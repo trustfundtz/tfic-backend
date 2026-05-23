@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trust Fund Investment Club — Tanzania's Leading Financial Education Platform</title>
-<meta name="description" content="Trust Fund Investment Club — Empowering Financial Freedom in Tanzania.">
+<title>Trust Fund Investment Club â€” Tanzania's Leading Financial Education Platform</title>
+<meta name="description" content="Trust Fund Investment Club â€” Empowering Financial Freedom in Tanzania.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -230,7 +230,7 @@ canvas.spark{width:100%;height:100%}
 .nl-input::placeholder{color:var(--text3)}
 .nl-perks{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
 .nl-perk{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3)}
-.nl-perk::before{content:'✓';color:var(--green);font-size:12px}
+.nl-perk::before{content:'âœ“';color:var(--green);font-size:12px}
 
 /* CONTACTS PAGE */
 .contacts-page{padding:80px 64px}
@@ -330,10 +330,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 <!-- SIGNUP MODAL -->
 <div class="modal-overlay" id="signupModal">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('signup')">✕</button>
+    <button class="modal-close" onclick="closeModal('signup')">âœ•</button>
     <h2>Join Trust Fund Investment Club</h2>
     <p class="sub">Jiunge na takriban wanachama 12,000+ wa TFIC. Pata market updates, elimu ya fedha, na mengi zaidi.</p>
-    <div id="signupSuccess" class="success-msg">✅ Umejisajili! Karibu kwenye TFIC. Sasa utapokea market updates mara kwa mara.</div>
+    <div id="signupSuccess" class="success-msg">âœ… Umejisajili! Karibu kwenye TFIC. Sasa utapokea market updates mara kwa mara.</div>
     <div id="signupError" class="error-msg"></div>
     <div id="signupForm">
       <div class="form-row">
@@ -356,7 +356,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       <div class="form-field"><label class="form-label">Password *</label><input class="form-input" id="s-pass" type="password" placeholder="Angalau herufi 8"></div>
       <div class="form-check"><input type="checkbox" id="s-updates" checked><label for="s-updates">Nataka kupokea market updates na habari za masoko</label></div>
       <div class="form-check"><input type="checkbox" id="s-remember" checked><label for="s-remember">Nikumbuke kwenye kifaa hiki (usinukie password tena)</label></div>
-      <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px" onclick="doSignup()">Jisajili Sasa Bure →</button>
+      <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px" onclick="doSignup()">Jisajili Sasa Bure â†’</button>
     </div>
     <div class="modal-switch">Una akaunti tayari? <a onclick="closeModal('signup');openModal('login')">Ingia hapa</a></div>
   </div>
@@ -365,26 +365,26 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 <!-- LOGIN MODAL -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('login')">✕</button>
-    <h2>Karibu Tena 👋</h2>
+    <button class="modal-close" onclick="closeModal('login')">âœ•</button>
+    <h2>Karibu Tena ðŸ‘‹</h2>
     <p class="sub">Ingia kwenye akaunti yako ya TFIC.</p>
     <div id="loginError" class="error-msg"></div>
     <div class="form-field"><label class="form-label">Email</label><input class="form-input" id="l-email" type="email" placeholder="email@mfano.com"></div>
     <div class="form-field"><label class="form-label">Password</label><input class="form-input" id="l-pass" type="password" placeholder="Password yako"></div>
     <div class="form-check"><input type="checkbox" id="l-remember" checked><label for="l-remember">Nikumbuke kwenye kifaa hiki</label></div>
-    <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px;margin-top:8px" onclick="doLogin()">Ingia →</button>
+    <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px;margin-top:8px" onclick="doLogin()">Ingia â†’</button>
     <div class="modal-switch">Huna akaunti? <a onclick="closeModal('login');openModal('signup')">Jisajili bure</a></div>
   </div>
 </div>
 
 <!-- NOTIFICATION -->
 <div class="notification" id="notification">
-  <button class="notif-close" onclick="closeNotif()">✕</button>
+  <button class="notif-close" onclick="closeNotif()">âœ•</button>
   <div class="notif-title" id="notifTitle"></div>
   <div class="notif-body" id="notifBody"></div>
 </div>
 
-<!-- ════════════════ HOME PAGE ════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• HOME PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div class="page active" id="page-home">
 
 <!-- HERO -->
@@ -398,7 +398,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
         <h3 id="mwName">Karibu tena!</h3>
         <p>Hapa chini unapata masoko ya sasa, analysis, na updates zote za TFIC.</p>
       </div>
-      <div class="mw-badges"><span class="badge badge-green">Member ✓</span><span class="badge badge-gold">Updates ON</span></div>
+      <div class="mw-badges"><span class="badge badge-green">Member âœ“</span><span class="badge badge-gold">Updates ON</span></div>
     </div>
     <div class="hero-eyebrow">Tanzania's Premier Financial Education Platform</div>
     <h1 class="hero-title">Building <span class="gold">Financial</span><br><span class="italic">Intelligence</span> Across Africa</h1>
@@ -420,18 +420,18 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       <div class="mc-header">
         <div>
           <div class="mc-label">USD/TZS Live Rate</div>
-          <div class="mc-val" id="hero-usdtzs">—</div>
+          <div class="mc-val" id="hero-usdtzs">â€”</div>
         </div>
         <div class="mc-chg">
           <div class="live-badge"><span class="live-dot"></span>LIVE</div>
-          <div class="mc-chg-val" id="hero-usdtzs-chg" style="margin-top:6px">—</div>
+          <div class="mc-chg-val" id="hero-usdtzs-chg" style="margin-top:6px">â€”</div>
         </div>
       </div>
       <div class="spark-wrap"><canvas class="spark" id="heroSpark"></canvas></div>
       <div class="mc-assets" id="heroAssets">
-        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">₿</div><div><div class="ma-name">Bitcoin</div><div class="ma-sub">BTC/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-btc">—</div><div class="ma-chg" id="h-btc-c">—</div></div></div>
-        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🥇</div><div><div class="ma-name">Gold</div><div class="ma-sub">XAU/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-gold">—</div><div class="ma-chg" id="h-gold-c">—</div></div></div>
-        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🛢</div><div><div class="ma-name">Brent Crude</div><div class="ma-sub">USD/bbl</div></div></div><div class="ma-right"><div class="ma-price" id="h-oil">—</div><div class="ma-chg" id="h-oil-c">—</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">â‚¿</div><div><div class="ma-name">Bitcoin</div><div class="ma-sub">BTC/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-btc">â€”</div><div class="ma-chg" id="h-btc-c">â€”</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">ðŸ¥‡</div><div><div class="ma-name">Gold</div><div class="ma-sub">XAU/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-gold">â€”</div><div class="ma-chg" id="h-gold-c">â€”</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">ðŸ›¢</div><div><div class="ma-name">Brent Crude</div><div class="ma-sub">USD/bbl</div></div></div><div class="ma-right"><div class="ma-price" id="h-oil">â€”</div><div class="ma-chg" id="h-oil-c">â€”</div></div></div>
       </div>
     </div>
   </div>
@@ -453,18 +453,18 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
     <h2 class="section-title">Your Complete Financial Education Platform</h2>
   </div>
   <div class="services-grid">
-    <div class="service-card"><div class="sv-icon">📈</div><h3 class="sv-title">Market Analysis</h3><p class="sv-desc">Uchambuzi wa kila siku wa forex, crypto, na masoko ya hisa duniani kwa muktadha wa Tanzania.</p><a class="sv-link" onclick="showPage('markets')">Soma Analysis →</a></div>
-    <div class="service-card"><div class="sv-icon">🎓</div><h3 class="sv-title">Financial Literacy</h3><p class="sv-desc">Kozi za Kiswahili na Kiingereza kuhusu bajeti, akiba, uwekezaji wa msingi na fedha za kibinafsi.</p><a class="sv-link">Angalia Kozi →</a></div>
-    <div class="service-card"><div class="sv-icon">💼</div><h3 class="sv-title">Investment Mentorship</h3><p class="sv-desc">Programu za ushauri wa mtu mmoja na kikundi, zinazokuunganisha na wawekezaji wenye uzoefu Tanzania.</p><a class="sv-link">Pata Mshauri →</a></div>
-    <div class="service-card"><div class="sv-icon">🌍</div><h3 class="sv-title">East Africa Focus</h3><p class="sv-desc">Taarifa maalum za DSE Dar es Salaam, NSE Kenya, USE Uganda na fursa za uwekezaji katika EAC.</p><a class="sv-link">Masoko ya Kikanda →</a></div>
-    <div class="service-card"><div class="sv-icon">₿</div><h3 class="sv-title">Crypto Education</h3><p class="sv-desc">Elimu salama na ya vitendo ya uwekezaji wa crypto, blockchain, na mali za kidijitali na muktadha wa Tanzania.</p><a class="sv-link">Jifunze Crypto →</a></div>
-    <div class="service-card"><div class="sv-icon">🏦</div><h3 class="sv-title">Business Finance</h3><p class="sv-desc">Zana na elimu kwa wamiliki wa biashara ndogo na wajasiriamali — kutoka ufadhili hadi mkakati wa uwekezaji.</p><a class="sv-link">Zana za Biashara →</a></div>
+    <div class="service-card"><div class="sv-icon">ðŸ“ˆ</div><h3 class="sv-title">Market Analysis</h3><p class="sv-desc">Uchambuzi wa kila siku wa forex, crypto, na masoko ya hisa duniani kwa muktadha wa Tanzania.</p><a class="sv-link" onclick="showPage('markets')">Soma Analysis â†’</a></div>
+    <div class="service-card"><div class="sv-icon">ðŸŽ“</div><h3 class="sv-title">Financial Literacy</h3><p class="sv-desc">Kozi za Kiswahili na Kiingereza kuhusu bajeti, akiba, uwekezaji wa msingi na fedha za kibinafsi.</p><a class="sv-link">Angalia Kozi â†’</a></div>
+    <div class="service-card"><div class="sv-icon">ðŸ’¼</div><h3 class="sv-title">Investment Mentorship</h3><p class="sv-desc">Programu za ushauri wa mtu mmoja na kikundi, zinazokuunganisha na wawekezaji wenye uzoefu Tanzania.</p><a class="sv-link">Pata Mshauri â†’</a></div>
+    <div class="service-card"><div class="sv-icon">ðŸŒ</div><h3 class="sv-title">East Africa Focus</h3><p class="sv-desc">Taarifa maalum za DSE Dar es Salaam, NSE Kenya, USE Uganda na fursa za uwekezaji katika EAC.</p><a class="sv-link">Masoko ya Kikanda â†’</a></div>
+    <div class="service-card"><div class="sv-icon">â‚¿</div><h3 class="sv-title">Crypto Education</h3><p class="sv-desc">Elimu salama na ya vitendo ya uwekezaji wa crypto, blockchain, na mali za kidijitali na muktadha wa Tanzania.</p><a class="sv-link">Jifunze Crypto â†’</a></div>
+    <div class="service-card"><div class="sv-icon">ðŸ¦</div><h3 class="sv-title">Business Finance</h3><p class="sv-desc">Zana na elimu kwa wamiliki wa biashara ndogo na wajasiriamali â€” kutoka ufadhili hadi mkakati wa uwekezaji.</p><a class="sv-link">Zana za Biashara â†’</a></div>
   </div>
 </section>
 
 <!-- NEWSLETTER -->
 <section class="newsletter-section">
-  <div class="nl-icon">📬</div>
+  <div class="nl-icon">ðŸ“¬</div>
   <h2 class="nl-title">Pata TFIC Daily Market Brief</h2>
   <p class="nl-sub">Kila asubuhi: muhtasari wa masoko Tanzania, viwango vya forex, harakati za dunia, na ufahamu mmoja wa uwekezaji unaohusu leo.</p>
   <div class="nl-form">
@@ -480,7 +480,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 </section>
 </div>
 
-<!-- ════════════════ MARKETS PAGE ════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MARKETS PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div class="page" id="page-markets">
 <section class="markets-section section">
   <div class="section-header">
@@ -492,7 +492,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       </div>
       <div style="display:flex;gap:12px;align-items:center">
         <div class="live-badge"><span class="live-dot"></span>Refreshing every 30s</div>
-        <button class="btn-ghost" onclick="fetchAllMarketData()" style="font-size:12px;padding:6px 14px">↻ Refresh Now</button>
+        <button class="btn-ghost" onclick="fetchAllMarketData()" style="font-size:12px;padding:6px 14px">â†» Refresh Now</button>
       </div>
     </div>
   </div>
@@ -529,14 +529,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
           <input type="number" class="conv-input" id="convAmount" value="1000">
           <select class="conv-select" id="convFrom"><option>USD</option><option>EUR</option><option>GBP</option><option>KES</option></select>
         </div>
-        <span class="conv-arrow">⇄</span>
+        <span class="conv-arrow">â‡„</span>
         <div class="conv-input-wrap">
           <input type="number" class="conv-input" id="convResult" readonly style="color:var(--gold-light)">
           <select class="conv-select" id="convTo"><option>TZS</option><option>USD</option><option>EUR</option><option>KES</option></select>
         </div>
       </div>
       <div class="conv-result">
-        <div class="conv-result-val" id="convBig">—</div>
+        <div class="conv-result-val" id="convBig">â€”</div>
         <div class="conv-result-sub" id="convRate">Inapakia viwango vya sasa...</div>
       </div>
     </div>
@@ -547,16 +547,16 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       <div class="calc-field"><div class="calc-label">Faida ya Mwaka (%) <span id="lRate">12%</span></div><input type="range" class="calc-range" id="rRate" min="5" max="25" step="1" value="12"></div>
       <div class="calc-field"><div class="calc-label">Miaka <span id="lYears">10</span></div><input type="range" class="calc-range" id="rYears" min="1" max="30" step="1" value="10"></div>
       <div class="calc-result-grid">
-        <div class="calc-stat"><div class="v" id="cFuture">—</div><div class="l">Future Value</div></div>
-        <div class="calc-stat"><div class="v" id="cGain" style="color:var(--gold-light)">—</div><div class="l">Total Gain</div></div>
-        <div class="calc-stat"><div class="v" id="cROI" style="color:var(--green-light)">—</div><div class="l">ROI</div></div>
+        <div class="calc-stat"><div class="v" id="cFuture">â€”</div><div class="l">Future Value</div></div>
+        <div class="calc-stat"><div class="v" id="cGain" style="color:var(--gold-light)">â€”</div><div class="l">Total Gain</div></div>
+        <div class="calc-stat"><div class="v" id="cROI" style="color:var(--green-light)">â€”</div><div class="l">ROI</div></div>
       </div>
     </div>
   </div>
 </section>
 </div>
 
-<!-- ════════════════ BLOG PAGE ════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• BLOG PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div class="page" id="page-blog">
 <section class="blog-section section">
   <div class="section-header">
@@ -577,7 +577,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
     <div class="blog-featured">
       <div class="feat-img"><canvas id="featChart" style="width:100%;height:100%"></canvas><span class="feat-badge">Featured Analysis</span></div>
       <div class="feat-content">
-        <div class="feat-cat">Macro · Tanzania Economy</div>
+        <div class="feat-cat">Macro Â· Tanzania Economy</div>
         <h2 class="feat-title">Tanzania's GDP Growth & What It Means for Your Investment Portfolio in 2026</h2>
         <p class="feat-excerpt">Huku Tanzania ikiandika ukuaji wa GDP wa 6.2% na Benki Kuu ya Tanzania ikishikilia viwango vya riba, tunavunja jinsi mazingira ya jumla yanavyounda fursa katika hisa za ndani, mali isiyohamishika, na uratibu wa USD/TZS.</p>
         <div class="feat-meta">
@@ -609,33 +609,33 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 </section>
 </div>
 
-<!-- ════════════════ SERVICES PAGE ════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• SERVICES PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div class="page" id="page-services">
 <section class="services-section section">
   <div class="section-header">
     <div class="eyebrow-label">Huduma Zetu</div>
     <h2 class="section-title">Jukwaa Lako Kamili la Elimu ya Fedha</h2>
-    <p class="section-subtitle">Kutoka kusoma msingi wa fedha hadi mikakati ya biashara ya juu — tunakufunika.</p>
+    <p class="section-subtitle">Kutoka kusoma msingi wa fedha hadi mikakati ya biashara ya juu â€” tunakufunika.</p>
   </div>
   <div class="services-grid">
-    <div class="service-card"><div class="sv-icon">📈</div><h3 class="sv-title">Market Analysis</h3><p class="sv-desc">Uchambuzi wa kila siku na wa kila wiki wa masoko ya forex, crypto, na hisa duniani ukizingatia muktadha wa Tanzania na Afrika Mashariki.</p><a class="sv-link" onclick="showPage('markets')">Angalia Masoko →</a></div>
-    <div class="service-card"><div class="sv-icon">🎓</div><h3 class="sv-title">Financial Literacy</h3><p class="sv-desc">Kozi zilizopangwa kwa Kiswahili na Kiingereza zinazofunika bajeti, akiba, misingi ya uwekezaji, na fedha za kibinafsi kwa viwango vyote vya mapato.</p><a class="sv-link">Angalia Kozi →</a></div>
-    <div class="service-card"><div class="sv-icon">💼</div><h3 class="sv-title">Investment Mentorship</h3><p class="sv-desc">Programu za ushauri wa mmoja mmoja na wa kikundi zinazokuunganisha na wawekezaji wenye uzoefu na wataalamu wa fedha Tanzania.</p><a class="sv-link">Pata Mshauri →</a></div>
-    <div class="service-card"><div class="sv-icon">🌍</div><h3 class="sv-title">East Africa Markets</h3><p class="sv-desc">Uchambuzi maalum wa DSE, NSE Kenya, USE Uganda, na fursa za uwekezaji katika nchi zote za EAC.</p><a class="sv-link">Masoko ya Kikanda →</a></div>
-    <div class="service-card"><div class="sv-icon">₿</div><h3 class="sv-title">Crypto Education</h3><p class="sv-desc">Elimu salama na ya vitendo ya uwekezaji wa crypto, teknolojia ya blockchain, na mali za kidijitali — na muktadha wa udhibiti wa Tanzania.</p><a class="sv-link">Jifunze Crypto →</a></div>
-    <div class="service-card"><div class="sv-icon">🏦</div><h3 class="sv-title">Business Finance</h3><p class="sv-desc">Zana na elimu kwa wamiliki wa SME na wajasiriamali — kutoka ufadhili wa biashara na usimamizi wa mtiririko wa fedha hadi mkakati wa uwekezaji.</p><a class="sv-link">Zana za Biashara →</a></div>
+    <div class="service-card"><div class="sv-icon">ðŸ“ˆ</div><h3 class="sv-title">Market Analysis</h3><p class="sv-desc">Uchambuzi wa kila siku na wa kila wiki wa masoko ya forex, crypto, na hisa duniani ukizingatia muktadha wa Tanzania na Afrika Mashariki.</p><a class="sv-link" onclick="showPage('markets')">Angalia Masoko â†’</a></div>
+    <div class="service-card"><div class="sv-icon">ðŸŽ“</div><h3 class="sv-title">Financial Literacy</h3><p class="sv-desc">Kozi zilizopangwa kwa Kiswahili na Kiingereza zinazofunika bajeti, akiba, misingi ya uwekezaji, na fedha za kibinafsi kwa viwango vyote vya mapato.</p><a class="sv-link">Angalia Kozi â†’</a></div>
+    <div class="service-card"><div class="sv-icon">ðŸ’¼</div><h3 class="sv-title">Investment Mentorship</h3><p class="sv-desc">Programu za ushauri wa mmoja mmoja na wa kikundi zinazokuunganisha na wawekezaji wenye uzoefu na wataalamu wa fedha Tanzania.</p><a class="sv-link">Pata Mshauri â†’</a></div>
+    <div class="service-card"><div class="sv-icon">ðŸŒ</div><h3 class="sv-title">East Africa Markets</h3><p class="sv-desc">Uchambuzi maalum wa DSE, NSE Kenya, USE Uganda, na fursa za uwekezaji katika nchi zote za EAC.</p><a class="sv-link">Masoko ya Kikanda â†’</a></div>
+    <div class="service-card"><div class="sv-icon">â‚¿</div><h3 class="sv-title">Crypto Education</h3><p class="sv-desc">Elimu salama na ya vitendo ya uwekezaji wa crypto, teknolojia ya blockchain, na mali za kidijitali â€” na muktadha wa udhibiti wa Tanzania.</p><a class="sv-link">Jifunze Crypto â†’</a></div>
+    <div class="service-card"><div class="sv-icon">ðŸ¦</div><h3 class="sv-title">Business Finance</h3><p class="sv-desc">Zana na elimu kwa wamiliki wa SME na wajasiriamali â€” kutoka ufadhili wa biashara na usimamizi wa mtiririko wa fedha hadi mkakati wa uwekezaji.</p><a class="sv-link">Zana za Biashara â†’</a></div>
   </div>
 
   <!-- Join CTA -->
   <div style="text-align:center;margin-top:64px;padding:48px;background:var(--surface);border:1px solid var(--border2);border-radius:16px">
     <h2 style="font-family:var(--serif);font-size:36px;font-weight:600;margin-bottom:12px">Uko tayari kuanza safari yako ya fedha?</h2>
     <p style="color:var(--text2);margin-bottom:28px;font-size:15px">Jiunge bure leo. Pata ufikiaji wa masoko ya wakati halisi, makala, na jamii ya TFIC.</p>
-    <button class="btn-primary" style="font-size:16px;padding:16px 40px" onclick="openModal('signup')">Jiunge Bure Sasa →</button>
+    <button class="btn-primary" style="font-size:16px;padding:16px 40px" onclick="openModal('signup')">Jiunge Bure Sasa â†’</button>
   </div>
 </section>
 </div>
 
-<!-- ════════════════ CONTACTS PAGE ════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• CONTACTS PAGE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div class="page" id="page-contacts">
 <section class="contacts-page">
   <div class="contacts-hero">
@@ -646,32 +646,32 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 
   <div class="contacts-grid">
     <div class="contact-card">
-      <div class="contact-icon">📞</div>
+      <div class="contact-icon">ðŸ“ž</div>
       <div class="contact-type">Simu / WhatsApp</div>
       <div class="contact-val">+255 744 000 000</div>
-      <div class="contact-sub">Jumatatu – Ijumaa, 8:00 – 17:00 EAT</div>
-      <a class="contact-btn" href="tel:+255744000000">Piga Simu →</a>
+      <div class="contact-sub">Jumatatu â€“ Ijumaa, 8:00 â€“ 17:00 EAT</div>
+      <a class="contact-btn" href="tel:+255744000000">Piga Simu â†’</a>
     </div>
     <div class="contact-card">
-      <div class="contact-icon">💬</div>
+      <div class="contact-icon">ðŸ’¬</div>
       <div class="contact-type">WhatsApp Group</div>
       <div class="contact-val">TFIC Community</div>
       <div class="contact-sub">Jiunge na kikundi cha wanachama 12,000+</div>
-      <a class="contact-btn" href="https://wa.me/255744000000" target="_blank">Jiunge WhatsApp →</a>
+      <a class="contact-btn" href="https://wa.me/255744000000" target="_blank">Jiunge WhatsApp â†’</a>
     </div>
     <div class="contact-card">
-      <div class="contact-icon">📧</div>
+      <div class="contact-icon">ðŸ“§</div>
       <div class="contact-type">Email</div>
       <div class="contact-val">info@tfic.co.tz</div>
       <div class="contact-sub">Jibu ndani ya saa 24 za kazi</div>
-      <a class="contact-btn gold" href="mailto:info@tfic.co.tz">Tuma Email →</a>
+      <a class="contact-btn gold" href="mailto:info@tfic.co.tz">Tuma Email â†’</a>
     </div>
     <div class="contact-card">
-      <div class="contact-icon">📍</div>
+      <div class="contact-icon">ðŸ“</div>
       <div class="contact-type">Ofisi Kuu</div>
       <div class="contact-val">Dar es Salaam, Tanzania</div>
       <div class="contact-sub">Mlimani City Office Park, Barabara ya Sam Nujoma</div>
-      <a class="contact-btn gold">Pata Ramani →</a>
+      <a class="contact-btn gold">Pata Ramani â†’</a>
     </div>
   </div>
 
@@ -679,7 +679,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
   <div class="contact-form-wrap">
     <h2>Tuma Ujumbe Moja kwa Moja</h2>
     <p>Jaza fomu hii na tutawasiliana nawe haraka iwezekanavyo.</p>
-    <div id="contactSuccess" class="success-msg" style="display:none">✅ Asante! Ujumbe wako umefika. Tutawasiliana nawe hivi karibuni.</div>
+    <div id="contactSuccess" class="success-msg" style="display:none">âœ… Asante! Ujumbe wako umefika. Tutawasiliana nawe hivi karibuni.</div>
     <div class="form-row" style="margin-bottom:16px">
       <div class="form-field"><label class="form-label">Jina lako *</label><input class="form-input" id="c-name" placeholder="Jina lako kamili"></div>
       <div class="form-field"><label class="form-label">Email *</label><input class="form-input" id="c-email" type="email" placeholder="email@mfano.com"></div>
@@ -698,16 +698,16 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       </select>
     </div>
     <div class="form-field"><label class="form-label">Ujumbe wako *</label><textarea class="textarea-input" id="c-message" placeholder="Andika ujumbe wako hapa..."></textarea></div>
-    <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px" onclick="sendContact()">Tuma Ujumbe →</button>
+    <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px" onclick="sendContact()">Tuma Ujumbe â†’</button>
   </div>
 
   <!-- Social Links -->
   <div class="social-links">
-    <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#1DA1F2">𝕏</div><div><div class="social-name">Twitter / X</div><div class="social-sub">@TrustFundTZ</div></div></a>
+    <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#1DA1F2">ð•</div><div><div class="social-name">Twitter / X</div><div class="social-sub">@TrustFundTZ</div></div></a>
     <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#1877F2">f</div><div><div class="social-name">Facebook</div><div class="social-sub">Trust Fund Investment Club</div></div></a>
-    <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#E1306C">📷</div><div><div class="social-name">Instagram</div><div class="social-sub">@tfic_tz</div></div></a>
-    <a class="social-card" href="https://t.me/tfic_tz" target="_blank"><div class="social-icon" style="background:#0088cc">✈</div><div><div class="social-name">Telegram</div><div class="social-sub">TFIC Channel</div></div></a>
-    <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#FF0000">▶</div><div><div class="social-name">YouTube</div><div class="social-sub">TFIC TV</div></div></a>
+    <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#E1306C">ðŸ“·</div><div><div class="social-name">Instagram</div><div class="social-sub">@tfic_tz</div></div></a>
+    <a class="social-card" href="https://t.me/tfic_tz" target="_blank"><div class="social-icon" style="background:#0088cc">âœˆ</div><div><div class="social-name">Telegram</div><div class="social-sub">TFIC Channel</div></div></a>
+    <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#FF0000">â–¶</div><div><div class="social-name">YouTube</div><div class="social-sub">TFIC TV</div></div></a>
   </div>
 </section>
 </div>
@@ -723,7 +723,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       </div>
       <p class="footer-brand-desc">Jukwaa la kwanza la elimu ya fedha na akili ya uwekezaji Tanzania. Kuwawezesha Watanzania na Waafrika wa Mashariki kujua jinsi ya kujenga utajiri wa kudumu.</p>
       <div class="footer-social">
-        <a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">f</a><a href="#" class="social-btn">📷</a><a href="#" class="social-btn">💬</a><a href="#" class="social-btn">▶</a>
+        <a href="#" class="social-btn">ð•</a><a href="#" class="social-btn">f</a><a href="#" class="social-btn">ðŸ“·</a><a href="#" class="social-btn">ðŸ’¬</a><a href="#" class="social-btn">â–¶</a>
       </div>
     </div>
     <div><div class="footer-col-title">Jukwaa</div><ul class="footer-links"><li><a onclick="showPage('markets')">Market Analysis</a></li><li><a>Financial Education</a></li><li><a onclick="showPage('markets')">Forex Trading</a></li><li><a>Crypto Insights</a></li></ul></div>
@@ -731,20 +731,20 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
     <div><div class="footer-col-title">Kampuni</div><ul class="footer-links"><li><a>Kuhusu TFIC</a></li><li><a>Timu Yetu</a></li><li><a>Sera ya Faragha</a></li><li><a onclick="showPage('contacts')">Mawasiliano</a></li></ul></div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2026 Trust Fund Investment Club. Haki zote zimehifadhiwa. Dar es Salaam, Tanzania.</div>
-    <div class="footer-tz">🇹🇿 Made in Tanzania · Serving East Africa</div>
+    <div class="footer-copy">Â© 2026 Trust Fund Investment Club. Haki zote zimehifadhiwa. Dar es Salaam, Tanzania.</div>
+    <div class="footer-tz">ðŸ‡¹ðŸ‡¿ Made in Tanzania Â· Serving East Africa</div>
   </div>
 </footer>
 
 <script>
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // BACKEND API CONNECTION
-// ═══════════════════════════════════════════════
-const API = 'http://localhost:3000/api';
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+const API = 'https://tfic-backend.onrender.com/api';
 
-// ═══════════════════════════════════════════════
-// USER AUTH & SIGNUP — Connected to Real Backend
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// USER AUTH & SIGNUP â€” Connected to Real Backend
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 let currentUser = null;
 
 function initAuth() {
@@ -792,7 +792,7 @@ async function doSignup() {
     if (!res.ok) {
       errEl.textContent = data.error || 'Kuna tatizo. Jaribu tena.';
       errEl.style.display = 'block';
-      if (btn) { btn.disabled = false; btn.textContent = 'Jisajili Sasa Bure →'; }
+      if (btn) { btn.disabled = false; btn.textContent = 'Jisajili Sasa Bure â†’'; }
       return;
     }
 
@@ -808,13 +808,13 @@ async function doSignup() {
     setTimeout(() => {
       closeModal('signup');
       renderLoggedIn();
-      showNotif('Karibu TFIC! 🎉', `Habari ${first}! Umefanikiwa kujisajili. Angalia email yako kwa barua ya karibu!`);
+      showNotif('Karibu TFIC! ðŸŽ‰', `Habari ${first}! Umefanikiwa kujisajili. Angalia email yako kwa barua ya karibu!`);
     }, 2000);
 
   } catch(e) {
     errEl.textContent = 'Huwezi kuunganika na server. Hakikisha server inafanya kazi (npm start).';
     errEl.style.display = 'block';
-    if (btn) { btn.disabled = false; btn.textContent = 'Jisajili Sasa Bure →'; }
+    if (btn) { btn.disabled = false; btn.textContent = 'Jisajili Sasa Bure â†’'; }
   }
 }
 
@@ -839,7 +839,7 @@ async function doLogin() {
     if (!res.ok) {
       errEl.textContent = data.error || 'Imeshindwa kuingia. Jaribu tena.';
       errEl.style.display = 'block';
-      if (btn) { btn.disabled = false; btn.textContent = 'Ingia →'; }
+      if (btn) { btn.disabled = false; btn.textContent = 'Ingia â†’'; }
       return;
     }
 
@@ -850,12 +850,12 @@ async function doLogin() {
     currentUser = data.user;
     closeModal('login');
     renderLoggedIn();
-    showNotif(`Karibu tena ${data.user.firstName}! 👋`, 'Umeingia kwenye akaunti yako ya TFIC.');
+    showNotif(`Karibu tena ${data.user.firstName}! ðŸ‘‹`, 'Umeingia kwenye akaunti yako ya TFIC.');
 
   } catch(e) {
     errEl.textContent = 'Huwezi kuunganika na server. Hakikisha server inafanya kazi.';
     errEl.style.display = 'block';
-    if (btn) { btn.disabled = false; btn.textContent = 'Ingia →'; }
+    if (btn) { btn.disabled = false; btn.textContent = 'Ingia â†’'; }
   }
 }
 
@@ -877,19 +877,19 @@ function renderLoggedIn() {
     <div class="user-pill" onclick="doLogout()" title="Toka">
       <div class="user-avatar">${initials}</div>
       <span style="font-size:13px">${fn}</span>
-      <span style="font-size:11px;color:var(--text3)">• Toka</span>
+      <span style="font-size:11px;color:var(--text3)">â€¢ Toka</span>
     </div>`;
   const mwb = document.getElementById('memberWelcomeBanner');
   if (mwb) {
     mwb.style.display = 'flex';
     document.getElementById('mwAvatar').textContent = initials;
-    document.getElementById('mwName').textContent = `Karibu tena, ${fn}! 🎉`;
+    document.getElementById('mwName').textContent = `Karibu tena, ${fn}! ðŸŽ‰`;
   }
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // MODAL CONTROL
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function openModal(type) {
   if (type==='signup') { document.getElementById('signupForm').style.display='block'; document.getElementById('signupSuccess').style.display='none'; document.getElementById('signupError').style.display='none'; document.getElementById('signupModal').classList.add('open'); }
   if (type==='login') { document.getElementById('loginError').style.display='none'; document.getElementById('loginModal').classList.add('open'); }
@@ -900,9 +900,9 @@ function closeModal(type) {
 }
 document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // PAGE NAVIGATION
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');
@@ -914,9 +914,9 @@ function showPage(name) {
   if (name === 'blog') setTimeout(drawFeatChart, 100);
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // LIVE MARKET DATA (CoinGecko + ExchangeRate)
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 let liveRates = {};
 let cryptoPrices = {};
 
@@ -964,12 +964,12 @@ async function fetchAllMarketData() {
 }
 
 function fmt(n, dec=2) {
-  if (!n && n!==0) return '—';
+  if (!n && n!==0) return 'â€”';
   return Number(n).toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec});
 }
 function chgStr(c) {
-  if (!c && c!==0) return '—';
-  const sign = c >= 0 ? '▲ +' : '▼ ';
+  if (!c && c!==0) return 'â€”';
+  const sign = c >= 0 ? 'â–² +' : 'â–¼ ';
   return sign + Math.abs(c).toFixed(2) + '%';
 }
 function chgClass(c) { return c >= 0 ? 'up' : 'dn'; }
@@ -977,14 +977,14 @@ function chgClass(c) { return c >= 0 ? 'up' : 'dn'; }
 function updateMarketsGrid() {
   const r = liveRates; const c = cryptoPrices;
   const tiles = [
-    { name:'EUR/USD', price: r.EUR ? (1/r.EUR).toFixed(4) : '—', chg:0.24, bar:62 },
-    { name:'GBP/USD', price: r.GBP ? (1/r.GBP).toFixed(4) : '—', chg:0.15, bar:58 },
-    { name:'USD/TZS', price: r.TZS ? fmt(r.TZS,0) : '—', chg:0.38, bar:55 },
-    { name:'USD/KES', price: r.KES ? fmt(r.KES,2) : '—', chg:-0.32, bar:44 },
-    { name:'BTC/USD', price: c.BTC?.price ? '$'+fmt(c.BTC.price,0) : '—', chg:c.BTC?.chg||0, bar:68 },
-    { name:'ETH/USD', price: c.ETH?.price ? '$'+fmt(c.ETH.price,0) : '—', chg:c.ETH?.chg||0, bar:45 },
-    { name:'USD/UGX', price: r.UGX ? fmt(r.UGX,0) : '—', chg:0.12, bar:52 },
-    { name:'USD/NGN', price: r.NGN ? fmt(r.NGN,0) : '—', chg:-0.8, bar:41 },
+    { name:'EUR/USD', price: r.EUR ? (1/r.EUR).toFixed(4) : 'â€”', chg:0.24, bar:62 },
+    { name:'GBP/USD', price: r.GBP ? (1/r.GBP).toFixed(4) : 'â€”', chg:0.15, bar:58 },
+    { name:'USD/TZS', price: r.TZS ? fmt(r.TZS,0) : 'â€”', chg:0.38, bar:55 },
+    { name:'USD/KES', price: r.KES ? fmt(r.KES,2) : 'â€”', chg:-0.32, bar:44 },
+    { name:'BTC/USD', price: c.BTC?.price ? '$'+fmt(c.BTC.price,0) : 'â€”', chg:c.BTC?.chg||0, bar:68 },
+    { name:'ETH/USD', price: c.ETH?.price ? '$'+fmt(c.ETH.price,0) : 'â€”', chg:c.ETH?.chg||0, bar:45 },
+    { name:'USD/UGX', price: r.UGX ? fmt(r.UGX,0) : 'â€”', chg:0.12, bar:52 },
+    { name:'USD/NGN', price: r.NGN ? fmt(r.NGN,0) : 'â€”', chg:-0.8, bar:41 },
   ];
   document.getElementById('marketsGrid').innerHTML = tiles.map(t => `
     <div class="market-tile">
@@ -1009,13 +1009,13 @@ function updateForexTable() {
   ];
   document.getElementById('forexBody').innerHTML = rows.map(r => {
     const up = r.pct >= 0;
-    const priceStr = r.price ? (r.price > 1000 ? '$'+fmt(r.price,0) : fmt(r.price,4)) : '—';
+    const priceStr = r.price ? (r.price > 1000 ? '$'+fmt(r.price,0) : fmt(r.price,4)) : 'â€”';
     const chgNum = r.chg !== null ? (up?'+':'')+r.chg : '';
     return `<tr>
       <td><span class="pair-name">${r.pair}</span></td>
       <td>${priceStr}</td>
       <td class="${up?'up':'dn'}">${chgNum}</td>
-      <td class="${up?'up':'dn'}">${up?'▲ +':'▼ '}${Math.abs(r.pct).toFixed(2)}%</td>
+      <td class="${up?'up':'dn'}">${up?'â–² +':'â–¼ '}${Math.abs(r.pct).toFixed(2)}%</td>
       <td><span style="color:${up?'var(--green)':'var(--red)'};font-size:11px;font-weight:600">${up?'BUY':'SELL'}</span></td>
     </tr>`;
   }).join('');
@@ -1025,7 +1025,7 @@ function updateHeroCard() {
   const tzs = liveRates.TZS;
   if (tzs) {
     document.getElementById('hero-usdtzs').textContent = fmt(tzs, 2);
-    document.getElementById('hero-usdtzs-chg').textContent = '▲ +0.38%';
+    document.getElementById('hero-usdtzs-chg').textContent = 'â–² +0.38%';
     document.getElementById('hero-usdtzs-chg').className = 'mc-chg-val up';
   }
   const btc = cryptoPrices.BTC;
@@ -1036,21 +1036,21 @@ function updateHeroCard() {
     el.className = 'ma-chg ' + chgClass(btc.chg);
   }
   document.getElementById('h-gold').textContent = '$2,345';
-  document.getElementById('h-gold-c').textContent = '▲ +0.52%';
+  document.getElementById('h-gold-c').textContent = 'â–² +0.52%';
   document.getElementById('h-gold-c').className = 'ma-chg up';
   document.getElementById('h-oil').textContent = '$82.15';
-  document.getElementById('h-oil-c').textContent = '▼ −0.28%';
+  document.getElementById('h-oil-c').textContent = 'â–¼ âˆ’0.28%';
   document.getElementById('h-oil-c').className = 'ma-chg dn';
 }
 
 function updateQuickStrip() {
   const r = liveRates; const c = cryptoPrices;
   const items = [
-    { label:'USD/TZS', val:r.TZS?fmt(r.TZS,0):'—', up:true },
-    { label:'USD/KES', val:r.KES?fmt(r.KES,2):'—', up:false },
-    { label:'EUR/USD', val:r.EUR?(1/r.EUR).toFixed(4):'—', up:true },
-    { label:'BTC', val:c.BTC?.price?'$'+fmt(c.BTC.price,0):'—', up:(c.BTC?.chg||0)>=0 },
-    { label:'ETH', val:c.ETH?.price?'$'+fmt(c.ETH.price,0):'—', up:(c.ETH?.chg||0)>=0 },
+    { label:'USD/TZS', val:r.TZS?fmt(r.TZS,0):'â€”', up:true },
+    { label:'USD/KES', val:r.KES?fmt(r.KES,2):'â€”', up:false },
+    { label:'EUR/USD', val:r.EUR?(1/r.EUR).toFixed(4):'â€”', up:true },
+    { label:'BTC', val:c.BTC?.price?'$'+fmt(c.BTC.price,0):'â€”', up:(c.BTC?.chg||0)>=0 },
+    { label:'ETH', val:c.ETH?.price?'$'+fmt(c.ETH.price,0):'â€”', up:(c.ETH?.chg||0)>=0 },
     { label:'GOLD', val:'$2,345', up:true },
   ];
   document.getElementById('quickStrip').innerHTML = items.map(i => `
@@ -1063,35 +1063,35 @@ function updateQuickStrip() {
 function updateTickerBar() {
   const r = liveRates; const c = cryptoPrices;
   const items = [
-    { sym:'USD/TZS', val:r.TZS?fmt(r.TZS,2):'—', up:true },
-    { sym:'EUR/USD', val:r.EUR?(1/r.EUR).toFixed(4):'—', up:true },
-    { sym:'GBP/USD', val:r.GBP?(1/r.GBP).toFixed(4):'—', up:true },
-    { sym:'USD/KES', val:r.KES?fmt(r.KES,2):'—', up:false },
-    { sym:'BTC/USD', val:c.BTC?.price?'$'+fmt(c.BTC.price,0):'—', up:(c.BTC?.chg||0)>=0 },
-    { sym:'ETH/USD', val:c.ETH?.price?'$'+fmt(c.ETH.price,0):'—', up:(c.ETH?.chg||0)>=0 },
-    { sym:'USD/JPY', val:r.JPY?fmt(r.JPY,2):'—', up:false },
+    { sym:'USD/TZS', val:r.TZS?fmt(r.TZS,2):'â€”', up:true },
+    { sym:'EUR/USD', val:r.EUR?(1/r.EUR).toFixed(4):'â€”', up:true },
+    { sym:'GBP/USD', val:r.GBP?(1/r.GBP).toFixed(4):'â€”', up:true },
+    { sym:'USD/KES', val:r.KES?fmt(r.KES,2):'â€”', up:false },
+    { sym:'BTC/USD', val:c.BTC?.price?'$'+fmt(c.BTC.price,0):'â€”', up:(c.BTC?.chg||0)>=0 },
+    { sym:'ETH/USD', val:c.ETH?.price?'$'+fmt(c.ETH.price,0):'â€”', up:(c.ETH?.chg||0)>=0 },
+    { sym:'USD/JPY', val:r.JPY?fmt(r.JPY,2):'â€”', up:false },
     { sym:'GOLD', val:'$2,345', up:true },
     { sym:'DSE TZ', val:'2,104', up:true },
     { sym:'NSE KE', val:'188.3', up:true },
   ];
-  const html = [...items,...items].map(d=>`<span class="t-item"><span class="t-sym">${d.sym}</span><span>${d.val}</span><span class="${d.up?'t-up':'t-dn'}">${d.up?'▲':'▼'}</span><span class="t-sep">·</span></span>`).join('');
+  const html = [...items,...items].map(d=>`<span class="t-item"><span class="t-sym">${d.sym}</span><span>${d.val}</span><span class="${d.up?'t-up':'t-dn'}">${d.up?'â–²':'â–¼'}</span><span class="t-sep">Â·</span></span>`).join('');
   document.getElementById('ticker').innerHTML = html;
 }
 
 // News ticker
 function updateNewsTicker() {
   const headlines = [
-    '📊 FED: Viwango vya riba vinaendelea kushikiliwa kwa mwaka 2026 — athari kwa sarafu za Afrika Mashariki', '₿ Bitcoin yaendelea kupanda baada ya kupita $67,000 — wawekezaji wa Tanzania wanaangalia', '🇹🇿 BOT: Benki Kuu ya Tanzania inashikilia viwango vya riba', '📈 S&P 500 inaendelea kupanda — masoko ya kimataifa yanaonyesha nguvu', '🥇 Dhahabu inavuka $2,300 — wawekezaji wanakimbia hatari', '🌍 EAC: Uchumi wa Afrika Mashariki unakuwa kwa kasi zaidi ya Afrika Nzima'
+    'ðŸ“Š FED: Viwango vya riba vinaendelea kushikiliwa kwa mwaka 2026 â€” athari kwa sarafu za Afrika Mashariki', 'â‚¿ Bitcoin yaendelea kupanda baada ya kupita $67,000 â€” wawekezaji wa Tanzania wanaangalia', 'ðŸ‡¹ðŸ‡¿ BOT: Benki Kuu ya Tanzania inashikilia viwango vya riba', 'ðŸ“ˆ S&P 500 inaendelea kupanda â€” masoko ya kimataifa yanaonyesha nguvu', 'ðŸ¥‡ Dhahabu inavuka $2,300 â€” wawekezaji wanakimbia hatari', 'ðŸŒ EAC: Uchumi wa Afrika Mashariki unakuwa kwa kasi zaidi ya Afrika Nzima'
   ];
   document.getElementById('newsTicker').innerHTML = headlines.map(h=>`<span class="news-item">${h}</span>`).join('');
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // CONVERTER (live rates)
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function updateConverter() {
   const el = document.getElementById('convRate');
-  if (el && liveRates.TZS) { el.textContent = `1 USD = ${fmt(liveRates.TZS,2)} TZS · Viwango vya sasa`; }
+  if (el && liveRates.TZS) { el.textContent = `1 USD = ${fmt(liveRates.TZS,2)} TZS Â· Viwango vya sasa`; }
   convert();
 }
 
@@ -1109,13 +1109,13 @@ function convert() {
   if (bigEl) bigEl.textContent = result.toLocaleString('en-US',{maximumFractionDigits:2}) + ' ' + to;
   const rateEl = document.getElementById('convRate');
   const r = (usdRates[to]||1) / (usdRates[from]||1);
-  if (rateEl) rateEl.textContent = `1 ${from} = ${r.toFixed(4)} ${to} · Viwango vya sasa`;
+  if (rateEl) rateEl.textContent = `1 ${from} = ${r.toFixed(4)} ${to} Â· Viwango vya sasa`;
 }
 ['convAmount','convFrom','convTo'].forEach(id => { const el = document.getElementById(id); if(el) el.addEventListener('input', convert); });
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // CALC
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function initCalc() {
   function calc() {
     const p = +document.getElementById('rPrincipal')?.value||0;
@@ -1134,9 +1134,9 @@ function initCalc() {
   calc();
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // SPARKLINE CANVAS
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function drawSpark(canvasId, color) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
@@ -1185,9 +1185,9 @@ function drawFeatChart() {
   ctx.strokeStyle='#c9a84c'; ctx.lineWidth=2.5*dpr; ctx.stroke();
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // CATEGORY TABS
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 document.querySelectorAll('.cat-tab').forEach(btn => {
   btn.addEventListener('click', () => {
     btn.closest('.cat-tabs').querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
@@ -1199,9 +1199,9 @@ document.querySelectorAll('.cat-tab').forEach(btn => {
   });
 });
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // CONTACT FORM
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 async function sendContact() {
   const name = document.getElementById('c-name')?.value.trim();
   const email = document.getElementById('c-email')?.value.trim();
@@ -1224,19 +1224,19 @@ async function sendContact() {
       document.getElementById('contactSuccess').style.display = 'block';
       ['c-name','c-email','c-phone','c-message'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
       document.getElementById('c-subject').value='';
-      showNotif('Ujumbe Umetumwa! ✅', 'Asante! Tutawasiliana nawe hivi karibuni.');
+      showNotif('Ujumbe Umetumwa! âœ…', 'Asante! Tutawasiliana nawe hivi karibuni.');
     } else {
       showNotif('Hitilafu', data.error || 'Ujumbe haukutumwa. Jaribu tena.');
     }
   } catch(e) {
     showNotif('Hitilafu', 'Huwezi kuunganika na server.');
   }
-  if (btn) { btn.disabled = false; btn.textContent = 'Tuma Ujumbe →'; }
+  if (btn) { btn.disabled = false; btn.textContent = 'Tuma Ujumbe â†’'; }
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // NEWSLETTER
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 async function nlSubscribe() {
   const email = document.getElementById('nlEmail')?.value.trim();
   if (!email || !email.includes('@')) { showNotif('Hitilafu', 'Weka email sahihi.'); return; }
@@ -1248,7 +1248,7 @@ async function nlSubscribe() {
     });
     const data = await res.json();
     if (res.ok) {
-      showNotif('Umejisajili! 🎉', 'Utaanza kupokea TFIC Daily Brief hivi karibuni.');
+      showNotif('Umejisajili! ðŸŽ‰', 'Utaanza kupokea TFIC Daily Brief hivi karibuni.');
       document.getElementById('nlEmail').value = '';
     } else {
       showNotif('Hitilafu', data.error || 'Jaribu tena.');
@@ -1258,9 +1258,9 @@ async function nlSubscribe() {
   }
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // NOTIFICATION
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 let notifTimer;
 function showNotif(title, body) {
   const n = document.getElementById('notification');
@@ -1272,9 +1272,9 @@ function showNotif(title, body) {
 }
 function closeNotif() { document.getElementById('notification').classList.remove('show'); }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // COUNTERS
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function animateCounters() {
   document.querySelectorAll('.counter').forEach(el => {
     const target = +el.dataset.target;
@@ -1288,9 +1288,9 @@ function animateCounters() {
   });
 }
 
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // INIT
-// ═══════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 window.addEventListener('load', async () => {
   initAuth();
   await fetchAllMarketData();
@@ -1301,9 +1301,10 @@ window.addEventListener('load', async () => {
   setInterval(fetchAllMarketData, 30000);
   // Notify logged-in members about updates
   if (currentUser?.wantsUpdates) {
-    setTimeout(() => showNotif('📊 Market Update', 'Viwango vipya vya forex vimepakiwa. USD/TZS: '+(liveRates.TZS?fmt(liveRates.TZS,2):'—')), 3000);
+    setTimeout(() => showNotif('ðŸ“Š Market Update', 'Viwango vipya vya forex vimepakiwa. USD/TZS: '+(liveRates.TZS?fmt(liveRates.TZS,2):'â€”')), 3000);
   }
 });
 </script>
 </body>
 </html>
+
