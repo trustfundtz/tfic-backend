@@ -345,7 +345,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       <div class="form-field"><label class="form-label">City / Region</label><input class="form-input" id="s-city" placeholder="Dar es Salaam, Mwanza..."></div>
       <div class="form-field"><label class="form-label">Who are you?</label>
         <select class="form-input" id="s-type">
-          <option value="">Chagua...</option>
+          <option value="">Select...</option>
           <option>Student</option>
           <option>Employee</option>
           <option>Business Owner</option>
@@ -453,10 +453,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
     <h2 class="section-title">Your Complete Financial Education Platform</h2>
   </div>
   <div class="services-grid">
-    <div class="service-card"><div class="sv-icon">📈</div><h3 class="sv-title">Market Analysis</h3><p class="sv-desc">Uchambuzi wa kila siku wa forex, crypto, na masoko ya hisa duniani kwa muktadha wa Tanzania.</p><a class="sv-link" onclick="showPage('markets')">Read Analysis →</a></div>
+    <div class="service-card"><div class="sv-icon">📈</div><h3 class="sv-title">Market Analysis</h3><p class="sv-desc">Daily and weekly analysis of forex, crypto, and global equity markets with Tanzania and East African context.</p><a class="sv-link" onclick="showPage('markets')">Read Analysis →</a></div>
     <div class="service-card"><div class="sv-icon">🎓</div><h3 class="sv-title">Financial Literacy</h3><p class="sv-desc">Structured courses covering budgeting, saving, investment fundamentals, and personal finance for all levels.</p><a class="sv-link">Browse Courses →</a></div>
     <div class="service-card"><div class="sv-icon">💼</div><h3 class="sv-title">Investment Mentorship</h3><p class="sv-desc">One-on-one and group mentorship programs connecting you with experienced investors across Tanzania.</p><a class="sv-link">Find a Mentor →</a></div>
-    <div class="service-card"><div class="sv-icon">🌍</div><h3 class="sv-title">East Africa Focus</h3><p class="sv-desc">Taarifa maalum za DSE Dar es Salaam, NSE Kenya, USE Uganda na fursa za uwekezaji katika EAC.</p><a class="sv-link">Regional Markets →</a></div>
+    <div class="service-card"><div class="sv-icon">🌍</div><h3 class="sv-title">East Africa Focus</h3><p class="sv-desc">Specialized insights on DSE Dar es Salaam, NSE Kenya, USE Uganda and investment opportunities across the EAC.</p><a class="sv-link">Regional Markets →</a></div>
     <div class="service-card"><div class="sv-icon">₿</div><h3 class="sv-title">Crypto Education</h3><p class="sv-desc">Safe, practical education on crypto investing, blockchain, and digital assets with Tanzania regulatory context.</p><a class="sv-link">Jifunze Crypto →</a></div>
     <div class="service-card"><div class="sv-icon">🏦</div><h3 class="sv-title">Business Finance</h3><p class="sv-desc">Tools and education for SME owners and entrepreneurs — from business financing to investment strategy.</p><a class="sv-link">Business Tools →</a></div>
   </div>
@@ -877,7 +877,7 @@ function renderLoggedIn() {
     <div class="user-pill" onclick="doLogout()" title="Toka">
       <div class="user-avatar">${initials}</div>
       <span style="font-size:13px">${fn}</span>
-      <span style="font-size:11px;color:var(--text3)">• Toka</span>
+      <span style="font-size:11px;color:var(--text3)">• Sign Out</span>
     </div>`;
   const mwb = document.getElementById('memberWelcomeBanner');
   if (mwb) {
@@ -1081,7 +1081,7 @@ function updateTickerBar() {
 // News ticker
 function updateNewsTicker() {
   const headlines = [
-    '📊 FED: Viwango vya riba vinaendelea kushikiliwa kwa mwaka 2026 — athari kwa sarafu za Afrika Mashariki', '₿ Bitcoin yaendelea kupanda baada ya kupita $67,000 — wawekezaji wa Tanzania wanaangalia', '🇹🇿 BOT: Benki Kuu ya Tanzania inashikilia viwango vya riba', '📈 S&P 500 inaendelea kupanda — masoko ya kimataifa yanaonyesha nguvu', '🥇 Dhahabu inavuka $2,300 — wawekezaji wanakimbia hatari', '🌍 EAC: Uchumi wa Afrika Mashariki unakuwa kwa kasi zaidi ya Afrika Nzima'
+    '📊 FED: Interest rates remain on hold through 2026 — impact on East African currencies', '₿ Bitcoin continues climbing past $67,000 — Tanzanian investors are watching closely', '🇹🇿 BOT: Bank of Tanzania holds interest rates steady', '📈 S&P 500 continues rising — international markets showing strength', '🥇 Gold crosses $2,300 — investors seeking safe haven assets', '🌍 EAC: East African economy growing faster than rest of Africa'
   ];
   document.getElementById('newsTicker').innerHTML = headlines.map(h=>`<span class="news-item">${h}</span>`).join('');
 }
@@ -1091,7 +1091,7 @@ function updateNewsTicker() {
 // ═══════════════════════════════════════════════
 function updateConverter() {
   const el = document.getElementById('convRate');
-  if (el && liveRates.TZS) { el.textContent = `1 USD = ${fmt(liveRates.TZS,2)} TZS · Viwango vya sasa`; }
+  if (el && liveRates.TZS) { el.textContent = `1 USD = ${fmt(liveRates.TZS,2)} TZS · Live rate`; }
   convert();
 }
 
@@ -1109,7 +1109,7 @@ function convert() {
   if (bigEl) bigEl.textContent = result.toLocaleString('en-US',{maximumFractionDigits:2}) + ' ' + to;
   const rateEl = document.getElementById('convRate');
   const r = (usdRates[to]||1) / (usdRates[from]||1);
-  if (rateEl) rateEl.textContent = `1 ${from} = ${r.toFixed(4)} ${to} · Viwango vya sasa`;
+  if (rateEl) rateEl.textContent = `1 ${from} = ${r.toFixed(4)} ${to} · Live rate`;
 }
 ['convAmount','convFrom','convTo'].forEach(id => { const el = document.getElementById(id); if(el) el.addEventListener('input', convert); });
 
@@ -1301,7 +1301,7 @@ window.addEventListener('load', async () => {
   setInterval(fetchAllMarketData, 30000);
   // Notify logged-in members about updates
   if (currentUser?.wantsUpdates) {
-    setTimeout(() => showNotif('📊 Market Update', 'Viwango vipya vya forex vimepakiwa. USD/TZS: '+(liveRates.TZS?fmt(liveRates.TZS,2):'—')), 3000);
+    setTimeout(() => showNotif('📊 Market Update', 'New forex rates loaded. USD/TZS: '+(liveRates.TZS?fmt(liveRates.TZS,2):'—')), 3000);
   }
 });
 </script>
