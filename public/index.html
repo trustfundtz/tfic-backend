@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust Fund Investment Club — Tanzania's Leading Financial Education Platform</title>
+<meta name="description" content="Trust Fund Investment Club — Empowering Financial Freedom in Tanzania.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#050a05;--bg2:#080e08;--surface:#0d160d;--surface2:#111b11;--surface3:#162016;
+  --border:rgba(255,255,255,0.06);--border2:rgba(100,200,80,0.15);
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#7a6030;
+  --green:#2dba56;--green-light:#4edd74;--green-dim:#1a6632;
+  --red:#e05555;--text:#e8ede8;--text2:#a0b0a0;--text3:#607060;
+  --mono:'JetBrains Mono',monospace;--serif:'Cormorant Garamond',serif;--sans:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;line-height:1.6}
+
+/* TICKER */
+.ticker-wrap{background:linear-gradient(90deg,#0a1f0a,#0d2a0d,#0a1f0a);border-bottom:1px solid var(--border2);overflow:hidden;padding:7px 0;position:relative}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2}
+.ticker-wrap::before{left:0;background:linear-gradient(90deg,#0a1f0a,transparent)}
+.ticker-wrap::after{right:0;background:linear-gradient(-90deg,#0a1f0a,transparent)}
+.ticker{display:flex;white-space:nowrap;animation:ticker 45s linear infinite}
+.t-item{display:inline-flex;gap:6px;align-items:center;padding:0 28px;font-family:var(--mono);font-size:11px;color:var(--text2)}
+.t-sym{color:var(--gold);font-weight:500;letter-spacing:.05em}
+.t-up{color:var(--green-light)}.t-dn{color:var(--red)}.t-sep{color:var(--text3)}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(5,10,5,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none;cursor:pointer}
+.nav-logo{height:52px;width:52px;object-fit:contain;border-radius:0}
+.nav-name{display:flex;flex-direction:column;line-height:1.1}
+.nav-name-main{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--gold-light);letter-spacing:.04em}
+.nav-name-sub{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.18em;text-transform:uppercase}
+.nav-links{display:flex;gap:2px;list-style:none}
+.nav-links a{display:block;padding:8px 14px;font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;border-radius:6px;transition:all .2s;cursor:pointer}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--surface3)}
+.nav-right{display:flex;gap:10px;align-items:center}
+.btn-ghost{padding:8px 18px;font-size:13px;font-weight:500;color:var(--text2);background:transparent;border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all .2s;font-family:var(--sans)}
+.btn-ghost:hover{border-color:var(--gold-dim);color:var(--gold-light)}
+.btn-gold{padding:8px 20px;font-size:13px;font-weight:600;color:#0a0f0a;background:var(--gold);border:none;border-radius:6px;cursor:pointer;font-family:var(--sans);transition:all .2s}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-green{padding:8px 20px;font-size:13px;font-weight:600;color:#030603;background:var(--green);border:none;border-radius:6px;cursor:pointer;font-family:var(--sans);transition:all .2s}
+.btn-green:hover{background:var(--green-light)}
+.user-pill{display:flex;align-items:center;gap:8px;padding:6px 12px;background:var(--surface2);border:1px solid var(--border2);border-radius:100px;font-size:13px;cursor:pointer}
+.user-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--green-dim),var(--gold-dim));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
+
+/* PAGES */
+.page{display:none}.page.active{display:block}
+
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);z-index:1000;display:none;overflow-y:auto;padding:20px}
+.modal-overlay.open{display:block}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:32px;width:100%;max-width:480px;position:relative;margin:0 auto}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--text)}
+.modal h2{font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:6px}
+.modal p.sub{font-size:13px;color:var(--text2);margin-bottom:24px}
+.form-field{margin-bottom:16px}
+.form-label{font-size:12px;color:var(--text2);margin-bottom:6px;display:block}
+.form-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--sans);font-size:14px;outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--green-dim)}
+.form-input::placeholder{color:var(--text3)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);margin-bottom:16px}
+.form-check input{accent-color:var(--green)}
+.modal-switch{text-align:center;font-size:13px;color:var(--text3);margin-top:16px}
+.modal-switch a{color:var(--gold);cursor:pointer;text-decoration:none}
+.modal-switch a:hover{color:var(--gold-light)}
+.success-msg{background:rgba(45,186,86,.1);border:1px solid rgba(45,186,86,.3);border-radius:8px;padding:14px;font-size:13px;color:var(--green-light);margin-bottom:16px;display:none}
+.error-msg{background:rgba(224,85,85,.1);border:1px solid rgba(224,85,85,.3);border-radius:8px;padding:14px;font-size:13px;color:var(--red);margin-bottom:16px;display:none}
+
+/* HERO */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:80px 64px 60px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 70% 50%,rgba(45,186,86,.07) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 20% 80%,rgba(201,168,76,.06) 0%,transparent 60%),linear-gradient(135deg,#050a05 0%,#060d06 40%,#070d07 100%)}
+.hero-grid-bg{position:absolute;inset:0;opacity:.03;background-image:linear-gradient(rgba(100,200,80,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(100,200,80,.5) 1px,transparent 1px);background-size:50px 50px}
+.hero-content{position:relative;z-index:1;max-width:780px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--green);text-transform:uppercase;margin-bottom:28px;padding:6px 14px;border:1px solid rgba(45,186,86,.25);border-radius:100px;background:rgba(45,186,86,.05)}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-title{font-family:var(--serif);font-size:clamp(44px,6vw,76px);line-height:1.05;font-weight:600;color:var(--text);letter-spacing:-.01em;margin-bottom:10px}
+.hero-title .gold{color:var(--gold-light)}.hero-title .italic{font-style:italic;color:var(--green-light)}
+.hero-sub{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,24px);color:var(--gold);margin-bottom:24px;letter-spacing:.02em}
+.hero-desc{font-size:16px;color:var(--text2);line-height:1.8;max-width:560px;margin-bottom:40px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:64px}
+.btn-primary{padding:14px 32px;font-size:14px;font-weight:600;color:#030603;background:var(--green);border:none;border-radius:8px;cursor:pointer;font-family:var(--sans);transition:all .25s}
+.btn-primary:hover{background:var(--green-light);transform:translateY(-1px)}
+.btn-outline{padding:14px 32px;font-size:14px;font-weight:500;color:var(--gold);background:transparent;border:1px solid var(--gold-dim);border-radius:8px;cursor:pointer;font-family:var(--sans);transition:all .25s}
+.btn-outline:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:32px}
+.hero-stat .val{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--gold-light);line-height:1;margin-bottom:4px}
+.hero-stat .lbl{font-size:12px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase}
+.hero-side{position:absolute;right:48px;top:50%;transform:translateY(-50%);width:360px}
+.market-card{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:24px;backdrop-filter:blur(10px)}
+.mc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.mc-label{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
+.mc-val{font-family:var(--mono);font-size:26px;font-weight:500;color:var(--text);margin-top:2px}
+.mc-chg{font-family:var(--mono);font-size:12px;color:var(--green);text-align:right}
+.mc-chg-val{font-size:16px;font-weight:500}
+.spark-wrap{height:120px;margin-bottom:20px}
+canvas.spark{width:100%;height:100%}
+.mc-assets{display:flex;flex-direction:column;gap:10px}
+.mc-asset{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border)}
+.ma-left{display:flex;align-items:center;gap:10px}
+.ma-icon{width:30px;height:30px;border-radius:8px;background:var(--surface3);display:flex;align-items:center;justify-content:center;font-size:14px}
+.ma-name{font-size:13px;font-weight:500}.ma-sub{font-family:var(--mono);font-size:10px;color:var(--text3)}
+.ma-right{text-align:right}.ma-price{font-family:var(--mono);font-size:13px;font-weight:500}.ma-chg{font-family:var(--mono);font-size:11px}
+.up{color:var(--green-light)}.dn{color:var(--red)}
+.live-badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);padding:3px 8px;border-radius:100px;background:rgba(45,186,86,.1);border:1px solid rgba(45,186,86,.2)}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
+
+/* SECTIONS */
+.section{padding:80px 64px}.section-sm{padding:48px 64px}
+.section-header{margin-bottom:48px}
+.eyebrow-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.eyebrow-label::before{content:'';width:24px;height:1px;background:var(--gold-dim)}
+.section-title{font-family:var(--serif);font-size:clamp(28px,3vw,42px);font-weight:600;line-height:1.15}
+.section-subtitle{font-size:15px;color:var(--text2);margin-top:10px;max-width:540px}
+
+/* MARKETS */
+.markets-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.markets-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:40px}
+.market-tile{background:var(--surface);padding:28px 24px;cursor:pointer;transition:background .2s}
+.market-tile:hover{background:var(--surface2)}
+.mt-name{font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.mt-price{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--text);margin-bottom:4px}
+.mt-change{font-family:var(--mono);font-size:12px;margin-bottom:12px}
+.mt-bar{height:2px;background:var(--surface3);border-radius:1px;overflow:hidden}
+.mt-bar-fill{height:100%;border-radius:1px;transition:width 1s ease}
+.loading-overlay{display:flex;align-items:center;justify-content:center;padding:40px;font-family:var(--mono);font-size:12px;color:var(--text3)}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FOREX TABLE */
+.forex-table{width:100%;border-collapse:collapse}
+.forex-table th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:10px 16px;text-align:left;border-bottom:1px solid var(--border)}
+.forex-table td{padding:14px 16px;font-family:var(--mono);font-size:13px;border-bottom:1px solid var(--border)}
+.forex-table tr:last-child td{border-bottom:none}
+.forex-table tr:hover td{background:var(--surface2)}
+.pair-name{font-weight:500;color:var(--gold-light)}
+.sentiment-bar{display:flex;height:4px;border-radius:2px;overflow:hidden;width:80px}
+.sent-bull{background:var(--green)}.sent-bear{background:var(--red)}
+
+/* NEWS TICKER */
+.news-ticker-wrap{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:10px;padding:12px 20px;margin-bottom:32px;overflow:hidden}
+.news-ticker-inner{white-space:nowrap;animation:ticker 60s linear infinite}
+.news-item{display:inline;font-size:13px;color:var(--text2);padding:0 32px}
+.news-item .news-cat{color:var(--gold);font-weight:600}
+
+/* BLOG */
+.blog-section{background:var(--bg2)}
+.cat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+.cat-tab{padding:7px 16px;font-size:12px;font-weight:500;color:var(--text3);background:var(--surface);border:1px solid var(--border);border-radius:100px;cursor:pointer;transition:all .2s;font-family:var(--sans)}
+.cat-tab.active{color:var(--bg);background:var(--gold);border-color:var(--gold)}
+.cat-tab:hover:not(.active){color:var(--text2);border-color:var(--border2)}
+.blog-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px}
+.blog-featured{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color .2s}
+.blog-featured:hover{border-color:var(--border2)}
+.feat-img{height:260px;background:linear-gradient(135deg,#0d1f10,#142814);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.feat-badge{position:absolute;top:16px;left:16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;background:rgba(45,186,86,.15);color:var(--green);border:1px solid rgba(45,186,86,.3);border-radius:100px}
+.feat-content{padding:28px 32px}
+.feat-cat{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.feat-title{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.3;color:var(--text);margin-bottom:12px}
+.feat-excerpt{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.feat-meta{display:flex;align-items:center;gap:16px}
+.feat-author{display:flex;align-items:center;gap:8px}
+.author-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--green-dim),var(--gold-dim));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text)}
+.author-name{font-size:13px;color:var(--text2)}
+.feat-date{font-family:var(--mono);font-size:11px;color:var(--text3)}
+.read-time{font-family:var(--mono);font-size:11px;color:var(--text3);margin-left:auto}
+.blog-sidebar{display:flex;flex-direction:column;gap:16px}
+.blog-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;cursor:pointer;transition:all .2s}
+.blog-card:hover{border-color:var(--border2);background:var(--surface2)}
+.bc-cat{font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.bc-title{font-family:var(--serif);font-size:17px;font-weight:600;line-height:1.4;color:var(--text);margin-bottom:8px}
+.bc-meta{display:flex;gap:12px}
+.bc-date{font-family:var(--mono);font-size:10px;color:var(--text3)}
+
+/* SERVICES */
+.services-section{background:var(--bg)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.service-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px 28px;transition:all .3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);transform:scaleX(0);transition:transform .3s}
+.service-card:hover{border-color:var(--border2);background:var(--surface2);transform:translateY(-3px)}
+.service-card:hover::before{transform:scaleX(1)}
+.sv-icon{width:48px;height:48px;border-radius:12px;background:var(--surface3);margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.sv-title{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--text);margin-bottom:10px}
+.sv-desc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.sv-link{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:6px;cursor:pointer}
+.sv-link:hover{color:var(--gold-light)}
+
+/* TOOLS */
+.tools-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.tool-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:28px}
+.tool-title{font-family:var(--serif);font-size:22px;font-weight:600;margin-bottom:6px}
+.tool-sub{font-size:13px;color:var(--text2);margin-bottom:24px}
+.converter-row{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+.conv-input-wrap{flex:1;position:relative}
+.conv-input{width:100%;padding:14px 50px 14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-family:var(--mono);font-size:18px;font-weight:500;color:var(--text);outline:none;transition:border-color .2s}
+.conv-input:focus{border-color:var(--green-dim)}
+.conv-select{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--surface3);border:none;border-radius:4px;font-family:var(--mono);font-size:11px;color:var(--gold);padding:4px 6px;cursor:pointer;outline:none}
+.conv-arrow{font-size:20px;color:var(--text3);flex-shrink:0}
+.conv-result{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:18px;text-align:center;margin-top:8px}
+.conv-result-val{font-family:var(--mono);font-size:28px;font-weight:500;color:var(--gold-light)}
+.conv-result-sub{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:4px}
+.calc-field{margin-bottom:16px}
+.calc-label{font-size:12px;color:var(--text2);margin-bottom:6px;display:flex;justify-content:space-between}
+.calc-label span{font-family:var(--mono);color:var(--gold)}
+.calc-range{width:100%;-webkit-appearance:none;height:4px;background:var(--surface3);border-radius:2px;outline:none;cursor:pointer}
+.calc-range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);cursor:pointer}
+.calc-result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px}
+.calc-stat{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
+.calc-stat .v{font-family:var(--mono);font-size:16px;font-weight:500;color:var(--green-light)}
+.calc-stat .l{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+
+/* NEWSLETTER */
+.newsletter-section{background:linear-gradient(135deg,#090f09,#0d180d);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 64px;text-align:center}
+.nl-icon{font-size:36px;margin-bottom:20px}
+.nl-title{font-family:var(--serif);font-size:clamp(28px,3vw,40px);font-weight:600;margin-bottom:12px}
+.nl-sub{font-size:15px;color:var(--text2);margin-bottom:36px}
+.nl-form{display:flex;gap:12px;max-width:480px;margin:0 auto 20px}
+.nl-input{flex:1;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--sans);font-size:14px;outline:none;transition:border-color .2s}
+.nl-input:focus{border-color:var(--green-dim)}
+.nl-input::placeholder{color:var(--text3)}
+.nl-perks{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.nl-perk{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3)}
+.nl-perk::before{content:'✓';color:var(--green);font-size:12px}
+
+/* CONTACTS PAGE */
+.contacts-page{padding:80px 64px}
+.contacts-hero{text-align:center;margin-bottom:64px}
+.contacts-hero h1{font-family:var(--serif);font-size:clamp(36px,4vw,56px);font-weight:600;margin-bottom:16px}
+.contacts-hero p{font-size:16px;color:var(--text2);max-width:560px;margin:0 auto}
+.contacts-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:900px;margin:0 auto 64px}
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px;text-align:center;transition:all .3s}
+.contact-card:hover{border-color:var(--border2);background:var(--surface2);transform:translateY(-3px)}
+.contact-icon{width:60px;height:60px;border-radius:50%;background:var(--surface3);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:26px}
+.contact-type{font-family:var(--mono);font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.contact-val{font-size:18px;font-weight:600;color:var(--text);margin-bottom:6px}
+.contact-sub{font-size:13px;color:var(--text2)}
+.contact-btn{display:inline-block;margin-top:16px;padding:10px 24px;background:var(--green);color:#030603;font-size:13px;font-weight:600;border-radius:8px;text-decoration:none;cursor:pointer;transition:background .2s}
+.contact-btn:hover{background:var(--green-light)}
+.contact-btn.gold{background:var(--gold);color:#0a0f0a}
+.contact-btn.gold:hover{background:var(--gold-light)}
+.contact-form-wrap{max-width:640px;margin:0 auto}
+.contact-form-wrap h2{font-family:var(--serif);font-size:32px;font-weight:600;margin-bottom:8px;text-align:center}
+.contact-form-wrap p{font-size:14px;color:var(--text2);text-align:center;margin-bottom:32px}
+.textarea-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--sans);font-size:14px;outline:none;resize:vertical;min-height:120px;transition:border-color .2s}
+.textarea-input:focus{border-color:var(--green-dim)}
+.social-links{display:flex;justify-content:center;gap:16px;margin-top:48px;flex-wrap:wrap}
+.social-card{display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);border-radius:10px;text-decoration:none;transition:all .2s}
+.social-card:hover{border-color:var(--border2);background:var(--surface2)}
+.social-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.social-name{font-size:14px;font-weight:500;color:var(--text)}
+.social-sub{font-size:11px;color:var(--text3)}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64px 32px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.footer-logo-img{height:48px;width:48px;object-fit:contain}
+.footer-brand-name{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--gold-light)}
+.footer-brand-desc{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:20px}
+.footer-social{display:flex;gap:10px}
+.social-btn{width:34px;height:34px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;text-decoration:none;transition:all .2s}
+.social-btn:hover{border-color:var(--gold-dim);background:var(--surface2)}
+.footer-col-title{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);margin-bottom:16px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color .2s;cursor:pointer}
+.footer-links a:hover{color:var(--gold-light)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:28px}
+.footer-copy{font-family:var(--mono);font-size:11px;color:var(--text3)}
+.footer-tz{font-family:var(--mono);font-size:11px;color:var(--green-dim);display:flex;align-items:center;gap:6px}
+
+/* NOTIFICATION */
+.notification{position:fixed;bottom:24px;right:24px;background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:16px 20px;max-width:320px;z-index:999;transform:translateY(100px);opacity:0;transition:all .4s;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.notification.show{transform:translateY(0);opacity:1}
+.notif-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.notif-body{font-size:13px;color:var(--text2)}
+.notif-close{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px}
+
+/* MEMBERS SECTION */
+.member-welcome{background:linear-gradient(135deg,rgba(45,186,86,.1),rgba(201,168,76,.05));border:1px solid var(--border2);border-radius:14px;padding:24px 28px;margin-bottom:32px;display:flex;align-items:center;gap:20px}
+.mw-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--green-dim),var(--gold-dim));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:600;flex-shrink:0}
+.mw-text h3{font-family:var(--serif);font-size:20px;font-weight:600}
+.mw-text p{font-size:13px;color:var(--text2)}
+.mw-badges{margin-left:auto;display:flex;gap:8px}
+.badge{padding:5px 12px;border-radius:100px;font-family:var(--mono);font-size:10px;font-weight:500}
+.badge-green{background:rgba(45,186,86,.15);color:var(--green);border:1px solid rgba(45,186,86,.3)}
+.badge-gold{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3)}
+
+@media(max-width:1100px){.hero-side{display:none}.hero{padding:60px 32px 50px}nav{padding:0 24px}.nav-links{display:none}.section{padding:60px 32px}}
+@media(max-width:768px){.markets-grid{grid-template-columns:repeat(2,1fr)}.blog-grid{grid-template-columns:1fr}.services-grid{grid-template-columns:1fr}.tools-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>:first-child{grid-column:1 / -1}.contacts-grid{grid-template-columns:1fr}.nl-form{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap"><div class="ticker" id="ticker"></div></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" onclick="showPage('home')">
+    <img src="data:image/jpeg;base64,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" 
+         alt="Trust Fund Investment Club" class="nav-logo" style="image-rendering:auto">
+    <div class="nav-name">
+      <span class="nav-name-main">TRUST FUND</span>
+      <span class="nav-name-sub">Investment Club</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('markets')" id="nav-markets">Markets</a></li>
+    <li><a onclick="showPage('blog')" id="nav-blog">Analysis</a></li>
+    <li><a onclick="showPage('services')" id="nav-services">Services</a></li>
+    <li><a onclick="showPage('contacts')" id="nav-contacts">Contacts</a></li>
+  </ul>
+  <div class="nav-right" id="navRight">
+    <button class="btn-ghost" onclick="openModal('login')">Sign In</button>
+    <button class="btn-gold" onclick="openModal('signup')">Join Club</button>
+  </div>
+</nav>
+
+<!-- SIGNUP MODAL -->
+<div class="modal-overlay" id="signupModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('signup')">✕</button>
+    <h2>Join Trust Fund Investment Club</h2>
+    <p class="sub">Jiunge na takriban wanachama 12,000+ wa TFIC. Pata market updates, elimu ya fedha, na mengi zaidi.</p>
+    <div id="signupSuccess" class="success-msg">✅ Umejisajili! Karibu kwenye TFIC. Sasa utapokea market updates mara kwa mara.</div>
+    <div id="signupError" class="error-msg"></div>
+    <div id="signupForm">
+      <div class="form-row">
+        <div class="form-field"><label class="form-label">Jina la Kwanza *</label><input class="form-input" id="s-first" placeholder="Jina la kwanza"></div>
+        <div class="form-field"><label class="form-label">Jina la Mwisho *</label><input class="form-input" id="s-last" placeholder="Jina la mwisho"></div>
+      </div>
+      <div class="form-field"><label class="form-label">Email *</label><input class="form-input" id="s-email" type="email" placeholder="email@mfano.com"></div>
+      <div class="form-field"><label class="form-label">Namba ya Simu (Tanzania)</label><input class="form-input" id="s-phone" placeholder="+255 7XX XXX XXX"></div>
+      <div class="form-field"><label class="form-label">Mji / Mkoa</label><input class="form-input" id="s-city" placeholder="Dar es Salaam, Mwanza..."></div>
+      <div class="form-field"><label class="form-label">Wewe ni nani?</label>
+        <select class="form-input" id="s-type">
+          <option value="">Chagua...</option>
+          <option>Mwanafunzi</option>
+          <option>Mfanyakazi</option>
+          <option>Mfanyabiashara</option>
+          <option>Mwekezaji</option>
+          <option>Mwingine</option>
+        </select>
+      </div>
+      <div class="form-field"><label class="form-label">Password *</label><input class="form-input" id="s-pass" type="password" placeholder="Angalau herufi 8"></div>
+      <div class="form-check"><input type="checkbox" id="s-updates" checked><label for="s-updates">Nataka kupokea market updates na habari za masoko</label></div>
+      <div class="form-check"><input type="checkbox" id="s-remember" checked><label for="s-remember">Nikumbuke kwenye kifaa hiki (usinukie password tena)</label></div>
+      <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px" onclick="doSignup()">Jisajili Sasa Bure →</button>
+    </div>
+    <div class="modal-switch">Una akaunti tayari? <a onclick="closeModal('signup');openModal('login')">Ingia hapa</a></div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('login')">✕</button>
+    <h2>Karibu Tena 👋</h2>
+    <p class="sub">Ingia kwenye akaunti yako ya TFIC.</p>
+    <div id="loginError" class="error-msg"></div>
+    <div class="form-field"><label class="form-label">Email</label><input class="form-input" id="l-email" type="email" placeholder="email@mfano.com"></div>
+    <div class="form-field"><label class="form-label">Password</label><input class="form-input" id="l-pass" type="password" placeholder="Password yako"></div>
+    <div class="form-check"><input type="checkbox" id="l-remember" checked><label for="l-remember">Nikumbuke kwenye kifaa hiki</label></div>
+    <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px;margin-top:8px" onclick="doLogin()">Ingia →</button>
+    <div class="modal-switch">Huna akaunti? <a onclick="closeModal('login');openModal('signup')">Jisajili bure</a></div>
+  </div>
+</div>
+
+<!-- NOTIFICATION -->
+<div class="notification" id="notification">
+  <button class="notif-close" onclick="closeNotif()">✕</button>
+  <div class="notif-title" id="notifTitle"></div>
+  <div class="notif-body" id="notifBody"></div>
+</div>
+
+<!-- ════════════════ HOME PAGE ════════════════ -->
+<div class="page active" id="page-home">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content">
+    <div id="memberWelcomeBanner" style="display:none" class="member-welcome" id="mwb">
+      <div class="mw-avatar" id="mwAvatar">TF</div>
+      <div class="mw-text">
+        <h3 id="mwName">Karibu tena!</h3>
+        <p>Hapa chini unapata masoko ya sasa, analysis, na updates zote za TFIC.</p>
+      </div>
+      <div class="mw-badges"><span class="badge badge-green">Member ✓</span><span class="badge badge-gold">Updates ON</span></div>
+    </div>
+    <div class="hero-eyebrow">Tanzania's Premier Financial Education Platform</div>
+    <h1 class="hero-title">Building <span class="gold">Financial</span><br><span class="italic">Intelligence</span> Across Africa</h1>
+    <p class="hero-sub">Empowering Financial Freedom in Tanzania</p>
+    <p class="hero-desc">Jiunge na maelfu ya Watanzania na wawekezaji wa Afrika Mashariki wanaojifunza forex, hisa, crypto, na fedha za kibinafsi kupitia elimu ya hali ya juu na taarifa za masoko za wakati halisi.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="openModal('signup')">Jiunge na Jamii Yetu</button>
+      <button class="btn-outline" onclick="showPage('markets')">Tazama Masoko Live</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val counter" data-target="12400">0</div><div class="lbl">Active Members</div></div>
+      <div class="hero-stat"><div class="val counter" data-target="340">0</div><div class="lbl">Courses & Guides</div></div>
+      <div class="hero-stat"><div class="val counter" data-target="5">0</div><div class="lbl">Years Educating</div></div>
+      <div class="hero-stat"><div class="val" style="font-family:var(--serif);font-size:32px;font-weight:600;color:var(--gold-light)">EAC</div><div class="lbl">Coverage Region</div></div>
+    </div>
+  </div>
+  <div class="hero-side">
+    <div class="market-card">
+      <div class="mc-header">
+        <div>
+          <div class="mc-label">USD/TZS Live Rate</div>
+          <div class="mc-val" id="hero-usdtzs">—</div>
+        </div>
+        <div class="mc-chg">
+          <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+          <div class="mc-chg-val" id="hero-usdtzs-chg" style="margin-top:6px">—</div>
+        </div>
+      </div>
+      <div class="spark-wrap"><canvas class="spark" id="heroSpark"></canvas></div>
+      <div class="mc-assets" id="heroAssets">
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">₿</div><div><div class="ma-name">Bitcoin</div><div class="ma-sub">BTC/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-btc">—</div><div class="ma-chg" id="h-btc-c">—</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🥇</div><div><div class="ma-name">Gold</div><div class="ma-sub">XAU/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-gold">—</div><div class="ma-chg" id="h-gold-c">—</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🛢</div><div><div class="ma-name">Brent Crude</div><div class="ma-sub">USD/bbl</div></div></div><div class="ma-right"><div class="ma-price" id="h-oil">—</div><div class="ma-chg" id="h-oil-c">—</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK MARKET STRIP -->
+<div style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 64px">
+  <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap">
+    <div style="font-family:var(--mono);font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em">Live Rates</div>
+    <div id="quickStrip" style="display:flex;gap:24px;flex-wrap:wrap"></div>
+    <div class="live-badge" style="margin-left:auto"><span class="live-dot"></span>Auto-refresh 30s</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section section">
+  <div class="section-header">
+    <div class="eyebrow-label">What We Offer</div>
+    <h2 class="section-title">Your Complete Financial Education Platform</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card"><div class="sv-icon">📈</div><h3 class="sv-title">Market Analysis</h3><p class="sv-desc">Uchambuzi wa kila siku wa forex, crypto, na masoko ya hisa duniani kwa muktadha wa Tanzania.</p><a class="sv-link" onclick="showPage('markets')">Soma Analysis →</a></div>
+    <div class="service-card"><div class="sv-icon">🎓</div><h3 class="sv-title">Financial Literacy</h3><p class="sv-desc">Kozi za Kiswahili na Kiingereza kuhusu bajeti, akiba, uwekezaji wa msingi na fedha za kibinafsi.</p><a class="sv-link">Angalia Kozi →</a></div>
+    <div class="service-card"><div class="sv-icon">💼</div><h3 class="sv-title">Investment Mentorship</h3><p class="sv-desc">Programu za ushauri wa mtu mmoja na kikundi, zinazokuunganisha na wawekezaji wenye uzoefu Tanzania.</p><a class="sv-link">Pata Mshauri →</a></div>
+    <div class="service-card"><div class="sv-icon">🌍</div><h3 class="sv-title">East Africa Focus</h3><p class="sv-desc">Taarifa maalum za DSE Dar es Salaam, NSE Kenya, USE Uganda na fursa za uwekezaji katika EAC.</p><a class="sv-link">Masoko ya Kikanda →</a></div>
+    <div class="service-card"><div class="sv-icon">₿</div><h3 class="sv-title">Crypto Education</h3><p class="sv-desc">Elimu salama na ya vitendo ya uwekezaji wa crypto, blockchain, na mali za kidijitali na muktadha wa Tanzania.</p><a class="sv-link">Jifunze Crypto →</a></div>
+    <div class="service-card"><div class="sv-icon">🏦</div><h3 class="sv-title">Business Finance</h3><p class="sv-desc">Zana na elimu kwa wamiliki wa biashara ndogo na wajasiriamali — kutoka ufadhili hadi mkakati wa uwekezaji.</p><a class="sv-link">Zana za Biashara →</a></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="nl-icon">📬</div>
+  <h2 class="nl-title">Pata TFIC Daily Market Brief</h2>
+  <p class="nl-sub">Kila asubuhi: muhtasari wa masoko Tanzania, viwango vya forex, harakati za dunia, na ufahamu mmoja wa uwekezaji unaohusu leo.</p>
+  <div class="nl-form">
+    <input type="email" class="nl-input" id="nlEmail" placeholder="Weka email yako hapa">
+    <button class="btn-gold" style="padding:14px 24px;font-size:14px;border-radius:8px;white-space:nowrap" onclick="nlSubscribe()">Subscribe Bure</button>
+  </div>
+  <div class="nl-perks">
+    <span class="nl-perk">Daily market brief</span>
+    <span class="nl-perk">Forex rate alerts</span>
+    <span class="nl-perk">Weekly deep-dive analysis</span>
+    <span class="nl-perk">Bila spam</span>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════ MARKETS PAGE ════════════════ -->
+<div class="page" id="page-markets">
+<section class="markets-section section">
+  <div class="section-header">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="eyebrow-label">Live Markets</div>
+        <h2 class="section-title">Global & East African Market Overview</h2>
+        <p class="section-subtitle">Viwango vya wakati halisi vya forex, commodities, na crypto.</p>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="live-badge"><span class="live-dot"></span>Refreshing every 30s</div>
+        <button class="btn-ghost" onclick="fetchAllMarketData()" style="font-size:12px;padding:6px 14px">↻ Refresh Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWS TICKER -->
+  <div class="news-ticker-wrap">
+    <div class="news-ticker-inner" id="newsTicker">Inapakia habari za masoko...</div>
+  </div>
+
+  <div id="marketsGrid" class="markets-grid">
+    <div class="loading-overlay" style="grid-column:1/-1"><span class="spin"></span>Inapakia data ya masoko...</div>
+  </div>
+
+  <table class="forex-table">
+    <thead><tr>
+      <th>Jozi / Pair</th><th>Bei / Price</th><th>Mabadiliko / Change</th><th>%</th><th>Ishara / Signal</th>
+    </tr></thead>
+    <tbody id="forexBody"><tr><td colspan="5" style="text-align:center;color:var(--text3);padding:20px"><span class="spin"></span> Inapakia...</td></tr></tbody>
+  </table>
+</section>
+
+<!-- TOOLS INSIDE MARKETS -->
+<section class="tools-section section">
+  <div class="section-header">
+    <div class="eyebrow-label">Financial Tools</div>
+    <h2 class="section-title">Zana za Fedha Kwa Maamuzi Bora</h2>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <h3 class="tool-title">Currency Converter</h3>
+      <p class="tool-sub">Badilisha kati ya sarafu kuu na shilingi za Afrika Mashariki.</p>
+      <div class="converter-row">
+        <div class="conv-input-wrap">
+          <input type="number" class="conv-input" id="convAmount" value="1000">
+          <select class="conv-select" id="convFrom"><option>USD</option><option>EUR</option><option>GBP</option><option>KES</option></select>
+        </div>
+        <span class="conv-arrow">⇄</span>
+        <div class="conv-input-wrap">
+          <input type="number" class="conv-input" id="convResult" readonly style="color:var(--gold-light)">
+          <select class="conv-select" id="convTo"><option>TZS</option><option>USD</option><option>EUR</option><option>KES</option></select>
+        </div>
+      </div>
+      <div class="conv-result">
+        <div class="conv-result-val" id="convBig">—</div>
+        <div class="conv-result-sub" id="convRate">Inapakia viwango vya sasa...</div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <h3 class="tool-title">Investment Calculator</h3>
+      <p class="tool-sub">Angazia ukuaji wa utajiri wako na riba ya mkopo.</p>
+      <div class="calc-field"><div class="calc-label">Kiasi cha Awali (TZS) <span id="lPrincipal">1,000,000</span></div><input type="range" class="calc-range" id="rPrincipal" min="100000" max="10000000" step="100000" value="1000000"></div>
+      <div class="calc-field"><div class="calc-label">Faida ya Mwaka (%) <span id="lRate">12%</span></div><input type="range" class="calc-range" id="rRate" min="5" max="25" step="1" value="12"></div>
+      <div class="calc-field"><div class="calc-label">Miaka <span id="lYears">10</span></div><input type="range" class="calc-range" id="rYears" min="1" max="30" step="1" value="10"></div>
+      <div class="calc-result-grid">
+        <div class="calc-stat"><div class="v" id="cFuture">—</div><div class="l">Future Value</div></div>
+        <div class="calc-stat"><div class="v" id="cGain" style="color:var(--gold-light)">—</div><div class="l">Total Gain</div></div>
+        <div class="calc-stat"><div class="v" id="cROI" style="color:var(--green-light)">—</div><div class="l">ROI</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════ BLOG PAGE ════════════════ -->
+<div class="page" id="page-blog">
+<section class="blog-section section">
+  <div class="section-header">
+    <div class="eyebrow-label">Market Intelligence</div>
+    <h2 class="section-title">Analysis, Elimu & Taarifa za Fedha</h2>
+    <p class="section-subtitle">Makala ya kina kuhusu masoko, mkakati wa uwekezaji, na elimu ya fedha kwa Tanzania na Afrika Mashariki.</p>
+  </div>
+  <div class="cat-tabs">
+    <button class="cat-tab active" data-cat="all">Yote</button>
+    <button class="cat-tab" data-cat="forex">Forex</button>
+    <button class="cat-tab" data-cat="crypto">Cryptocurrency</button>
+    <button class="cat-tab" data-cat="investment">Uwekezaji</button>
+    <button class="cat-tab" data-cat="tz">Tanzania Economy</button>
+    <button class="cat-tab" data-cat="global">Global Markets</button>
+    <button class="cat-tab" data-cat="edu">Elimu ya Fedha</button>
+  </div>
+  <div class="blog-grid">
+    <div class="blog-featured">
+      <div class="feat-img"><canvas id="featChart" style="width:100%;height:100%"></canvas><span class="feat-badge">Featured Analysis</span></div>
+      <div class="feat-content">
+        <div class="feat-cat">Macro · Tanzania Economy</div>
+        <h2 class="feat-title">Tanzania's GDP Growth & What It Means for Your Investment Portfolio in 2026</h2>
+        <p class="feat-excerpt">Huku Tanzania ikiandika ukuaji wa GDP wa 6.2% na Benki Kuu ya Tanzania ikishikilia viwango vya riba, tunavunja jinsi mazingira ya jumla yanavyounda fursa katika hisa za ndani, mali isiyohamishika, na uratibu wa USD/TZS.</p>
+        <div class="feat-meta">
+          <div class="feat-author"><div class="author-avatar">TF</div><span class="author-name">TFIC Research Desk</span></div>
+          <span class="feat-date">May 19, 2026</span><span class="read-time">12 min read</span>
+        </div>
+      </div>
+    </div>
+    <div class="blog-sidebar">
+      <div class="blog-card" data-cat="forex"><div class="bc-cat">Forex</div><h3 class="bc-title">USD/TZS: Viwango muhimu vya kuangalia wiki hii</h3><div class="bc-meta"><span class="bc-date">May 18, 2026</span><span class="bc-date">6 min</span></div></div>
+      <div class="blog-card" data-cat="crypto"><div class="bc-cat">Cryptocurrency</div><h3 class="bc-title">Bitcoin halving: Masomo kwa wawekezaji wa Tanzania</h3><div class="bc-meta"><span class="bc-date">May 16, 2026</span><span class="bc-date">9 min</span></div></div>
+      <div class="blog-card" data-cat="investment"><div class="bc-cat">Uwekezaji</div><h3 class="bc-title">DSE 2026: Hisa 3 zenye thamani ndogo</h3><div class="bc-meta"><span class="bc-date">May 14, 2026</span><span class="bc-date">7 min</span></div></div>
+      <div class="blog-card" data-cat="edu"><div class="bc-cat">Elimu ya Fedha</div><h3 class="bc-title">Jinsi ya kujenga akaunti ya dharura kwa mshahara wa Tanzania</h3><div class="bc-meta"><span class="bc-date">May 12, 2026</span><span class="bc-date">5 min</span></div></div>
+    </div>
+  </div>
+
+  <!-- More articles grid -->
+  <div style="margin-top:40px">
+    <h3 style="font-family:var(--serif);font-size:24px;font-weight:600;margin-bottom:24px">Makala Zaidi</h3>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" id="moreArticles">
+      <div class="blog-card" data-cat="forex"><div class="bc-cat">Forex</div><h3 class="bc-title">EUR/USD & Afrika: Athari kwa waagizaji wa Tanzania</h3><div class="bc-meta"><span class="bc-date">May 10, 2026</span></div></div>
+      <div class="blog-card" data-cat="global"><div class="bc-cat">Global Markets</div><h3 class="bc-title">Masoko ya dunia yanavyoathiri mfumo wa uchumi wa Afrika Mashariki</h3><div class="bc-meta"><span class="bc-date">May 8, 2026</span></div></div>
+      <div class="blog-card" data-cat="edu"><div class="bc-cat">Elimu ya Fedha</div><h3 class="bc-title">Kanuni 5 za usimamizi wa fedha kwa vijana wa Tanzania</h3><div class="bc-meta"><span class="bc-date">May 6, 2026</span></div></div>
+      <div class="blog-card" data-cat="tz"><div class="bc-cat">Tanzania Economy</div><h3 class="bc-title">Uchumi wa Tanzania 2026: Changamoto na fursa</h3><div class="bc-meta"><span class="bc-date">May 4, 2026</span></div></div>
+      <div class="blog-card" data-cat="crypto"><div class="bc-cat">Cryptocurrency</div><h3 class="bc-title">Ethereum vs Solana: Lipi bora kwa mwekezaji wa Afrika?</h3><div class="bc-meta"><span class="bc-date">May 2, 2026</span></div></div>
+      <div class="blog-card" data-cat="investment"><div class="bc-cat">Uwekezaji</div><h3 class="bc-title">Hatua za kwanza za uwekezaji wa hisa kwa Watanzania</h3><div class="bc-meta"><span class="bc-date">Apr 30, 2026</span></div></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════ SERVICES PAGE ════════════════ -->
+<div class="page" id="page-services">
+<section class="services-section section">
+  <div class="section-header">
+    <div class="eyebrow-label">Huduma Zetu</div>
+    <h2 class="section-title">Jukwaa Lako Kamili la Elimu ya Fedha</h2>
+    <p class="section-subtitle">Kutoka kusoma msingi wa fedha hadi mikakati ya biashara ya juu — tunakufunika.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card"><div class="sv-icon">📈</div><h3 class="sv-title">Market Analysis</h3><p class="sv-desc">Uchambuzi wa kila siku na wa kila wiki wa masoko ya forex, crypto, na hisa duniani ukizingatia muktadha wa Tanzania na Afrika Mashariki.</p><a class="sv-link" onclick="showPage('markets')">Angalia Masoko →</a></div>
+    <div class="service-card"><div class="sv-icon">🎓</div><h3 class="sv-title">Financial Literacy</h3><p class="sv-desc">Kozi zilizopangwa kwa Kiswahili na Kiingereza zinazofunika bajeti, akiba, misingi ya uwekezaji, na fedha za kibinafsi kwa viwango vyote vya mapato.</p><a class="sv-link">Angalia Kozi →</a></div>
+    <div class="service-card"><div class="sv-icon">💼</div><h3 class="sv-title">Investment Mentorship</h3><p class="sv-desc">Programu za ushauri wa mmoja mmoja na wa kikundi zinazokuunganisha na wawekezaji wenye uzoefu na wataalamu wa fedha Tanzania.</p><a class="sv-link">Pata Mshauri →</a></div>
+    <div class="service-card"><div class="sv-icon">🌍</div><h3 class="sv-title">East Africa Markets</h3><p class="sv-desc">Uchambuzi maalum wa DSE, NSE Kenya, USE Uganda, na fursa za uwekezaji katika nchi zote za EAC.</p><a class="sv-link">Masoko ya Kikanda →</a></div>
+    <div class="service-card"><div class="sv-icon">₿</div><h3 class="sv-title">Crypto Education</h3><p class="sv-desc">Elimu salama na ya vitendo ya uwekezaji wa crypto, teknolojia ya blockchain, na mali za kidijitali — na muktadha wa udhibiti wa Tanzania.</p><a class="sv-link">Jifunze Crypto →</a></div>
+    <div class="service-card"><div class="sv-icon">🏦</div><h3 class="sv-title">Business Finance</h3><p class="sv-desc">Zana na elimu kwa wamiliki wa SME na wajasiriamali — kutoka ufadhili wa biashara na usimamizi wa mtiririko wa fedha hadi mkakati wa uwekezaji.</p><a class="sv-link">Zana za Biashara →</a></div>
+  </div>
+
+  <!-- Join CTA -->
+  <div style="text-align:center;margin-top:64px;padding:48px;background:var(--surface);border:1px solid var(--border2);border-radius:16px">
+    <h2 style="font-family:var(--serif);font-size:36px;font-weight:600;margin-bottom:12px">Uko tayari kuanza safari yako ya fedha?</h2>
+    <p style="color:var(--text2);margin-bottom:28px;font-size:15px">Jiunge bure leo. Pata ufikiaji wa masoko ya wakati halisi, makala, na jamii ya TFIC.</p>
+    <button class="btn-primary" style="font-size:16px;padding:16px 40px" onclick="openModal('signup')">Jiunge Bure Sasa →</button>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════ CONTACTS PAGE ════════════════ -->
+<div class="page" id="page-contacts">
+<section class="contacts-page">
+  <div class="contacts-hero">
+    <div class="eyebrow-label" style="justify-content:center;margin-bottom:16px">Wasiliana Nasi</div>
+    <h1>Tuzungumze Moja kwa Moja</h1>
+    <p>Una swali, pendekezo, au unataka kushirikiana na TFIC? Tuko karibu nawe. Tumia njia yoyote hapa chini.</p>
+  </div>
+
+  <div class="contacts-grid">
+    <div class="contact-card">
+      <div class="contact-icon">📞</div>
+      <div class="contact-type">Simu / WhatsApp</div>
+      <div class="contact-val">+255 744 000 000</div>
+      <div class="contact-sub">Jumatatu – Ijumaa, 8:00 – 17:00 EAT</div>
+      <a class="contact-btn" href="tel:+255744000000">Piga Simu →</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">💬</div>
+      <div class="contact-type">WhatsApp Group</div>
+      <div class="contact-val">TFIC Community</div>
+      <div class="contact-sub">Jiunge na kikundi cha wanachama 12,000+</div>
+      <a class="contact-btn" href="https://wa.me/255744000000" target="_blank">Jiunge WhatsApp →</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📧</div>
+      <div class="contact-type">Email</div>
+      <div class="contact-val">info@tfic.co.tz</div>
+      <div class="contact-sub">Jibu ndani ya saa 24 za kazi</div>
+      <a class="contact-btn gold" href="mailto:info@tfic.co.tz">Tuma Email →</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <div class="contact-type">Ofisi Kuu</div>
+      <div class="contact-val">Dar es Salaam, Tanzania</div>
+      <div class="contact-sub">Mlimani City Office Park, Barabara ya Sam Nujoma</div>
+      <a class="contact-btn gold">Pata Ramani →</a>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="contact-form-wrap">
+    <h2>Tuma Ujumbe Moja kwa Moja</h2>
+    <p>Jaza fomu hii na tutawasiliana nawe haraka iwezekanavyo.</p>
+    <div id="contactSuccess" class="success-msg" style="display:none">✅ Asante! Ujumbe wako umefika. Tutawasiliana nawe hivi karibuni.</div>
+    <div class="form-row" style="margin-bottom:16px">
+      <div class="form-field"><label class="form-label">Jina lako *</label><input class="form-input" id="c-name" placeholder="Jina lako kamili"></div>
+      <div class="form-field"><label class="form-label">Email *</label><input class="form-input" id="c-email" type="email" placeholder="email@mfano.com"></div>
+    </div>
+    <div class="form-field"><label class="form-label">Namba ya Simu</label><input class="form-input" id="c-phone" placeholder="+255 7XX XXX XXX"></div>
+    <div class="form-field"><label class="form-label">Mada / Subject *</label>
+      <select class="form-input" id="c-subject">
+        <option value="">Chagua mada...</option>
+        <option>Kuhusu Uanachama</option>
+        <option>Market Analysis / Uchambuzi</option>
+        <option>Ushauri wa Uwekezaji</option>
+        <option>Kozi na Elimu</option>
+        <option>Ushirikiano wa Biashara</option>
+        <option>Tatizo la Kiufundi</option>
+        <option>Mengineyo</option>
+      </select>
+    </div>
+    <div class="form-field"><label class="form-label">Ujumbe wako *</label><textarea class="textarea-input" id="c-message" placeholder="Andika ujumbe wako hapa..."></textarea></div>
+    <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px" onclick="sendContact()">Tuma Ujumbe →</button>
+  </div>
+
+  <!-- Social Links -->
+  <div class="social-links">
+    <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#1DA1F2">𝕏</div><div><div class="social-name">Twitter / X</div><div class="social-sub">@TrustFundTZ</div></div></a>
+    <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#1877F2">f</div><div><div class="social-name">Facebook</div><div class="social-sub">Trust Fund Investment Club</div></div></a>
+    <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#E1306C">📷</div><div><div class="social-name">Instagram</div><div class="social-sub">@tfic_tz</div></div></a>
+    <a class="social-card" href="https://t.me/tfic_tz" target="_blank"><div class="social-icon" style="background:#0088cc">✈</div><div><div class="social-name">Telegram</div><div class="social-sub">TFIC Channel</div></div></a>
+    <a class="social-card" href="#" target="_blank"><div class="social-icon" style="background:#FF0000">▶</div><div><div class="social-name">YouTube</div><div class="social-sub">TFIC TV</div></div></a>
+  </div>
+</section>
+</div>
+
+<!-- FOOTER (shown on all pages) -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-row">
+        <img src="data:image/jpeg;base64,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" 
+             alt="TFIC" class="footer-logo-img">
+        <span class="footer-brand-name">TRUST FUND INVESTMENT CLUB</span>
+      </div>
+      <p class="footer-brand-desc">Jukwaa la kwanza la elimu ya fedha na akili ya uwekezaji Tanzania. Kuwawezesha Watanzania na Waafrika wa Mashariki kujua jinsi ya kujenga utajiri wa kudumu.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">f</a><a href="#" class="social-btn">📷</a><a href="#" class="social-btn">💬</a><a href="#" class="social-btn">▶</a>
+      </div>
+    </div>
+    <div><div class="footer-col-title">Jukwaa</div><ul class="footer-links"><li><a onclick="showPage('markets')">Market Analysis</a></li><li><a>Financial Education</a></li><li><a onclick="showPage('markets')">Forex Trading</a></li><li><a>Crypto Insights</a></li></ul></div>
+    <div><div class="footer-col-title">Jamii</div><ul class="footer-links"><li><a onclick="openModal('signup')">Jiunge TFIC</a></li><li><a>Mentorship</a></li><li><a>Matukio & Webinars</a></li><li><a onclick="showPage('contacts')">Wasiliana Nasi</a></li></ul></div>
+    <div><div class="footer-col-title">Kampuni</div><ul class="footer-links"><li><a>Kuhusu TFIC</a></li><li><a>Timu Yetu</a></li><li><a>Sera ya Faragha</a></li><li><a onclick="showPage('contacts')">Mawasiliano</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Trust Fund Investment Club. Haki zote zimehifadhiwa. Dar es Salaam, Tanzania.</div>
+    <div class="footer-tz">🇹🇿 Made in Tanzania · Serving East Africa</div>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+// BACKEND API CONNECTION
+// ═══════════════════════════════════════════════
+const API = 'http://localhost:3000/api';
+
+// ═══════════════════════════════════════════════
+// USER AUTH & SIGNUP — Connected to Real Backend
+// ═══════════════════════════════════════════════
+let currentUser = null;
+
+function initAuth() {
+  const token = localStorage.getItem('tfic_token');
+  const user = localStorage.getItem('tfic_user');
+  if (token && user) {
+    try {
+      currentUser = JSON.parse(user);
+      renderLoggedIn();
+    } catch(e) {
+      localStorage.removeItem('tfic_token');
+      localStorage.removeItem('tfic_user');
+    }
+  }
+}
+
+async function doSignup() {
+  const first = document.getElementById('s-first').value.trim();
+  const last = document.getElementById('s-last').value.trim();
+  const email = document.getElementById('s-email').value.trim();
+  const phone = document.getElementById('s-phone').value.trim();
+  const city = document.getElementById('s-city').value.trim();
+  const type = document.getElementById('s-type').value;
+  const pass = document.getElementById('s-pass').value;
+  const updates = document.getElementById('s-updates').checked;
+  const remember = document.getElementById('s-remember').checked;
+  const errEl = document.getElementById('signupError');
+  errEl.style.display = 'none';
+
+  if (!first || !last || !email || !pass) { errEl.textContent='Tafadhali jaza sehemu zote zinazohitajika (*)'; errEl.style.display='block'; return; }
+  if (pass.length < 8) { errEl.textContent='Password lazima iwe na angalau herufi 8'; errEl.style.display='block'; return; }
+
+  // Disable button during request
+  const btn = document.querySelector('#signupForm button');
+  if (btn) { btn.disabled = true; btn.textContent = 'Inajisajili...'; }
+
+  try {
+    const res = await fetch(`${API}/auth/signup`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ firstName:first, lastName:last, email, phone, city, userType:type, password:pass, wantsUpdates:updates })
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      errEl.textContent = data.error || 'Kuna tatizo. Jaribu tena.';
+      errEl.style.display = 'block';
+      if (btn) { btn.disabled = false; btn.textContent = 'Jisajili Sasa Bure →'; }
+      return;
+    }
+
+    // Save token for auto-login
+    if (remember) {
+      localStorage.setItem('tfic_token', data.token);
+      localStorage.setItem('tfic_user', JSON.stringify(data.user));
+    }
+    currentUser = data.user;
+
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('signupSuccess').style.display = 'block';
+    setTimeout(() => {
+      closeModal('signup');
+      renderLoggedIn();
+      showNotif('Karibu TFIC! 🎉', `Habari ${first}! Umefanikiwa kujisajili. Angalia email yako kwa barua ya karibu!`);
+    }, 2000);
+
+  } catch(e) {
+    errEl.textContent = 'Huwezi kuunganika na server. Hakikisha server inafanya kazi (npm start).';
+    errEl.style.display = 'block';
+    if (btn) { btn.disabled = false; btn.textContent = 'Jisajili Sasa Bure →'; }
+  }
+}
+
+async function doLogin() {
+  const email = document.getElementById('l-email').value.trim();
+  const pass = document.getElementById('l-pass').value;
+  const remember = document.getElementById('l-remember').checked;
+  const errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+
+  const btn = document.querySelector('#loginModal button.btn-green');
+  if (btn) { btn.disabled = true; btn.textContent = 'Inaingia...'; }
+
+  try {
+    const res = await fetch(`${API}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pass })
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      errEl.textContent = data.error || 'Imeshindwa kuingia. Jaribu tena.';
+      errEl.style.display = 'block';
+      if (btn) { btn.disabled = false; btn.textContent = 'Ingia →'; }
+      return;
+    }
+
+    if (remember) {
+      localStorage.setItem('tfic_token', data.token);
+      localStorage.setItem('tfic_user', JSON.stringify(data.user));
+    }
+    currentUser = data.user;
+    closeModal('login');
+    renderLoggedIn();
+    showNotif(`Karibu tena ${data.user.firstName}! 👋`, 'Umeingia kwenye akaunti yako ya TFIC.');
+
+  } catch(e) {
+    errEl.textContent = 'Huwezi kuunganika na server. Hakikisha server inafanya kazi.';
+    errEl.style.display = 'block';
+    if (btn) { btn.disabled = false; btn.textContent = 'Ingia →'; }
+  }
+}
+
+function doLogout() {
+  localStorage.removeItem('tfic_token');
+  localStorage.removeItem('tfic_user');
+  currentUser = null;
+  document.getElementById('navRight').innerHTML = `<button class="btn-ghost" onclick="openModal('login')">Sign In</button><button class="btn-gold" onclick="openModal('signup')">Join Club</button>`;
+  document.getElementById('memberWelcomeBanner').style.display = 'none';
+  showNotif('Umetoka', 'Umefanikiwa kutoka kwenye akaunti yako.');
+}
+
+function renderLoggedIn() {
+  if (!currentUser) return;
+  const fn = currentUser.firstName || currentUser.first_name || '?';
+  const ln = currentUser.lastName || currentUser.last_name || '?';
+  const initials = (fn[0] + ln[0]).toUpperCase();
+  document.getElementById('navRight').innerHTML = `
+    <div class="user-pill" onclick="doLogout()" title="Toka">
+      <div class="user-avatar">${initials}</div>
+      <span style="font-size:13px">${fn}</span>
+      <span style="font-size:11px;color:var(--text3)">• Toka</span>
+    </div>`;
+  const mwb = document.getElementById('memberWelcomeBanner');
+  if (mwb) {
+    mwb.style.display = 'flex';
+    document.getElementById('mwAvatar').textContent = initials;
+    document.getElementById('mwName').textContent = `Karibu tena, ${fn}! 🎉`;
+  }
+}
+
+// ═══════════════════════════════════════════════
+// MODAL CONTROL
+// ═══════════════════════════════════════════════
+function openModal(type) {
+  if (type==='signup') { document.getElementById('signupForm').style.display='block'; document.getElementById('signupSuccess').style.display='none'; document.getElementById('signupError').style.display='none'; document.getElementById('signupModal').classList.add('open'); }
+  if (type==='login') { document.getElementById('loginError').style.display='none'; document.getElementById('loginModal').classList.add('open'); }
+}
+function closeModal(type) {
+  if (type==='signup') document.getElementById('signupModal').classList.remove('open');
+  if (type==='login') document.getElementById('loginModal').classList.remove('open');
+}
+document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
+
+// ═══════════════════════════════════════════════
+// PAGE NAVIGATION
+// ═══════════════════════════════════════════════
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-'+name);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (name === 'markets') { fetchAllMarketData(); initCalc(); }
+  if (name === 'blog') setTimeout(drawFeatChart, 100);
+}
+
+// ═══════════════════════════════════════════════
+// LIVE MARKET DATA (CoinGecko + ExchangeRate)
+// ═══════════════════════════════════════════════
+let liveRates = {};
+let cryptoPrices = {};
+
+async function fetchCryptoData() {
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,solana&vs_currencies=usd&include_24hr_change=true');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    cryptoPrices = {
+      BTC: { price: data.bitcoin?.usd, chg: data.bitcoin?.usd_24h_change },
+      ETH: { price: data.ethereum?.usd, chg: data.ethereum?.usd_24h_change },
+      BNB: { price: data.binancecoin?.usd, chg: data.binancecoin?.usd_24h_change },
+      SOL: { price: data.solana?.usd, chg: data.solana?.usd_24h_change },
+    };
+    return true;
+  } catch(e) {
+    // Fallback
+    cryptoPrices = { BTC:{price:67420,chg:1.84}, ETH:{price:3218,chg:-0.61}, BNB:{price:605,chg:0.44}, SOL:{price:178,chg:2.1} };
+    return false;
+  }
+}
+
+async function fetchForexData() {
+  try {
+    const res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    liveRates = data.rates;
+    return true;
+  } catch(e) {
+    // Fallback approximate rates
+    liveRates = { TZS:2628, KES:128.5, UGX:3780, EUR:0.921, GBP:0.786, JPY:154.8, NGN:1600, ZAR:18.9 };
+    return false;
+  }
+}
+
+async function fetchAllMarketData() {
+  await Promise.all([fetchCryptoData(), fetchForexData()]);
+  updateMarketsGrid();
+  updateForexTable();
+  updateHeroCard();
+  updateQuickStrip();
+  updateTickerBar();
+  updateConverter();
+}
+
+function fmt(n, dec=2) {
+  if (!n && n!==0) return '—';
+  return Number(n).toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+}
+function chgStr(c) {
+  if (!c && c!==0) return '—';
+  const sign = c >= 0 ? '▲ +' : '▼ ';
+  return sign + Math.abs(c).toFixed(2) + '%';
+}
+function chgClass(c) { return c >= 0 ? 'up' : 'dn'; }
+
+function updateMarketsGrid() {
+  const r = liveRates; const c = cryptoPrices;
+  const tiles = [
+    { name:'EUR/USD', price: r.EUR ? (1/r.EUR).toFixed(4) : '—', chg:0.24, bar:62 },
+    { name:'GBP/USD', price: r.GBP ? (1/r.GBP).toFixed(4) : '—', chg:0.15, bar:58 },
+    { name:'USD/TZS', price: r.TZS ? fmt(r.TZS,0) : '—', chg:0.38, bar:55 },
+    { name:'USD/KES', price: r.KES ? fmt(r.KES,2) : '—', chg:-0.32, bar:44 },
+    { name:'BTC/USD', price: c.BTC?.price ? '$'+fmt(c.BTC.price,0) : '—', chg:c.BTC?.chg||0, bar:68 },
+    { name:'ETH/USD', price: c.ETH?.price ? '$'+fmt(c.ETH.price,0) : '—', chg:c.ETH?.chg||0, bar:45 },
+    { name:'USD/UGX', price: r.UGX ? fmt(r.UGX,0) : '—', chg:0.12, bar:52 },
+    { name:'USD/NGN', price: r.NGN ? fmt(r.NGN,0) : '—', chg:-0.8, bar:41 },
+  ];
+  document.getElementById('marketsGrid').innerHTML = tiles.map(t => `
+    <div class="market-tile">
+      <div class="mt-name">${t.name}</div>
+      <div class="mt-price">${t.price}</div>
+      <div class="mt-change ${chgClass(t.chg)}">${chgStr(t.chg)}</div>
+      <div class="mt-bar"><div class="mt-bar-fill" style="width:${t.bar}%;background:${t.chg>=0?'var(--green)':'var(--red)'};height:100%;border-radius:1px"></div></div>
+    </div>`).join('');
+}
+
+function updateForexTable() {
+  const r = liveRates; const c = cryptoPrices;
+  const rows = [
+    { pair:'USD/TZS', price: r.TZS, chg: 9.8, pct: 0.38 },
+    { pair:'EUR/USD', price: r.EUR ? 1/r.EUR : null, chg: 0.0026, pct: 0.24 },
+    { pair:'GBP/USD', price: r.GBP ? 1/r.GBP : null, chg: 0.0019, pct: 0.15 },
+    { pair:'USD/KES', price: r.KES, chg: -0.42, pct: -0.32 },
+    { pair:'USD/JPY', price: r.JPY, chg: -0.22, pct: -0.14 },
+    { pair:'USD/ZAR', price: r.ZAR, chg: 0.18, pct: 0.97 },
+    { pair:'BTC/USD', price: c.BTC?.price, chg: null, pct: c.BTC?.chg||0 },
+    { pair:'ETH/USD', price: c.ETH?.price, chg: null, pct: c.ETH?.chg||0 },
+  ];
+  document.getElementById('forexBody').innerHTML = rows.map(r => {
+    const up = r.pct >= 0;
+    const priceStr = r.price ? (r.price > 1000 ? '$'+fmt(r.price,0) : fmt(r.price,4)) : '—';
+    const chgNum = r.chg !== null ? (up?'+':'')+r.chg : '';
+    return `<tr>
+      <td><span class="pair-name">${r.pair}</span></td>
+      <td>${priceStr}</td>
+      <td class="${up?'up':'dn'}">${chgNum}</td>
+      <td class="${up?'up':'dn'}">${up?'▲ +':'▼ '}${Math.abs(r.pct).toFixed(2)}%</td>
+      <td><span style="color:${up?'var(--green)':'var(--red)'};font-size:11px;font-weight:600">${up?'BUY':'SELL'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function updateHeroCard() {
+  const tzs = liveRates.TZS;
+  if (tzs) {
+    document.getElementById('hero-usdtzs').textContent = fmt(tzs, 2);
+    document.getElementById('hero-usdtzs-chg').textContent = '▲ +0.38%';
+    document.getElementById('hero-usdtzs-chg').className = 'mc-chg-val up';
+  }
+  const btc = cryptoPrices.BTC;
+  if (btc?.price) {
+    document.getElementById('h-btc').textContent = '$'+fmt(btc.price,0);
+    const el = document.getElementById('h-btc-c');
+    el.textContent = chgStr(btc.chg);
+    el.className = 'ma-chg ' + chgClass(btc.chg);
+  }
+  document.getElementById('h-gold').textContent = '$2,345';
+  document.getElementById('h-gold-c').textContent = '▲ +0.52%';
+  document.getElementById('h-gold-c').className = 'ma-chg up';
+  document.getElementById('h-oil').textContent = '$82.15';
+  document.getElementById('h-oil-c').textContent = '▼ −0.28%';
+  document.getElementById('h-oil-c').className = 'ma-chg dn';
+}
+
+function updateQuickStrip() {
+  const r = liveRates; const c = cryptoPrices;
+  const items = [
+    { label:'USD/TZS', val:r.TZS?fmt(r.TZS,0):'—', up:true },
+    { label:'USD/KES', val:r.KES?fmt(r.KES,2):'—', up:false },
+    { label:'EUR/USD', val:r.EUR?(1/r.EUR).toFixed(4):'—', up:true },
+    { label:'BTC', val:c.BTC?.price?'$'+fmt(c.BTC.price,0):'—', up:(c.BTC?.chg||0)>=0 },
+    { label:'ETH', val:c.ETH?.price?'$'+fmt(c.ETH.price,0):'—', up:(c.ETH?.chg||0)>=0 },
+    { label:'GOLD', val:'$2,345', up:true },
+  ];
+  document.getElementById('quickStrip').innerHTML = items.map(i => `
+    <div style="display:flex;flex-direction:column">
+      <span style="font-family:var(--mono);font-size:10px;color:var(--text3)">${i.label}</span>
+      <span style="font-family:var(--mono);font-size:13px;font-weight:500;color:${i.up?'var(--green-light)':'var(--red)'}">${i.val}</span>
+    </div>`).join('');
+}
+
+function updateTickerBar() {
+  const r = liveRates; const c = cryptoPrices;
+  const items = [
+    { sym:'USD/TZS', val:r.TZS?fmt(r.TZS,2):'—', up:true },
+    { sym:'EUR/USD', val:r.EUR?(1/r.EUR).toFixed(4):'—', up:true },
+    { sym:'GBP/USD', val:r.GBP?(1/r.GBP).toFixed(4):'—', up:true },
+    { sym:'USD/KES', val:r.KES?fmt(r.KES,2):'—', up:false },
+    { sym:'BTC/USD', val:c.BTC?.price?'$'+fmt(c.BTC.price,0):'—', up:(c.BTC?.chg||0)>=0 },
+    { sym:'ETH/USD', val:c.ETH?.price?'$'+fmt(c.ETH.price,0):'—', up:(c.ETH?.chg||0)>=0 },
+    { sym:'USD/JPY', val:r.JPY?fmt(r.JPY,2):'—', up:false },
+    { sym:'GOLD', val:'$2,345', up:true },
+    { sym:'DSE TZ', val:'2,104', up:true },
+    { sym:'NSE KE', val:'188.3', up:true },
+  ];
+  const html = [...items,...items].map(d=>`<span class="t-item"><span class="t-sym">${d.sym}</span><span>${d.val}</span><span class="${d.up?'t-up':'t-dn'}">${d.up?'▲':'▼'}</span><span class="t-sep">·</span></span>`).join('');
+  document.getElementById('ticker').innerHTML = html;
+}
+
+// News ticker
+function updateNewsTicker() {
+  const headlines = [
+    '📊 FED: Viwango vya riba vinaendelea kushikiliwa kwa mwaka 2026 — athari kwa sarafu za Afrika Mashariki', '₿ Bitcoin yaendelea kupanda baada ya kupita $67,000 — wawekezaji wa Tanzania wanaangalia', '🇹🇿 BOT: Benki Kuu ya Tanzania inashikilia viwango vya riba', '📈 S&P 500 inaendelea kupanda — masoko ya kimataifa yanaonyesha nguvu', '🥇 Dhahabu inavuka $2,300 — wawekezaji wanakimbia hatari', '🌍 EAC: Uchumi wa Afrika Mashariki unakuwa kwa kasi zaidi ya Afrika Nzima'
+  ];
+  document.getElementById('newsTicker').innerHTML = headlines.map(h=>`<span class="news-item">${h}</span>`).join('');
+}
+
+// ═══════════════════════════════════════════════
+// CONVERTER (live rates)
+// ═══════════════════════════════════════════════
+function updateConverter() {
+  const el = document.getElementById('convRate');
+  if (el && liveRates.TZS) { el.textContent = `1 USD = ${fmt(liveRates.TZS,2)} TZS · Viwango vya sasa`; }
+  convert();
+}
+
+function convert() {
+  const amt = parseFloat(document.getElementById('convAmount')?.value)||0;
+  const fromEl = document.getElementById('convFrom');
+  const toEl = document.getElementById('convTo');
+  if (!fromEl || !toEl || !Object.keys(liveRates).length) return;
+  const from = fromEl.value; const to = toEl.value;
+  const usdRates = { ...liveRates, USD:1 };
+  const result = (amt / (usdRates[from]||1)) * (usdRates[to]||1);
+  const resEl = document.getElementById('convResult');
+  if (resEl) resEl.value = result.toFixed(2);
+  const bigEl = document.getElementById('convBig');
+  if (bigEl) bigEl.textContent = result.toLocaleString('en-US',{maximumFractionDigits:2}) + ' ' + to;
+  const rateEl = document.getElementById('convRate');
+  const r = (usdRates[to]||1) / (usdRates[from]||1);
+  if (rateEl) rateEl.textContent = `1 ${from} = ${r.toFixed(4)} ${to} · Viwango vya sasa`;
+}
+['convAmount','convFrom','convTo'].forEach(id => { const el = document.getElementById(id); if(el) el.addEventListener('input', convert); });
+
+// ═══════════════════════════════════════════════
+// CALC
+// ═══════════════════════════════════════════════
+function initCalc() {
+  function calc() {
+    const p = +document.getElementById('rPrincipal')?.value||0;
+    const r = +document.getElementById('rRate')?.value/100||0;
+    const y = +document.getElementById('rYears')?.value||0;
+    const fv = p * Math.pow(1+r, y);
+    const gain = fv - p;
+    document.getElementById('lPrincipal').textContent = p.toLocaleString('en-US');
+    document.getElementById('lRate').textContent = (+document.getElementById('rRate').value)+'%';
+    document.getElementById('lYears').textContent = y;
+    document.getElementById('cFuture').textContent = Math.round(fv).toLocaleString('en-US');
+    document.getElementById('cGain').textContent = Math.round(gain).toLocaleString('en-US');
+    document.getElementById('cROI').textContent = Math.round(gain/p*100)+'%';
+  }
+  ['rPrincipal','rRate','rYears'].forEach(id => { const el=document.getElementById(id); if(el) { el.removeEventListener('input',calc); el.addEventListener('input',calc); } });
+  calc();
+}
+
+// ═══════════════════════════════════════════════
+// SPARKLINE CANVAS
+// ═══════════════════════════════════════════════
+function drawSpark(canvasId, color) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const dpr = window.devicePixelRatio||1;
+  const w = (canvas.parentElement?.clientWidth||320)*dpr;
+  const h = (canvas.parentElement?.clientHeight||120)*dpr;
+  canvas.width=w; canvas.height=h;
+  canvas.style.width=(w/dpr)+'px'; canvas.style.height=(h/dpr)+'px';
+  const ctx=canvas.getContext('2d');
+  ctx.clearRect(0,0,w,h);
+  const n=60; const data=[100];
+  for(let i=1;i<n;i++) data.push(data[i-1]+(Math.random()-.44)*4);
+  const mn=Math.min(...data)-2, mx=Math.max(...data)+2;
+  const tx=i=>i/(n-1)*w, ty=v=>h-(v-mn)/(mx-mn)*h;
+  const grad=ctx.createLinearGradient(0,0,0,h);
+  grad.addColorStop(0,color+'33'); grad.addColorStop(1,color+'00');
+  ctx.beginPath(); ctx.moveTo(tx(0),ty(data[0]));
+  for(let i=1;i<n;i++){const cx=(tx(i-1)+tx(i))/2; ctx.bezierCurveTo(cx,ty(data[i-1]),cx,ty(data[i]),tx(i),ty(data[i]));}
+  ctx.lineTo(w,h); ctx.lineTo(0,h); ctx.closePath();
+  ctx.fillStyle=grad; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(tx(0),ty(data[0]));
+  for(let i=1;i<n;i++){const cx=(tx(i-1)+tx(i))/2; ctx.bezierCurveTo(cx,ty(data[i-1]),cx,ty(data[i]),tx(i),ty(data[i]));}
+  ctx.strokeStyle=color; ctx.lineWidth=2*dpr; ctx.stroke();
+}
+
+function drawFeatChart() {
+  const canvas=document.getElementById('featChart');
+  if(!canvas) return;
+  const dpr=window.devicePixelRatio||1;
+  const rect=canvas.parentElement.getBoundingClientRect();
+  const w=(rect.width||600)*dpr, h=(rect.height||260)*dpr;
+  canvas.width=w; canvas.height=h;
+  canvas.style.width=(rect.width||600)+'px'; canvas.style.height=(rect.height||260)+'px';
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#0d1f10'; ctx.fillRect(0,0,w,h);
+  const bars=24; const bw=w/bars*0.6, gap=w/bars;
+  for(let i=0;i<bars;i++){
+    const up=Math.random()>.4; const bh=(30+Math.random()*120)*dpr;
+    const x=i*gap+gap*0.2; const y=h/2-(up?bh:0);
+    ctx.fillStyle=up?'rgba(45,186,86,.7)':'rgba(224,85,85,.7)';
+    ctx.fillRect(x,y,bw,bh);
+  }
+  const pts=[]; for(let i=0;i<40;i++) pts.push(.3+Math.random()*.4+(i/40)*.25);
+  ctx.beginPath(); ctx.moveTo(0,h*(1-pts[0]));
+  for(let i=1;i<pts.length;i++){const cx=(i-.5)/pts.length*w; ctx.bezierCurveTo(cx,h*(1-pts[i-1]),cx,h*(1-pts[i]),(i/pts.length)*w,h*(1-pts[i]));}
+  ctx.strokeStyle='#c9a84c'; ctx.lineWidth=2.5*dpr; ctx.stroke();
+}
+
+// ═══════════════════════════════════════════════
+// CATEGORY TABS
+// ═══════════════════════════════════════════════
+document.querySelectorAll('.cat-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.cat-tabs').querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('.blog-card[data-cat]').forEach(card => {
+      card.style.display = (cat==='all' || card.dataset.cat===cat) ? '' : 'none';
+    });
+  });
+});
+
+// ═══════════════════════════════════════════════
+// CONTACT FORM
+// ═══════════════════════════════════════════════
+async function sendContact() {
+  const name = document.getElementById('c-name')?.value.trim();
+  const email = document.getElementById('c-email')?.value.trim();
+  const phone = document.getElementById('c-phone')?.value.trim();
+  const subject = document.getElementById('c-subject')?.value;
+  const message = document.getElementById('c-message')?.value.trim();
+  if (!name||!email||!subject||!message) { showNotif('Hitilafu', 'Tafadhali jaza sehemu zote zinazohitajika.'); return; }
+
+  const btn = document.querySelector('.contact-form-wrap button');
+  if (btn) { btn.disabled = true; btn.textContent = 'Inatuma...'; }
+
+  try {
+    const res = await fetch(`${API}/contact`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, phone, subject, message })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      document.getElementById('contactSuccess').style.display = 'block';
+      ['c-name','c-email','c-phone','c-message'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+      document.getElementById('c-subject').value='';
+      showNotif('Ujumbe Umetumwa! ✅', 'Asante! Tutawasiliana nawe hivi karibuni.');
+    } else {
+      showNotif('Hitilafu', data.error || 'Ujumbe haukutumwa. Jaribu tena.');
+    }
+  } catch(e) {
+    showNotif('Hitilafu', 'Huwezi kuunganika na server.');
+  }
+  if (btn) { btn.disabled = false; btn.textContent = 'Tuma Ujumbe →'; }
+}
+
+// ═══════════════════════════════════════════════
+// NEWSLETTER
+// ═══════════════════════════════════════════════
+async function nlSubscribe() {
+  const email = document.getElementById('nlEmail')?.value.trim();
+  if (!email || !email.includes('@')) { showNotif('Hitilafu', 'Weka email sahihi.'); return; }
+  try {
+    const res = await fetch(`${API}/newsletter/subscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      showNotif('Umejisajili! 🎉', 'Utaanza kupokea TFIC Daily Brief hivi karibuni.');
+      document.getElementById('nlEmail').value = '';
+    } else {
+      showNotif('Hitilafu', data.error || 'Jaribu tena.');
+    }
+  } catch(e) {
+    showNotif('Hitilafu', 'Huwezi kuunganika na server.');
+  }
+}
+
+// ═══════════════════════════════════════════════
+// NOTIFICATION
+// ═══════════════════════════════════════════════
+let notifTimer;
+function showNotif(title, body) {
+  const n = document.getElementById('notification');
+  document.getElementById('notifTitle').textContent = title;
+  document.getElementById('notifBody').textContent = body;
+  n.classList.add('show');
+  clearTimeout(notifTimer);
+  notifTimer = setTimeout(() => n.classList.remove('show'), 5000);
+}
+function closeNotif() { document.getElementById('notification').classList.remove('show'); }
+
+// ═══════════════════════════════════════════════
+// COUNTERS
+// ═══════════════════════════════════════════════
+function animateCounters() {
+  document.querySelectorAll('.counter').forEach(el => {
+    const target = +el.dataset.target;
+    let current = 0;
+    const step = target/80;
+    const timer = setInterval(() => {
+      current = Math.min(current+step, target);
+      el.textContent = Math.floor(current).toLocaleString('en-US');
+      if (current >= target) clearInterval(timer);
+    }, 16);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+window.addEventListener('load', async () => {
+  initAuth();
+  await fetchAllMarketData();
+  updateNewsTicker();
+  setTimeout(() => { drawSpark('heroSpark','#c9a84c'); drawFeatChart(); }, 200);
+  animateCounters();
+  // Auto-refresh every 30 seconds
+  setInterval(fetchAllMarketData, 30000);
+  // Notify logged-in members about updates
+  if (currentUser?.wantsUpdates) {
+    setTimeout(() => showNotif('📊 Market Update', 'Viwango vipya vya forex vimepakiwa. USD/TZS: '+(liveRates.TZS?fmt(liveRates.TZS,2):'—')), 3000);
+  }
+});
+</script>
+</body>
+</html>
