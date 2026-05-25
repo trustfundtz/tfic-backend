@@ -1,11 +1,11 @@
-﻿const express = require('express');
+const express = require('express');
 const router = express.Router();
 const { pool } = require('../db');
 const nodemailer = require('nodemailer');
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
 const TFIC_SYSTEM_PROMPT = `You are ARIA, the official AI support assistant for Trust Fund Investment Club (TFIC). You are professional, calm, and investor-focused. Founded 2025, Dar es Salaam, Tanzania. Services: forex education, gold investment, financial literacy, market analysis, mentorship, events. Email: trustfundinvestmentclub38@gmail.com | WhatsApp: +255 692 317 297. RULES: Always say "our team" not "I alone". Never give specific trade advice. Keep responses under 4 sentences. Add [ESCALATE] when user asks for human, complains, or discusses real money amounts.`;
 async function callAI(messages) {
-  const r = await fetch(ANTHROPIC_API_URL, { method:'POST', headers:{'Content-Type':'application/json','x-api-key':process.env.ANTHROPIC_API_KEY,'anthropic-version':'2023-06-01'}, body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,system:TFIC_SYSTEM_PROMPT,messages:messages.slice(-10)}) });
+  const r = await fetch(ANTHROPIC_API_URL, { method:'POST', headers:{'Content-Type':'application/json','x-api-key':process.env.ANTHROPIC_API_KEY,'anthropic-version':'2023-06-01'}, body:JSON.stringify({model:'claude-opus-4-5',max_tokens:400,system:TFIC_SYSTEM_PROMPT,messages:messages.slice(-10)}) });
   if (!r.ok) throw new Error('API error '+r.status);
   const d = await r.json(); return d.content[0].text;
 }
@@ -30,7 +30,7 @@ router.post('/notify', async (req,res) => {
     const {sessionId,userName,userEmail,userMessage,topic,chatHistory}=req.body;
     const t = nodemailer.createTransporter({service:'gmail',auth:{user:process.env.GMAIL_USER||process.env.EMAIL_FROM,pass:process.env.GMAIL_PASS||process.env.EMAIL_PASS}});
     const hist = (chatHistory||[]).map(m=>`${m.role==='user'?'Client':'ARIA'}: ${m.content}`).join('\n\n');
-    await t.sendMail({from:`"TFIC Chat" <${process.env.GMAIL_USER||process.env.EMAIL_FROM}>`,to:'trustfundinvestmentclub38@gmail.com',subject:`Chat Escalation — ${topic||'General'} | ${new Date().toLocaleString('en-US',{timeZone:'Africa/Nairobi'})}`,html:`<h2 style="color:#c9a84c">TFIC Chat Alert</h2><p><b>Client:</b> ${userName||'Anonymous'}</p><p><b>Email:</b> ${userEmail||'N/A'}</p><p><b>Topic:</b> ${topic||'General'}</p><p><b>Message:</b> "${userMessage}"</p><p><b>History:</b><br><pre>${hist}</pre></p><a href="https://wa.me/255692317297" style="background:#25D366;color:#fff;padding:10px 20px;text-decoration:none;border-radius:6px">Reply on WhatsApp</a>`});
+    await t.sendMail({from:`"TFIC Chat" <${process.env.GMAIL_USER||process.env.EMAIL_FROM}>`,to:'trustfundinvestmentclub38@gmail.com',subject:`Chat Escalation � ${topic||'General'} | ${new Date().toLocaleString('en-US',{timeZone:'Africa/Nairobi'})}`,html:`<h2 style="color:#c9a84c">TFIC Chat Alert</h2><p><b>Client:</b> ${userName||'Anonymous'}</p><p><b>Email:</b> ${userEmail||'N/A'}</p><p><b>Topic:</b> ${topic||'General'}</p><p><b>Message:</b> "${userMessage}"</p><p><b>History:</b><br><pre>${hist}</pre></p><a href="https://wa.me/255692317297" style="background:#25D366;color:#fff;padding:10px 20px;text-decoration:none;border-radius:6px">Reply on WhatsApp</a>`});
     return res.json({success:true});
   } catch(err){console.error('[Notify]',err.message);return res.status(500).json({error:'Notify failed'});}
 });
