@@ -104,7 +104,7 @@ nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-co
 .btn-outline{padding:14px 32px;font-size:14px;font-weight:500;color:var(--gold);background:transparent;border:1px solid var(--gold-dim);border-radius:8px;cursor:pointer;font-family:var(--sans);transition:all .25s}
 .btn-outline:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
 .hero-stats{display:flex;gap:40px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:32px}
-.hero-stat .val{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--gold-light);line-height:1;margin-bottom:4px}
+.hero-stat .val{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--gold-light);line-height:1;margin-bottom:4px;transition:all .3s}
 .hero-stat .lbl{font-size:12px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase}
 .hero-side{position:absolute;right:48px;top:50%;transform:translateY(-50%);width:360px}
 .market-card{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:24px;backdrop-filter:blur(10px)}
@@ -1675,6 +1675,29 @@ const API = window.location.hostname === 'localhost'
   : 'https://tfic-backend.onrender.com/api';
 
 // ═══════════════════════════════════════════════
+// Error Translation — Swahili → English
+// ═══════════════════════════════════════════════
+function translateError(msg) {
+  if (!msg) return 'Something went wrong. Please try again.';
+  const translations = {
+    'Password si sahihi': 'Incorrect password. Please try again.',
+    'Nywila si sahihi': 'Incorrect password. Please try again.',
+    'Barua pepe au nywila': 'Incorrect email or password.',
+    'Akaunti haijapatikani': 'Account not found. Please register first.',
+    'Maombi mengi': 'Too many requests. Please wait a few minutes.',
+    'Majaribio mengi': 'Too many attempts. Please wait 15 minutes.',
+    'Kuna tatizo la seva': 'Server error. Please try again.',
+    'haipatikani': 'not found',
+    'Subiri dakika': 'Please wait',
+    'Tuma tena': 'Please try again',
+  };
+  for (const [sw, en] of Object.entries(translations)) {
+    if (msg.includes(sw)) return en;
+  }
+  return msg;
+}
+
+// ═══════════════════════════════════════════════
 // SITE SETTINGS — Dynamic from Admin Dashboard
 // ═══════════════════════════════════════════════
 const SITE_DEFAULTS = {
@@ -1688,19 +1711,45 @@ const SITE_DEFAULTS = {
 
 async function loadSiteSettings() {
   try {
-    const res = await fetch(`${API}/settings/public`, { signal: AbortSignal.timeout(5000) });
+    const res = await fetch(`${API}/settings/public`, { signal: AbortSignal.timeout(6000) });
     if (!res.ok) throw new Error();
     const s = await res.json();
-    if (s.memberCount !== undefined) SITE_DEFAULTS.memberCount = s.memberCount;
-    if (s.courseCount !== undefined) SITE_DEFAULTS.courseCount = s.courseCount;
+    if (s.memberCount !== undefined && s.memberCount !== null) SITE_DEFAULTS.memberCount = s.memberCount;
+    if (s.courseCount !== undefined && s.courseCount !== null) SITE_DEFAULTS.courseCount = s.courseCount;
     if (s.yearsActive !== undefined) SITE_DEFAULTS.yearsActive = s.yearsActive;
     if (s.coverageRegion !== undefined) SITE_DEFAULTS.coverageRegion = s.coverageRegion;
-    if (s.goldPriceOverride !== undefined) SITE_DEFAULTS.goldPriceOverride = s.goldPriceOverride;
-    if (s.instagramUrl !== undefined) SITE_DEFAULTS.instagramUrl = s.instagramUrl;
   } catch(e) {
-    // Use defaults if API unavailable
+    // Use defaults — API may be warming up
   }
   applySettings();
+  animateCounters();
+}
+
+// ── Animated Number Counter ───────────────────────────────────
+function animateCounter(el, target, suffix) {
+  if (!el || !target) return;
+  const isNumber = !isNaN(Number(target));
+  if (!isNumber) { el.textContent = target; return; }
+  const end = Number(target);
+  const duration = 2000;
+  const step = 50;
+  const increment = end / (duration / step);
+  let current = 0;
+  const timer = setInterval(() => {
+    current = Math.min(current + increment, end);
+    el.textContent = Math.floor(current).toLocaleString('en-US') + (suffix || '');
+    if (current >= end) clearInterval(timer);
+  }, step);
+}
+
+function animateCounters() {
+  const mEl = document.getElementById('statMembers');
+  const cEl = document.getElementById('statCourses');
+  const yEl = document.getElementById('statYears');
+  const rEl = document.getElementById('statRegion');
+  if (SITE_DEFAULTS.memberCount && mEl) animateCounter(mEl, SITE_DEFAULTS.memberCount, '+');
+  if (SITE_DEFAULTS.courseCount && cEl) animateCounter(cEl, SITE_DEFAULTS.courseCount, '');
+  if (yEl) animateCounter(yEl, SITE_DEFAULTS.yearsActive, '');
 }
 
 function applySettings() {
@@ -1708,8 +1757,8 @@ function applySettings() {
   const cEl = document.getElementById('statCourses');
   const yEl = document.getElementById('statYears');
   const rEl = document.getElementById('statRegion');
-  if (mEl) mEl.textContent = SITE_DEFAULTS.memberCount ? Number(SITE_DEFAULTS.memberCount).toLocaleString('en-US') : '—';
-  if (cEl) cEl.textContent = SITE_DEFAULTS.courseCount ? Number(SITE_DEFAULTS.courseCount).toLocaleString('en-US') : '—';
+  if (mEl) mEl.textContent = SITE_DEFAULTS.memberCount ? Number(SITE_DEFAULTS.memberCount).toLocaleString('en-US') : 'Growing';
+  if (cEl) cEl.textContent = SITE_DEFAULTS.courseCount ? Number(SITE_DEFAULTS.courseCount).toLocaleString('en-US') : 'Growing';
   if (yEl) yEl.textContent = SITE_DEFAULTS.yearsActive;
   if (rEl) rEl.textContent = SITE_DEFAULTS.coverageRegion;
 }
@@ -1753,7 +1802,7 @@ async function doSignup() {
     });
     const data = await res.json();
     if (!res.ok) {
-      errEl.textContent = data.error || 'Something went wrong. Please try again.';
+      errEl.textContent = translateError(data.error) || 'Something went wrong. Please try again.';
       errEl.style.display = 'block';
       if (btn) { btn.disabled = false; btn.textContent = 'Register for Free →'; }
       return;
@@ -1785,7 +1834,10 @@ async function doLogin() {
     });
     const data = await res.json();
     if (!res.ok) {
-      errEl.textContent = data.error || 'Login failed. Please check your credentials.';
+      // Translate any Swahili backend errors to English
+      let errMsg = data.error || 'Login failed. Please check your credentials.';
+      errMsg = translateError(errMsg);
+      errEl.textContent = errMsg;
       errEl.style.display = 'block';
       if (btn) { btn.disabled = false; btn.textContent = 'Sign In →'; }
       return;
@@ -2235,7 +2287,7 @@ async function nlSubscribe() {
       showNotif('Subscribed! 🎉', 'You will start receiving the TFIC Daily Brief soon.');
       document.getElementById('nlEmail').value = '';
     } else {
-      showNotif('Error', data.error || 'Please try again.');
+      showNotif('Error', translateError(data.error) || 'Please try again.');
     }
   } catch(e) {
     showNotif('Error', 'Cannot connect to server. Please try again later.');
