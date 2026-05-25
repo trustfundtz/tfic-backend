@@ -1534,8 +1534,18 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       <div class="contact-val">+255 692 317 297</div>
       <div class="contact-sub">Mon – Fri, 8:00 AM – 5:00 PM EAT</div>
       <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap">
-        <a class="contact-btn" href="tel:+255692317297" style="margin-top:0">📞 Call</a>
-        <a class="contact-btn" href="https://wa.me/255692317297" target="_blank" style="margin-top:0;background:#25D366">💬 WhatsApp</a>
+        <a class="contact-btn"
+           href="tel:+255692317297"
+           onclick="handleCall(event)"
+           style="margin-top:0;display:flex;align-items:center;gap:6px">
+          📞 Call Now
+        </a>
+        <a class="contact-btn"
+           href="https://wa.me/255692317297"
+           target="_blank" rel="noopener"
+           style="margin-top:0;background:#25D366;display:flex;align-items:center;gap:6px">
+          💬 WhatsApp
+        </a>
       </div>
     </div>
     <div class="contact-card">
@@ -2268,6 +2278,120 @@ document.getElementById('convFrom')?.addEventListener('change', updateConverter)
 document.getElementById('convTo')?.addEventListener('change', updateConverter);
 </script>
 
+
+<!-- ════ FLOATING CONTACT BAR (mobile) ════ -->
+<div id="floatingContact" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:500;
+  background:rgba(5,10,5,0.97);border-top:1px solid rgba(100,200,80,0.2);
+  display:flex;gap:0;
+">
+  <a href="tel:+255692317297"
+     onclick="handleCall(event)"
+     style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+            padding:12px 8px;text-decoration:none;color:var(--green-light);
+            border-right:1px solid rgba(255,255,255,0.06);transition:background .2s"
+     onmouseover="this.style.background='rgba(45,186,86,.12)'"
+     onmouseout="this.style.background='transparent'">
+    <span style="font-size:20px;margin-bottom:2px">📞</span>
+    <span style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase">Call</span>
+  </a>
+  <a href="https://wa.me/255692317297"
+     target="_blank" rel="noopener"
+     style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+            padding:12px 8px;text-decoration:none;color:#25D366;
+            border-right:1px solid rgba(255,255,255,0.06);transition:background .2s"
+     onmouseover="this.style.background='rgba(37,211,102,.12)'"
+     onmouseout="this.style.background='transparent'">
+    <span style="font-size:20px;margin-bottom:2px">💬</span>
+    <span style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase">WhatsApp</span>
+  </a>
+  <a href="mailto:trustfundinvestmentclub38@gmail.com"
+     style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+            padding:12px 8px;text-decoration:none;color:var(--gold-light);
+            border-right:1px solid rgba(255,255,255,0.06);transition:background .2s"
+     onmouseover="this.style.background='rgba(201,168,76,.12)'"
+     onmouseout="this.style.background='transparent'">
+    <span style="font-size:20px;margin-bottom:2px">📧</span>
+    <span style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase">Email</span>
+  </a>
+  <button onclick="openCommunityForm()"
+     style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+            padding:12px 8px;background:transparent;border:none;color:var(--text2);cursor:pointer;
+            transition:background .2s"
+     onmouseover="this.style.background='rgba(255,255,255,.05)'"
+     onmouseout="this.style.background='transparent'">
+    <span style="font-size:20px;margin-bottom:2px">🤝</span>
+    <span style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--text2)">Community</span>
+  </button>
+  <button onclick="document.getElementById('floatingContact').style.display='none'"
+     style="width:28px;background:transparent;border:none;border-left:1px solid rgba(255,255,255,0.06);
+            color:var(--text3);cursor:pointer;font-size:14px;flex-shrink:0">✕</button>
+</div>
+
+<!-- Push footer above floating bar on mobile -->
+<style>
+@media(max-width:768px){
+  footer{ padding-bottom:72px }
+  .notification{ bottom:88px }
+}
+/* Hide floating bar on very large screens */
+@media(min-width:1200px){
+  #floatingContact{ display:none!important }
+}
+</style>
+
+<script>
+// ─── Smart Call Handler ───────────────────────────────────────
+function handleCall(e) {
+  // On desktop: show a small tooltip with options
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  if (!isMobile) {
+    e.preventDefault();
+    showCallOptions();
+  }
+  // On mobile: let tel: href do its job natively
+}
+
+function showCallOptions() {
+  const existing = document.getElementById('callOptionsPopup');
+  if (existing) { existing.remove(); return; }
+
+  const popup = document.createElement('div');
+  popup.id = 'callOptionsPopup';
+  popup.innerHTML = `
+    <div style="position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:flex;align-items:center;justify-content:center" onclick="this.parentElement.remove()">
+      <div style="background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:32px;max-width:360px;width:90%;text-align:center" onclick="event.stopPropagation()">
+        <div style="font-size:36px;margin-bottom:12px">📞</div>
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:600;margin-bottom:6px">Call TFIC</h3>
+        <p style="font-family:var(--mono);font-size:18px;color:var(--gold-light);margin-bottom:20px">+255 692 317 297</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="tel:+255692317297"
+             style="display:block;padding:13px;background:var(--green);color:#030603;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px"
+             onclick="document.getElementById('callOptionsPopup').remove()">
+            📞 Call via Phone / Skype
+          </a>
+          <a href="https://wa.me/255692317297" target="_blank" rel="noopener"
+             style="display:block;padding:13px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px"
+             onclick="document.getElementById('callOptionsPopup').remove()">
+            💬 Chat on WhatsApp Instead
+          </a>
+          <button onclick="
+            navigator.clipboard.writeText('+255692317297').then(()=>showNotif('Number Copied!','\u2705 +255 692 317 297 copied to clipboard'));
+            document.getElementById('callOptionsPopup').remove()"
+             style="padding:13px;background:var(--surface2);color:var(--text2);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:14px;font-family:var(--sans)">
+            📋 Copy Number to Clipboard
+          </button>
+          <button onclick="document.getElementById('callOptionsPopup').remove()"
+             style="padding:10px;background:transparent;border:none;color:var(--text3);cursor:pointer;font-size:13px;font-family:var(--sans)">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(popup);
+}
+</script>
+
 <!-- ════ COMMUNITY JOIN MODAL ════ -->
 <div class="modal-overlay" id="communityModal" style="z-index:1100">
   <div class="modal" style="max-width:560px">
@@ -2465,5 +2589,579 @@ document.getElementById('communityModal').addEventListener('click', e => {
   if (e.target === document.getElementById('communityModal')) closeCommunityForm();
 });
 </script>
+
+<!-- ═══════════════════════════════════════════════════
+     ARIA — TFIC AI LIVE CHAT SYSTEM
+     Premium investor-grade support widget
+═══════════════════════════════════════════════════ -->
+
+<style>
+/* ── ARIA Chat Core ── */
+#ariaChat{position:fixed;bottom:96px;right:24px;z-index:800;font-family:var(--sans)}
+@media(min-width:769px){#ariaChat{bottom:28px;right:28px}}
+
+/* Trigger Button */
+#ariaTrigger{
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,#0d1810,#162016);
+  border:2px solid var(--gold);
+  box-shadow:0 4px 20px rgba(201,168,76,.35),0 2px 8px rgba(0,0,0,.5);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .3s;position:relative;flex-shrink:0;
+  animation:ariaPulseGlow 3s infinite;
+}
+#ariaTrigger:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(201,168,76,.5)}
+@keyframes ariaPulseGlow{0%,100%{box-shadow:0 4px 20px rgba(201,168,76,.35),0 2px 8px rgba(0,0,0,.5)}50%{box-shadow:0 4px 28px rgba(201,168,76,.6),0 2px 12px rgba(0,0,0,.4)}}
+#ariaTriggerIcon{font-size:22px;transition:all .3s;line-height:1}
+#ariaTriggerClose{font-size:20px;color:var(--text2);display:none;line-height:1}
+#ariaBadge{
+  position:absolute;top:-4px;right:-4px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--red);color:#fff;font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--bg);animation:badgePop .3s ease;
+}
+@keyframes badgePop{0%{transform:scale(0)}100%{transform:scale(1)}}
+
+/* Chat Window */
+#ariaChatWin{
+  position:absolute;bottom:70px;right:0;
+  width:360px;max-height:580px;
+  background:var(--surface);border:1px solid var(--border2);border-radius:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,.7),0 4px 20px rgba(201,168,76,.1);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:scale(.9) translateY(20px);opacity:0;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  pointer-events:none;
+}
+#ariaChatWin.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+@media(max-width:480px){
+  #ariaChatWin{width:calc(100vw - 20px);right:-4px;max-height:75vh;bottom:68px}
+  #ariaChat{bottom:76px;right:10px}
+}
+
+/* Header */
+.aria-header{
+  background:linear-gradient(135deg,#0a1810,#111f14);
+  border-bottom:1px solid rgba(201,168,76,.2);
+  padding:14px 16px;display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.aria-header-left{display:flex;align-items:center;gap:12px}
+.aria-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green-dim),var(--gold-dim));
+  border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:14px;font-weight:700;color:var(--gold-light);
+  flex-shrink:0;
+}
+.aria-name{font-size:14px;font-weight:700;color:var(--gold-light);line-height:1.2}
+.aria-dept{font-size:10px;color:var(--text3);font-family:var(--mono);letter-spacing:.05em;margin-top:1px}
+.aria-status{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--green);font-family:var(--mono);margin-top:2px}
+.aria-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite;flex-shrink:0}
+.aria-header-right{display:flex;gap:6px}
+.aria-header-right button{
+  width:28px;height:28px;border-radius:6px;border:1px solid var(--border);
+  background:var(--surface2);color:var(--text3);cursor:pointer;
+  font-size:14px;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.aria-header-right button:hover{border-color:var(--border2);color:var(--text);background:var(--surface3)}
+
+/* Messages Area */
+#ariaMessages{
+  flex:1;overflow-y:auto;padding:16px 14px;
+  display:flex;flex-direction:column;gap:12px;
+  scroll-behavior:smooth;
+}
+#ariaMessages::-webkit-scrollbar{width:4px}
+#ariaMessages::-webkit-scrollbar-thumb{background:var(--surface3);border-radius:2px}
+
+/* Message Bubbles */
+.aria-msg{display:flex;gap:8px;animation:msgFadeIn .3s ease}
+@keyframes msgFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.aria-msg.user{flex-direction:row-reverse}
+.aria-msg-avatar{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;
+  margin-top:2px;
+}
+.aria-msg-avatar.ai{background:linear-gradient(135deg,var(--green-dim),var(--gold-dim));color:var(--gold-light)}
+.aria-msg-avatar.user{background:var(--surface3);color:var(--text2)}
+.aria-bubble{
+  max-width:78%;padding:10px 14px;border-radius:14px;
+  font-size:13.5px;line-height:1.6;
+}
+.aria-bubble.ai{
+  background:var(--surface2);border:1px solid var(--border);
+  border-bottom-left-radius:4px;color:var(--text);
+}
+.aria-bubble.user{
+  background:linear-gradient(135deg,#1a5530,#1d6335);
+  border:1px solid rgba(45,186,86,.3);
+  border-bottom-right-radius:4px;color:#e8fde8;
+}
+.aria-time{font-size:9px;color:var(--text3);margin-top:4px;display:block;text-align:right;font-family:var(--mono)}
+
+/* Typing Indicator */
+#ariaTyping{padding:4px 14px 8px;display:none}
+.aria-typing-wrap{display:flex;gap:8px;align-items:flex-end}
+.aria-typing-bubble{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:14px;border-bottom-left-radius:4px;
+  padding:12px 16px;display:flex;gap:4px;align-items:center;
+}
+.aria-typing-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--text3);
+  animation:typingBounce 1.2s infinite;
+}
+.aria-typing-dot:nth-child(2){animation-delay:.2s}
+.aria-typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+/* Quick Replies */
+#ariaQuickReplies{
+  padding:0 14px 12px;display:flex;flex-wrap:wrap;gap:8px;
+  max-height:120px;overflow-y:auto;
+}
+.aria-qr{
+  padding:6px 12px;font-size:12px;font-weight:500;
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:100px;cursor:pointer;color:var(--text2);
+  transition:all .2s;font-family:var(--sans);white-space:nowrap;
+}
+.aria-qr:hover{background:var(--surface3);border-color:var(--gold-dim);color:var(--gold-light)}
+
+/* User Info Prompt */
+#ariaInfoPrompt{
+  margin:0 14px 12px;padding:14px;
+  background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);
+  border-radius:10px;
+}
+#ariaInfoPrompt p{font-size:12px;color:var(--text2);margin-bottom:10px}
+#ariaInfoPrompt input{
+  width:100%;padding:8px 12px;margin-bottom:8px;
+  background:var(--bg);border:1px solid var(--border);border-radius:6px;
+  color:var(--text);font-size:13px;font-family:var(--sans);outline:none;
+}
+#ariaInfoPrompt input:focus{border-color:var(--green-dim)}
+#ariaInfoPromptBtns{display:flex;gap:8px}
+
+/* Input Area */
+.aria-input-wrap{
+  padding:12px 14px;border-top:1px solid var(--border);
+  display:flex;gap:8px;align-items:center;flex-shrink:0;
+  background:var(--surface);
+}
+#ariaInput{
+  flex:1;padding:10px 14px;
+  background:var(--surface2);border:1px solid var(--border);border-radius:100px;
+  color:var(--text);font-size:13.5px;font-family:var(--sans);outline:none;
+  transition:border-color .2s;
+}
+#ariaInput:focus{border-color:var(--green-dim)}
+#ariaInput::placeholder{color:var(--text3)}
+#ariaSendBtn{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--green);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:#030603;font-size:16px;flex-shrink:0;transition:all .2s;
+}
+#ariaSendBtn:hover{background:var(--green-light);transform:scale(1.05)}
+#ariaSendBtn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* Footer */
+.aria-footer{
+  padding:6px 14px 10px;text-align:center;
+  font-family:var(--mono);font-size:9px;color:var(--text3);
+  border-top:1px solid var(--border);flex-shrink:0;
+}
+.aria-footer a{color:var(--text3);text-decoration:none}
+.aria-footer a:hover{color:var(--gold)}
+
+/* Escalation Banner */
+.aria-escalate-banner{
+  margin:0 14px 12px;padding:12px 14px;
+  background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);
+  border-radius:10px;font-size:12px;color:var(--text2);
+}
+.aria-escalate-banner strong{color:var(--gold-light);display:block;margin-bottom:4px;font-size:13px}
+.aria-escalate-btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.aria-esc-btn{
+  padding:7px 14px;font-size:12px;font-weight:600;border-radius:6px;
+  cursor:pointer;border:none;font-family:var(--sans);transition:all .2s;
+}
+</style>
+
+<div id="ariaChat">
+  <!-- Trigger -->
+  <div id="ariaTrigger" onclick="toggleAriaChat()" role="button" aria-label="Open TFIC Live Chat">
+    <span id="ariaTriggerIcon">💬</span>
+    <span id="ariaTriggerClose" style="display:none">✕</span>
+    <span id="ariaBadge" style="display:none">1</span>
+  </div>
+
+  <!-- Window -->
+  <div id="ariaChatWin" role="dialog" aria-label="TFIC Live Chat">
+    <!-- Header -->
+    <div class="aria-header">
+      <div class="aria-header-left">
+        <div class="aria-avatar">TF</div>
+        <div>
+          <div class="aria-name">ARIA</div>
+          <div class="aria-dept" id="ariaCurrentDept">TFIC Support Assistant</div>
+          <div class="aria-status"><span class="aria-dot"></span>Online now</div>
+        </div>
+      </div>
+      <div class="aria-header-right">
+        <button onclick="ariaClearChat()" title="New conversation">↺</button>
+        <button onclick="toggleAriaChat()" title="Close">✕</button>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div id="ariaMessages"></div>
+
+    <!-- Typing Indicator -->
+    <div id="ariaTyping">
+      <div class="aria-typing-wrap">
+        <div class="aria-msg-avatar ai" style="width:24px;height:24px;font-size:9px">TF</div>
+        <div class="aria-typing-bubble">
+          <div class="aria-typing-dot"></div>
+          <div class="aria-typing-dot"></div>
+          <div class="aria-typing-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Info Prompt (hidden initially) -->
+    <div id="ariaInfoPrompt" style="display:none">
+      <p>💼 To connect you with the right specialist, may we have your details?</p>
+      <input type="text" id="ariaNameInput" placeholder="Your name (optional)">
+      <input type="email" id="ariaEmailInput" placeholder="Email address (optional)">
+      <div id="ariaInfoPromptBtns">
+        <button class="aria-esc-btn" style="background:var(--green);color:#030603;flex:2" onclick="ariaSubmitInfo()">Continue →</button>
+        <button class="aria-esc-btn" style="background:var(--surface3);color:var(--text2);flex:1" onclick="ariaSkipInfo()">Skip</button>
+      </div>
+    </div>
+
+    <!-- Escalation Banner (hidden initially) -->
+    <div id="ariaEscalate" style="display:none" class="aria-escalate-banner">
+      <strong>🤝 Connect with our team directly</strong>
+      For this type of request, our specialists can assist you best.
+      <div class="aria-escalate-btns">
+        <a href="https://wa.me/255692317297" target="_blank" rel="noopener"
+           class="aria-esc-btn" style="background:#25D366;color:#fff;text-decoration:none;padding:7px 14px;display:inline-block">
+          💬 WhatsApp
+        </a>
+        <a href="mailto:trustfundinvestmentclub38@gmail.com"
+           class="aria-esc-btn" style="background:var(--gold);color:#0a0f0a;text-decoration:none;padding:7px 14px;display:inline-block">
+          📧 Email Us
+        </a>
+        <button class="aria-esc-btn" style="background:var(--surface3);color:var(--text2)" onclick="ariaDismissEscalate()">
+          Continue Chat
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Replies -->
+    <div id="ariaQuickReplies"></div>
+
+    <!-- Input -->
+    <div class="aria-input-wrap">
+      <input type="text" id="ariaInput" placeholder="Ask ARIA anything..." maxlength="500"
+             onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();ariaHandleSend()}">
+      <button id="ariaSendBtn" onclick="ariaHandleSend()" aria-label="Send message">➤</button>
+    </div>
+
+    <div class="aria-footer">
+      🔒 Secure · Powered by <strong style="color:var(--gold)">TFIC ARIA</strong> ·
+      <a onclick="showPage('privacy')">Privacy</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// ARIA — TFIC AI Live Chat System
+// ═══════════════════════════════════════════════
+
+const ARIA = {
+  open: false,
+  sessionId: (() => { // Generate or restore session ID
+    let id = sessionStorage.getItem('aria_sid');
+    if (!id) { id = 'tfic-' + Date.now() + '-' + Math.random().toString(36).substr(2,8); sessionStorage.setItem('aria_sid', id); }
+    return id;
+  })(),
+  messages: [],       // Full conversation for API context
+  userInfo: { name: null, email: null },
+  topic: null,
+  messageCount: 0,
+  escalated: false,
+  infoCollected: false,
+  badgeShown: false,
+};
+
+// ── Topic Definitions ──────────────────────────────────────────
+const ARIA_TOPICS = [
+  { id: 'forex',    label: '💱 Forex Trading',       dept: 'Forex Trading Department' },
+  { id: 'gold',     label: '🥇 Gold Investment',     dept: 'Gold & Commodities' },
+  { id: 'edu',      label: '🎓 Financial Education', dept: 'Education Team' },
+  { id: 'market',   label: '📊 Market Analysis',     dept: 'Research & Analysis' },
+  { id: 'member',   label: '🤝 Membership & Join',   dept: 'Membership Team' },
+  { id: 'mentor',   label: '👤 Mentorship',          dept: 'Mentorship Program' },
+  { id: 'events',   label: '📅 Events & Webinars',   dept: 'Events Team' },
+  { id: 'support',  label: '🛠️ Technical Support',  dept: 'Support Team' },
+];
+
+// ── Open / Close ───────────────────────────────────────────────
+function toggleAriaChat() {
+  ARIA.open = !ARIA.open;
+  const win = document.getElementById('ariaChatWin');
+  const icon = document.getElementById('ariaTriggerIcon');
+  const close = document.getElementById('ariaTriggerClose');
+  const badge = document.getElementById('ariaBadge');
+
+  if (ARIA.open) {
+    win.classList.add('open');
+    icon.style.display = 'none';
+    close.style.display = 'block';
+    badge.style.display = 'none';
+    ARIA.badgeShown = false;
+    if (ARIA.messages.length === 0) ariaInit();
+    setTimeout(() => document.getElementById('ariaInput')?.focus(), 300);
+  } else {
+    win.classList.remove('open');
+    icon.style.display = 'block';
+    close.style.display = 'none';
+  }
+}
+
+// ── Initialize Chat ────────────────────────────────────────────
+function ariaInit() {
+  ariaAddMessage('assistant',
+    "Hello 👋 Welcome to **Trust Fund Investment Club**.\n\nI'm ARIA, your personal investment support assistant. How can I help you today?\n\nSelect a topic below or type your question directly:"
+  );
+  ariaShowQuickReplies(ARIA_TOPICS.map(t => ({
+    label: t.label,
+    action: () => ariaSelectTopic(t)
+  })));
+
+  // Show badge after 8 seconds if chat not open
+  setTimeout(() => {
+    if (!ARIA.open && !ARIA.badgeShown) {
+      document.getElementById('ariaBadge').style.display = 'flex';
+      ARIA.badgeShown = true;
+    }
+  }, 8000);
+}
+
+// ── Select Topic ───────────────────────────────────────────────
+function ariaSelectTopic(topic) {
+  ARIA.topic = topic.id;
+  document.getElementById('ariaCurrentDept').textContent = topic.dept;
+  ariaHandleSend(topic.label);
+}
+
+// ── Show Quick Replies ─────────────────────────────────────────
+function ariaShowQuickReplies(options) {
+  const qr = document.getElementById('ariaQuickReplies');
+  qr.innerHTML = options.map((opt, i) => `
+    <button class="aria-qr" onclick="(${opt.action.toString()})()">${opt.label}</button>
+  `).join('');
+  // Fix: render properly
+  qr.innerHTML = '';
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'aria-qr';
+    btn.textContent = opt.label;
+    btn.onclick = opt.action;
+    qr.appendChild(btn);
+  });
+}
+
+function ariaClearQuickReplies() {
+  document.getElementById('ariaQuickReplies').innerHTML = '';
+}
+
+// ── Add Message Bubble ─────────────────────────────────────────
+function ariaAddMessage(role, text) {
+  const container = document.getElementById('ariaMessages');
+  const div = document.createElement('div');
+  div.className = `aria-msg ${role}`;
+
+  // Process markdown-like bold
+  const formatted = text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+
+  const now = new Date().toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', hour12:true });
+
+  div.innerHTML = `
+    <div class="aria-msg-avatar ${role}">${role === 'assistant' ? 'TF' : '👤'}</div>
+    <div>
+      <div class="aria-bubble ${role}">${formatted}</div>
+      <span class="aria-time">${now}</span>
+    </div>`;
+
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+
+  // Add to API context
+  ARIA.messages.push({ role: role === 'assistant' ? 'assistant' : 'user', content: text });
+  ARIA.messageCount++;
+
+  // Save to backend (non-blocking)
+  fetch(`${API}/chat/save`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      sessionId: ARIA.sessionId,
+      role: role === 'assistant' ? 'assistant' : 'user',
+      content: text,
+      topic: ARIA.topic,
+      userName: ARIA.userInfo.name,
+      userEmail: ARIA.userInfo.email
+    })
+  }).catch(() => {}); // Silent fail
+
+  return div;
+}
+
+// ── Typing Indicator ───────────────────────────────────────────
+function ariaShowTyping() { document.getElementById('ariaTyping').style.display = 'block'; document.getElementById('ariaMessages').scrollTop = 99999; }
+function ariaHideTyping()  { document.getElementById('ariaTyping').style.display = 'none'; }
+
+// ── Handle Send ────────────────────────────────────────────────
+async function ariaHandleSend(overrideText) {
+  const input = document.getElementById('ariaInput');
+  const sendBtn = document.getElementById('ariaSendBtn');
+  const text = overrideText || input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  ariaClearQuickReplies();
+  ariaAddMessage('user', text);
+
+  sendBtn.disabled = true;
+  ariaShowTyping();
+
+  try {
+    const response = await fetch(`${API}/chat/ai`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages: ARIA.messages.slice(-12), // last 12 for context
+        sessionId: ARIA.sessionId,
+        topic: ARIA.topic
+      })
+    });
+
+    const data = await response.json();
+    ariaHideTyping();
+
+    const aiText = data.message || data.fallback || "Our team will be in touch shortly. You can also reach us via WhatsApp: +255 692 317 297.";
+    ariaAddMessage('assistant', aiText);
+
+    // Handle escalation
+    if (data.shouldEscalate && !ARIA.escalated) {
+      ARIA.escalated = true;
+      setTimeout(() => ariaShowEscalation(text), 800);
+    }
+
+    // Show contextual quick replies after first AI response
+    if (ARIA.messageCount <= 4 && !ARIA.topic) {
+      setTimeout(() => ariaShowQuickReplies(ARIA_TOPICS.slice(0,4).map(t => ({
+        label: t.label, action: () => ariaSelectTopic(t)
+      }))), 300);
+    }
+
+    // Offer to collect user info after 5 messages
+    if (ARIA.messageCount >= 5 && !ARIA.infoCollected && !ARIA.userInfo.name) {
+      setTimeout(ariaShowInfoPrompt, 1200);
+    }
+
+  } catch (err) {
+    ariaHideTyping();
+    ariaAddMessage('assistant', "I apologize for the interruption. Please contact us directly:\n\n📧 trustfundinvestmentclub38@gmail.com\n💬 WhatsApp: +255 692 317 297\n\nOur team will respond promptly during business hours.");
+  }
+
+  sendBtn.disabled = false;
+}
+
+// ── Escalation ─────────────────────────────────────────────────
+function ariaShowEscalation(lastMessage) {
+  document.getElementById('ariaEscalate').style.display = 'block';
+  document.getElementById('ariaMessages').scrollTop = 99999;
+
+  // Notify Hassan via backend
+  fetch(`${API}/chat/notify`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      sessionId: ARIA.sessionId,
+      userName: ARIA.userInfo.name,
+      userEmail: ARIA.userInfo.email,
+      userMessage: lastMessage,
+      topic: ARIA.topic || 'General Support',
+      chatHistory: ARIA.messages.slice(-8)
+    })
+  }).catch(() => {});
+}
+
+function ariaDismissEscalate() {
+  document.getElementById('ariaEscalate').style.display = 'none';
+}
+
+// ── User Info Collection ───────────────────────────────────────
+function ariaShowInfoPrompt() {
+  document.getElementById('ariaInfoPrompt').style.display = 'block';
+  document.getElementById('ariaMessages').scrollTop = 99999;
+}
+
+function ariaSubmitInfo() {
+  const name = document.getElementById('ariaNameInput').value.trim();
+  const email = document.getElementById('ariaEmailInput').value.trim();
+  ARIA.userInfo = { name: name || null, email: email || null };
+  ARIA.infoCollected = true;
+  document.getElementById('ariaInfoPrompt').style.display = 'none';
+  if (name || email) {
+    ariaAddMessage('assistant', `Thank you${name ? ', ' + name : ''}! ✅ Our team now has your details and can follow up if needed. How else can I assist you today?`);
+  }
+}
+
+function ariaSkipInfo() {
+  ARIA.infoCollected = true;
+  document.getElementById('ariaInfoPrompt').style.display = 'none';
+}
+
+// ── Clear Chat ─────────────────────────────────────────────────
+function ariaClearChat() {
+  ARIA.messages = [];
+  ARIA.messageCount = 0;
+  ARIA.escalated = false;
+  ARIA.infoCollected = false;
+  ARIA.topic = null;
+  ARIA.sessionId = 'tfic-' + Date.now() + '-' + Math.random().toString(36).substr(2,8);
+  sessionStorage.setItem('aria_sid', ARIA.sessionId);
+  document.getElementById('ariaMessages').innerHTML = '';
+  document.getElementById('ariaQuickReplies').innerHTML = '';
+  document.getElementById('ariaEscalate').style.display = 'none';
+  document.getElementById('ariaInfoPrompt').style.display = 'none';
+  document.getElementById('ariaCurrentDept').textContent = 'TFIC Support Assistant';
+  ariaInit();
+}
+
+// ── Auto-open after delay (subtle engagement) ──────────────────
+setTimeout(() => {
+  if (!sessionStorage.getItem('aria_greeted')) {
+    sessionStorage.setItem('aria_greeted', '1');
+    document.getElementById('ariaBadge').style.display = 'flex';
+    ARIA.badgeShown = true;
+  }
+}, 12000);
+</script>
+
 </body>
 </html>
