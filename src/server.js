@@ -8,6 +8,7 @@ const cron = require('node-cron');
 const path = require('path');
 
 const apiRoutes = require('./routes/api');
+const communityRoutes = require('./routes/community');
 const { sendMarketUpdate } = require('./services/emailService');
 const { fetchLiveMarkets } = require('./services/marketService');
 
@@ -33,6 +34,7 @@ const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100, message: { error
 const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10, message: { error: 'Majaribio mengi ya kuingia. Subiri dakika 15.' } });
 app.use('/api', limiter);
 app.use('/api/auth', authLimiter);
+app.use('/api/community', communityRoutes);
 
 // ── API Routes ───────────────────────────────────
 app.use('/api', apiRoutes);
