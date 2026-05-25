@@ -37,6 +37,7 @@ const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10, message: { er
 app.use('/api', limiter);
 app.use('/api/auth', authLimiter);
 app.use('/api/community', communityRoutes);
+app.use('/api/mentorship', require('./routes/mentorship'));
 app.use('/api/settings', require('./routes/settings'));
 app.use('/api/chat', require('./routes/chat'));
 
