@@ -935,101 +935,82 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
   </div>
 
   <!-- AI INTELLIGENCE -->
-  <div class="inst-section-header">
-    <div class="inst-section-title">TFIC Market Intelligence</div>
-    <div class="live-badge"><span class="live-dot"></span>AI Analysis</div>
-  </div>
-  <div class="home-ai-strip" style="margin-bottom:24px">
-    <div class="hai-icon">TF</div>
-    <div class="hai-body" id="bbAiBody">
-      <strong>Gold (XAU/USD)</strong> is trading at <span id="bbAiGold">$4,510</span> — supported by safe-haven demand and central bank accumulation at record pace. Federal Reserve rate cut expectations remain the primary bullish catalyst. <strong>TFIC swing target: $4,600–$4,700.</strong>
-      USD/TZS holds at <span id="bbAiTzs">2,628</span>, reflecting stable BOT policy. EAC trade flows support current levels. <strong>BTC/USD</strong> at <span id="bbAiBtc">$67,420</span> — institutional ETF inflows continue driving demand. Post-halving supply dynamics remain constructive.
-      <br><span style="color:var(--text3);font-size:12px;margin-top:6px;display:block">TFIC Institutional Outlook: Moderating inflation + central bank pivots = structurally supportive for gold. Gold $5,000+ target maintained over 12–18 months.</span>
+  <div style="padding:0 64px 40px">
+    <div class="inst-section-header">
+      <div class="inst-section-title">TFIC Market Intelligence</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="live-badge"><span class="live-dot"></span>AI Analysis</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3)" id="aiUpdateTime"></div>
+      </div>
     </div>
-  </div>
-</div>
 
-<section class="markets-section section">
-  <div class="section-header">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
-      <div>
-        <div class="eyebrow-label">Live Markets</div>
-        <h2 class="section-title">Global Market Overview</h2>
-        <p class="section-subtitle">Real-time rates across forex, commodities, and crypto markets — updated automatically every 30 seconds.</p>
-      </div>
-      <div style="display:flex;gap:12px;align-items:center">
-        <div class="live-badge"><span class="live-dot"></span>Refreshing every 30s</div>
-        <button class="btn-ghost" onclick="fetchAllMarketData()" style="font-size:12px;padding:6px 14px">↻ Refresh Now</button>
-      </div>
-    </div>
-  </div>
-  <div class="news-ticker-wrap">
-    <div class="news-ticker-inner" id="newsTicker">Loading market news...</div>
-  </div>
-  <div id="marketsGrid" class="markets-grid">
-    <div class="market-tile"><div class="mt-name">XAU/USD</div><div class="mt-price" id="fb-gold">$4,510</div><div class="mt-change up">▲ +0.44%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:60%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
-    <div class="market-tile"><div class="mt-name">USD/TZS</div><div class="mt-price" id="fb-tzs">2,628</div><div class="mt-change up">▲ +0.38%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:55%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
-    <div class="market-tile"><div class="mt-name">BTC/USD</div><div class="mt-price" id="fb-btc">$67,420</div><div class="mt-change up">▲ +1.84%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:68%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
-    <div class="market-tile"><div class="mt-name">EUR/USD</div><div class="mt-price" id="fb-eur">1.0854</div><div class="mt-change up">▲ +0.24%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:62%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
-    <div class="market-tile"><div class="mt-name">GBP/USD</div><div class="mt-price" id="fb-gbp">1.2683</div><div class="mt-change up">▲ +0.15%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:58%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
-    <div class="market-tile"><div class="mt-name">USD/JPY</div><div class="mt-price" id="fb-jpy">154.82</div><div class="mt-change dn">▼ -0.14%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:38%;background:var(--red);height:100%;border-radius:1px"></div></div></div>
-    <div class="market-tile"><div class="mt-name">USD/KES</div><div class="mt-price" id="fb-kes">128.45</div><div class="mt-change dn">▼ -0.32%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:44%;background:var(--red);height:100%;border-radius:1px"></div></div></div>
-    <div class="market-tile"><div class="mt-name">XAU/USD (Gold)</div><div class="mt-price" id="fb-gold2">$4,510</div><div class="mt-change up">▲ +0.44%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:60%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
-  </div>
-  <table class="forex-table">
-    <thead><tr>
-      <th>Pair</th><th>Price</th><th>Change</th><th>%</th><th>Signal</th>
-    </tr></thead>
-    <tbody id="forexBody">
-    <tr><td><span class="pair-name">XAU/USD</span></td><td id="fbt-gold">$4,510.00</td><td class="up">+0.44</td><td class="up">▲ +0.44%</td><td><span style="color:var(--green);font-size:11px;font-weight:600">BUY</span></td></tr>
-    <tr><td><span class="pair-name">USD/TZS</span></td><td id="fbt-tzs">2,628.00</td><td class="up">+9.8</td><td class="up">▲ +0.38%</td><td><span style="color:var(--gold);font-size:11px;font-weight:600">NEUTRAL</span></td></tr>
-    <tr><td><span class="pair-name">EUR/USD</span></td><td id="fbt-eur">1.0854</td><td class="up">+0.003</td><td class="up">▲ +0.24%</td><td><span style="color:var(--gold);font-size:11px;font-weight:600">NEUTRAL</span></td></tr>
-    <tr><td><span class="pair-name">GBP/USD</span></td><td id="fbt-gbp">1.2683</td><td class="up">+0.002</td><td class="up">▲ +0.15%</td><td><span style="color:var(--green);font-size:11px;font-weight:600">BUY</span></td></tr>
-    <tr><td><span class="pair-name">USD/JPY</span></td><td id="fbt-jpy">154.82</td><td class="dn">-0.22</td><td class="dn">▼ -0.14%</td><td><span style="color:var(--red);font-size:11px;font-weight:600">SELL</span></td></tr>
-    <tr><td><span class="pair-name">BTC/USD</span></td><td id="fbt-btc">$67,420</td><td class="up">+0</td><td class="up">▲ +1.84%</td><td><span style="color:var(--green);font-size:11px;font-weight:600">BUY</span></td></tr>
-  </tbody>
-  </table>
-</section>
-<section class="tools-section section">
-  <div class="section-header">
-    <div class="eyebrow-label">Financial Tools</div>
-    <h2 class="section-title">Smart Tools for Better Decisions</h2>
-  </div>
-  <div class="tools-grid">
-    <div class="tool-card">
-      <h3 class="tool-title">Currency Converter</h3>
-      <p class="tool-sub">Convert between major currencies and East African shillings.</p>
-      <div class="converter-row">
-        <div class="conv-input-wrap">
-          <input type="number" class="conv-input" id="convAmount" value="1000">
-          <select class="conv-select" id="convFrom"><option>USD</option><option>EUR</option><option>GBP</option><option>KES</option></select>
+    <!-- 3-Column Analysis -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+      <div style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:18px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span style="font-size:18px">🥇</span>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--gold);letter-spacing:.1em">XAU/USD · GOLD</div>
         </div>
-        <span class="conv-arrow">⇄</span>
-        <div class="conv-input-wrap">
-          <input type="number" class="conv-input" id="convResult" readonly style="color:var(--gold-light)">
-          <select class="conv-select" id="convTo"><option>TZS</option><option>USD</option><option>EUR</option><option>KES</option></select>
+        <div style="font-family:var(--mono);font-size:22px;font-weight:600;color:var(--gold-light);margin-bottom:3px" id="ai-gold-price">$4,510</div>
+        <div style="font-family:var(--mono);font-size:11px;margin-bottom:12px" id="ai-gold-chg" class="up">▲ +0.44% today</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.75" id="ai-gold-text">Structurally bullish. Central bank accumulation at record pace. Fed pivot narrative building. Key support $4,400. Resistance $4,600.</div>
+        <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">
+          <span style="font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(45,186,86,.1);color:var(--green);border:1px solid rgba(45,186,86,.2)">BUY BIAS</span>
+          <span style="font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.2)">Target $5,000+</span>
         </div>
       </div>
-      <div class="conv-result">
-        <div class="conv-result-val" id="convBig">—</div>
-        <div class="conv-result-sub" id="convRate">Loading current rates...</div>
+      <div style="background:rgba(45,186,86,.04);border:1px solid rgba(45,186,86,.12);border-radius:12px;padding:18px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span style="font-size:18px">🇹🇿</span>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--green);letter-spacing:.1em">USD/TZS · EAC</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:22px;font-weight:600;color:var(--text);margin-bottom:3px" id="ai-tzs-price">2,628</div>
+        <div style="font-family:var(--mono);font-size:11px;margin-bottom:12px;color:var(--green)">▲ +0.38% stable</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.75">BOT holding rate at 5.5%. Import demand supporting USD. EAC regional trade flows stable. No major policy changes expected.</div>
+        <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">
+          <span style="font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.2)">NEUTRAL</span>
+          <span style="font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(45,186,86,.1);color:var(--green);border:1px solid rgba(45,186,86,.2)">BOT Stable</span>
+        </div>
+      </div>
+      <div style="background:rgba(100,120,255,.04);border:1px solid rgba(100,120,255,.12);border-radius:12px;padding:18px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span style="font-size:18px">₿</span>
+          <div style="font-family:var(--mono);font-size:9px;color:#8ab4f8;letter-spacing:.1em">BTC/USD · CRYPTO</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:22px;font-weight:600;color:var(--text);margin-bottom:3px" id="ai-btc-price">$67,420</div>
+        <div style="font-family:var(--mono);font-size:11px;margin-bottom:12px" id="ai-btc-chg" class="up">▲ +1.84% today</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.75" id="ai-btc-text">Institutional ETF inflows continue. Post-halving supply dynamics supportive. Key support $60K. Watch $75K for breakout signal.</div>
+        <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">
+          <span id="ai-btc-sig" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(45,186,86,.1);color:var(--green);border:1px solid rgba(45,186,86,.2)">BUY</span>
+          <span style="font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(100,120,255,.1);color:#8ab4f8;border:1px solid rgba(100,120,255,.2)">High Volatility</span>
+        </div>
       </div>
     </div>
-    <div class="tool-card">
-      <h3 class="tool-title">Investment Calculator</h3>
-      <p class="tool-sub">Project your wealth growth with compound interest.</p>
-      <div class="calc-field"><div class="calc-label">Initial Amount (TZS) <span id="lPrincipal">1,000,000</span></div><input type="range" class="calc-range" id="rPrincipal" min="100000" max="10000000" step="100000" value="1000000"></div>
-      <div class="calc-field"><div class="calc-label">Annual Return (%) <span id="lRate">12%</span></div><input type="range" class="calc-range" id="rRate" min="5" max="25" step="1" value="12"></div>
-      <div class="calc-field"><div class="calc-label">Years <span id="lYears">10</span></div><input type="range" class="calc-range" id="rYears" min="1" max="30" step="1" value="10"></div>
-      <div class="calc-result-grid">
-        <div class="calc-stat"><div class="v" id="cFuture">—</div><div class="l">Future Value</div></div>
-        <div class="calc-stat"><div class="v" id="cGain" style="color:var(--gold-light)">—</div><div class="l">Total Gain</div></div>
-        <div class="calc-stat"><div class="v" id="cROI" style="color:var(--green-light)">—</div><div class="l">ROI</div></div>
+
+    <!-- Macro Row -->
+    <div style="background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px">
+      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+        <span>🏛️</span> Macro Institutional Outlook
       </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
+        <div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--gold);margin-bottom:6px">Federal Reserve</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.7">Rate cut expectations building for late 2026. Dollar weakness expected medium-term — bullish for gold and EM currencies globally.</div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--green);margin-bottom:6px">Bank of Tanzania</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.7">Stable rate policy maintained. EAC integration progressing well. USD/TZS expected to remain in 2,500–2,700 range medium-term.</div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--gold-light);margin-bottom:6px">TFIC 12-Month View</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.7">Gold $5,000+ · BTC $85,000–90,000 · USD/TZS range 2,500–2,700. Moderating inflation supports hard assets positioning.</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;padding-bottom:8px">
+      <p style="font-family:var(--mono);font-size:10px;color:var(--text3)">⚠️ Educational purposes only — not financial advice. Always conduct your own research.</p>
     </div>
   </div>
-</section>
-</div>
 
 <!-- ════════════════ ANALYSIS PAGE ════════════════ -->
 <div class="page" id="page-blog">
@@ -2674,8 +2655,46 @@ setInterval(function() {
   if (cl) cl.textContent = new Date().toLocaleTimeString('en-US',{timeZone:'Africa/Nairobi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}) + ' EAT';
 }, 1000);
 
-// Update Bloomberg cards from live data (called after fetchAllMarketData)
+// Update Bloomberg cards + AI intelligence from live data
 function updateBloombergCards() {
+  // Update AI intelligence section
+  var r = liveRates || {};
+  var c = cryptoPrices || {};
+  var g = goldPrice || 4510;
+  var gc = goldChg || 0.44;
+  var bp = (c.BTC && c.BTC.price) || 67420;
+  var bc = (c.BTC && c.BTC.chg) || 1.84;
+
+  var setT = function(id, val) { var el = document.getElementById(id); if(el) el.textContent = val; };
+
+  setT('ai-gold-price', '$'+g.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
+  setT('ai-gold-chg', (gc>=0?'▲ +':'▼ ')+Math.abs(gc).toFixed(2)+'% today');
+  setT('ai-tzs-price', r.TZS ? r.TZS.toLocaleString('en-US',{minimumFractionDigits:2}) : '2,628');
+  setT('ai-btc-price', '$'+bp.toLocaleString('en-US',{maximumFractionDigits:0}));
+  setT('ai-btc-chg', (bc>=0?'▲ +':'▼ ')+Math.abs(bc).toFixed(2)+'% today');
+
+  var btcSig = document.getElementById('ai-btc-sig');
+  if(btcSig) { btcSig.textContent = bc>=0?'BUY':'NEUTRAL'; btcSig.style.color = bc>=0?'var(--green)':'var(--gold)'; }
+
+  var now = new Date();
+  var dateStr = now.toLocaleDateString('en-US',{timeZone:'Africa/Nairobi',weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  setT('aiDailyDate', dateStr + ' · Updated ' + now.toLocaleTimeString('en-US',{timeZone:'Africa/Nairobi',hour:'2-digit',minute:'2-digit',hour12:false}) + ' EAT');
+  setT('aiUpdateTime', now.toLocaleTimeString('en-US',{timeZone:'Africa/Nairobi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}) + ' EAT');
+
+  // Dynamic gold text
+  var goldEl = document.getElementById('ai-gold-text');
+  if(goldEl) goldEl.textContent = gc >= 0
+    ? 'Structurally bullish. Central bank accumulation at record pace. Safe-haven demand elevated. Key support: $'+(Math.round(g*0.976/10)*10).toLocaleString()+'. Resistance: $'+(Math.round(g*1.018/10)*10).toLocaleString()+'.'
+    : 'Near-term consolidation. Profit-taking pressure. Key support at $'+(Math.round(g*0.982/10)*10).toLocaleString()+' critical. Long-term bull case intact — central bank buying continues.';
+
+  // Dynamic BTC text
+  var btcEl = document.getElementById('ai-btc-text');
+  if(btcEl) btcEl.textContent = bc >= 0
+    ? 'Institutional ETF inflows continue supporting demand. Post-halving supply dynamics constructive. Key level $60K support. Target: $'+(Math.round(bp*1.12/1000)*1000).toLocaleString()+'.'
+    : 'Consolidation phase. Watch $60K support — key institutional level. Position sizing critical given high volatility environment.';
+
+// Update Bloomberg cards from live data (called after fetchAllMarketData)
+function updateBloombergCards_orig() {
   var r = liveRates || {};
   var c = cryptoPrices || {};
   var g = goldPrice || 4510;
