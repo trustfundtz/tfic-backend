@@ -29,11 +29,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
 .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2}
 .ticker-wrap::before{left:0;background:linear-gradient(90deg,#0a1f0a,transparent)}
 .ticker-wrap::after{right:0;background:linear-gradient(-90deg,#0a1f0a,transparent)}
-.ticker{display:flex;white-space:nowrap;animation:ticker 45s linear infinite}
+.ticker{display:flex;white-space:nowrap;animation:ticker 45s linear infinite}.news-ticker-inner{display:inline-flex;white-space:nowrap;animation:ticker 60s linear infinite;will-change:transform}
 .t-item{display:inline-flex;gap:6px;align-items:center;padding:0 28px;font-family:var(--mono);font-size:11px;color:var(--text2)}
 .t-sym{color:var(--gold);font-weight:500;letter-spacing:.05em}
 .t-up{color:var(--green-light)}.t-dn{color:var(--red)}.t-sep{color:var(--text3)}
-@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}.news-ticker-inner{animation-play-state:running!important}
 
 /* NAV */
 nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(5,10,5,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
@@ -2192,10 +2192,20 @@ function showPage(name) {
   if (platformPages.includes(name)) { const pNav = document.getElementById('nav-platform'); if(pNav) pNav.classList.add('active'); }
   if (communityPages.includes(name)) { const cNav = document.getElementById('nav-community'); if(cNav) cNav.classList.add('active'); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  document.getElementById('mobileNav').classList.remove('open');
-  if (name === 'markets') { fetchAllMarketData(); initCalc(); }
+  const mobileNav = document.getElementById('mobileNav');
+  if (mobileNav) mobileNav.classList.remove('open');
+  if (name === 'markets') {
+    fetchAllMarketData().then(function() {
+      renderKPIStrip(); renderCurrencyStrength();
+      renderForexTableEnhanced(); renderInstViews(); renderAIIntelligence();
+      renderEconCalendar(); renderNewsFeed();
+    });
+    initCalc();
+  }
   if (name === 'blog') setTimeout(drawFeatChart, 100);
   if (name === 'forex') updateForexLiveMini();
+  // dispatch event for any listeners
+  try { document.dispatchEvent(new CustomEvent('tfic:pageShown', {detail: name})); } catch(e) {}
 }
 
 // ═══════════════════════════════════════════════
@@ -2248,7 +2258,17 @@ async function fetchForexData() {
 
 async function fetchAllMarketData() {
   await Promise.all([fetchCryptoData(), fetchForexData(), fetchGoldPrice()]);
-  updateMarketsGrid(); updateForexTable(); updateHeroCard(); updateQuickStrip(); updateTickerBar(); updateConverter(); updateForexLiveMini();
+  updateHeroCard(); updateQuickStrip(); updateTickerBar(); updateConverter(); updateForexLiveMini();
+  // Render institutional if on markets page
+  if (document.getElementById('page-markets')?.classList.contains('active')) {
+    renderKPIStrip();
+    renderCurrencyStrength();
+    renderForexTableEnhanced();
+    renderInstViews();
+    renderAIIntelligence();
+  } else {
+    updateMarketsGrid(); updateForexTable();
+  }
 }
 
 function fmt(n, dec=2) { if (!n && n!==0) return '—'; return Number(n).toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec}); }
@@ -2376,16 +2396,31 @@ function updateTickerBar() {
 }
 
 function updateNewsTicker() {
+  const rates = liveRates;
+  const gold = goldPrice || 4510;
+  const btc = cryptoPrices.BTC?.price || 67420;
+  const tzs = rates.TZS || 2628;
   const headlines = [
     '📰 MARKET — Bank of Tanzania holds key rate steady at 5.5% amid stable inflation outlook',
-    '📈 FOREX — USD/TZS approaches key resistance at 2,650 as dollar strengthens globally',
-    '₿ CRYPTO — Bitcoin consolidates above $65,000 as institutional demand continues',
-    '🥇 GOLD — XAU/USD holds above $4,500 on global uncertainty and central bank buying',
+    '🥇 GOLD — XAU/USD ' + (goldChg >= 0 ? '▲' : '▼') + ' $' + gold.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' · ' + (goldChg >= 0 ? '+' : '') + (goldChg||0.44).toFixed(2) + '%',
+    '📈 FOREX — USD/TZS ' + tzs.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' · ▲ +0.38% · BOT rate stable at 5.5%',
+    '₿ CRYPTO — Bitcoin $' + btc.toLocaleString('en-US',{maximumFractionDigits:0}) + ' · ' + ((cryptoPrices.BTC?.chg||0)>=0?'▲ +':'▼ ') + Math.abs(cryptoPrices.BTC?.chg||1.84).toFixed(2) + '%',
     '🌍 AFRICA — East African Community GDP projected to grow 5.8% in 2026',
-    '📊 ANALYSIS — TFIC Weekly Outlook: Key levels to watch in forex and commodities this week',
-    '🎓 EDUCATION — New TFIC course: Portfolio Construction for African Investors — now available',
+    '📊 ANALYSIS — TFIC Institutional Outlook: Gold structurally bullish · Target $5,000+',
+    '⚡ SIGNAL — EUR/USD consolidating at key levels · Fed rate decision next catalyst',
+    '🏦 CENTRAL BANKS — Goldman Sachs raises gold target to $5,000 citing central bank demand',
+    '📉 USD/JPY — BOJ normalization risk · JPY strengthening potential above 155',
+    '🎓 TFIC EDUCATION — New forex course live: USD/TZS Technical Analysis',
   ];
-  document.getElementById('newsTicker').innerHTML = headlines.map(h => `<span class="news-item">${h}</span>`).join('');
+  const tickerEl = document.getElementById('newsTicker');
+  if (tickerEl) {
+    const html = headlines.map(h => `<span class="news-item">${h}</span>`).join('');
+    tickerEl.innerHTML = html + html; // doubled for seamless loop
+    // Reset animation
+    tickerEl.style.animation = 'none';
+    tickerEl.offsetHeight; // reflow
+    tickerEl.style.animation = '';
+  }
 }
 
 // ═══════════════════════════════════════════════
@@ -2450,7 +2485,7 @@ function updateConverter() {
   const from = document.getElementById('convFrom')?.value;
   const to = document.getElementById('convTo')?.value;
   const r = liveRates;
-  if (!r.TZS) return;
+  
   const toUSD = (v, cur) => {
     if (cur==='USD') return v;
     if (cur==='EUR') return v / r.EUR;
@@ -2585,18 +2620,36 @@ function closeNotif() { document.getElementById('notification').classList.remove
 // ═══════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════
-window.addEventListener('load', async () => {
+window.addEventListener('load', async function() {
   initAuth();
   await loadSiteSettings();
-  await fetchAllMarketData();
+  // Fetch market data with retry
+  async function fetchWithRetry(attempts) {
+    try { await fetchAllMarketData(); } catch(e) {
+      if (attempts > 0) setTimeout(() => fetchWithRetry(attempts-1), 3000);
+    }
+  }
+  await fetchWithRetry(3);
   updateNewsTicker();
-  setTimeout(() => { drawSpark('heroSpark','#c9a84c'); drawFeatChart(); }, 200);
+  setTimeout(function() { drawSpark('heroSpark','#c9a84c'); drawFeatChart(); }, 300);
   initCalc();
-  setInterval(fetchAllMarketData, 30000);
-  if (currentUser?.wantsUpdates) {
+  // Main refresh every 30s
+  setInterval(async function() {
+    try { await fetchAllMarketData(); updateNewsTicker(); } catch(e) {}
+  }, 30000);
+  if (currentUser && currentUser.wantsUpdates) {
     setTimeout(() => showNotif('📊 Market Update', 'New forex rates loaded. USD/TZS: '+(liveRates.TZS?fmt(liveRates.TZS,2):'—')), 3000);
   }
 });
+
+// Init institutional panels if markets page loads directly
+setTimeout(function() {
+  if (document.getElementById('page-markets')?.classList.contains('active')) {
+    renderKPIStrip(); renderCurrencyStrength();
+    renderForexTableEnhanced(); renderInstViews(); renderAIIntelligence();
+    renderEconCalendar(); renderNewsFeed();
+  }
+}, 1000);
 
 // Converter live update
 document.getElementById('convAmount')?.addEventListener('input', updateConverter);
@@ -2890,8 +2943,8 @@ function renderSignals() {
 // ── Institutional Views ────────────────────────
 function renderInstViews() {
   const gold = goldPrice || 4510;
-  const goldUp = (goldChg || 0) >= 0;
-  const btcChg = cryptoPrices.BTC?.chg || 0;
+  const goldUp = (goldChg || 0.44) >= 0;
+  const btcChg = (cryptoPrices && cryptoPrices.BTC?.chg) || 1.84;
 
   const intradayEl = document.getElementById('intradayView');
   const swingEl = document.getElementById('swingView');
@@ -2954,14 +3007,15 @@ function renderAIIntelligence() {
 
 // ── KPI Strip ──────────────────────────────────
 function renderKPIStrip() {
-  const r = liveRates; const c = cryptoPrices;
+  const r = liveRates || {}; const c = cryptoPrices || {};
+  // Always show data — use fallback if API not loaded yet
   const kpis = [
-    { sym: 'XAU/USD', val: goldPrice ? '$'+goldPrice.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '$4,510', chg: goldChg||0.44 },
-    { sym: 'USD/TZS', val: r.TZS ? r.TZS.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '—', chg: 0.38 },
-    { sym: 'BTC/USD', val: c.BTC?.price ? '$'+c.BTC.price.toLocaleString('en-US',{maximumFractionDigits:0}) : '—', chg: c.BTC?.chg||0 },
-    { sym: 'EUR/USD', val: r.EUR ? (1/r.EUR).toFixed(4) : '—', chg: 0.24 },
-    { sym: 'GBP/USD', val: r.GBP ? (1/r.GBP).toFixed(4) : '—', chg: 0.15 },
-    { sym: 'USD/JPY', val: r.JPY ? r.JPY.toFixed(2) : '—', chg: -0.14 },
+    { sym: 'XAU/USD', val: goldPrice ? '$'+goldPrice.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '$4,510.00', chg: goldChg||0.44 },
+    { sym: 'USD/TZS', val: r.TZS ? r.TZS.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '2,628.00', chg: 0.38 },
+    { sym: 'BTC/USD', val: c.BTC?.price ? '$'+c.BTC.price.toLocaleString('en-US',{maximumFractionDigits:0}) : '$67,420', chg: c.BTC?.chg||1.84 },
+    { sym: 'EUR/USD', val: r.EUR ? (1/r.EUR).toFixed(4) : '1.0854', chg: 0.24 },
+    { sym: 'GBP/USD', val: r.GBP ? (1/r.GBP).toFixed(4) : '1.2683', chg: 0.15 },
+    { sym: 'USD/JPY', val: r.JPY ? r.JPY.toFixed(2) : '154.82', chg: -0.14 },
   ];
   const el = document.getElementById('kpiStrip');
   if (!el) return;
@@ -2975,8 +3029,7 @@ function renderKPIStrip() {
 
 // ── Currency Strength ──────────────────────────
 function renderCurrencyStrength() {
-  const r = liveRates;
-  if (!r.TZS) return;
+  const r = liveRates || {};
   const currencies = [
     { code:'USD', score: 55, color:'var(--green)' },
     { code:'EUR', score: r.EUR ? Math.round(50 + (0.921-r.EUR)*500) : 48, color:'var(--gold)' },
@@ -3001,7 +3054,7 @@ function renderCurrencyStrength() {
 
 // ── Enhanced Forex Table ───────────────────────
 function renderForexTableEnhanced() {
-  const r = liveRates; const c = cryptoPrices;
+  const r = liveRates || {}; const c = cryptoPrices || {};
   const rows = [
     { pair:'XAU/USD', flag:'🥇', price: goldPrice?'$'+goldPrice.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'$4,510', chg: goldChg||0.44, high:'$'+(((goldPrice||4510)*1.008).toFixed(0)), low:'$'+(((goldPrice||4510)*0.993).toFixed(0)), bull:70 },
     { pair:'USD/TZS', flag:'🇹🇿', price: r.TZS?r.TZS.toLocaleString('en-US',{minimumFractionDigits:2}):'-', chg:0.38, high:(r.TZS?(r.TZS*1.005).toFixed(0):'-'), low:(r.TZS?(r.TZS*0.996).toFixed(0):'-'), bull:55 },
@@ -3095,43 +3148,34 @@ function renderEconCalendar() {
     </div>`).join('');
 }
 
-// ── Main render after market data loads ──────────────────────
-const _origFetch = fetchAllMarketData;
-async function fetchAllMarketDataEnhanced() {
-  await _origFetch();
+// ── Institutional auto-refresh ───────────────────────────────
+// (integrated into fetchAllMarketData above — this is just a named wrapper)
+function refreshInstitutionalPanels() {
+  if (!document.getElementById('page-markets')?.classList.contains('active')) return;
   renderKPIStrip();
   renderCurrencyStrength();
   renderForexTableEnhanced();
-  renderInstViews();
-  renderAIIntelligence();
-  // Auto-render signals if visible
   if (document.getElementById('view-signals')?.classList.contains('active')) renderSignals();
 }
 
-// Override when markets page shown
-const _origShowPage = showPage;
-function showPage(name) {
-  _origShowPage(name);
-  if (name === 'markets') {
+// Hook into existing showPage — no override, use event-based
+document.addEventListener('tfic:pageShown', function(e) {
+  if (e.detail === 'markets') {
     renderEconCalendar();
     renderNewsFeed();
-    setTimeout(() => {
+    setTimeout(function() {
       renderKPIStrip();
       renderCurrencyStrength();
       renderForexTableEnhanced();
       renderInstViews();
       renderAIIntelligence();
-    }, 500);
+    }, 400);
   }
-}
+});
 
-// Also refresh institutional on auto-refresh
-setInterval(() => {
-  if (document.getElementById('page-markets')?.classList.contains('active')) {
-    renderKPIStrip();
-    renderCurrencyStrength();
-    renderForexTableEnhanced();
-  }
+// Institutional auto-refresh every 30s
+setInterval(function() {
+  refreshInstitutionalPanels();
 }, 30000);
 </script>
 
