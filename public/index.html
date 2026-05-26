@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trust Fund Investment Club — Africa's Premier Investment Education Platform</title><!-- TFIC v17 build 20260526_114145 -->
+<title>Trust Fund Investment Club — Africa's Premier Investment Education Platform</title><!-- TFIC Stable Build · 2026-05-26 11:46 -->
 <meta name="description" content="Trust Fund Investment Club (TFIC) — Professional financial education, portfolio development, and investment intelligence. Empowering investors worldwide.">
 <meta property="og:title" content="Trust Fund Investment Club (TFIC)">
 <meta property="og:description" content="Professional financial education, portfolio development and investment intelligence. Established 2025, Tanzania.">
@@ -658,18 +658,18 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       <div class="mc-header">
         <div>
           <div class="mc-label">USD/TZS Live Rate</div>
-          <div class="mc-val" id="hero-usdtzs">—</div>
+          <div class="mc-val" id="hero-usdtzs">2,628</div>
         </div>
         <div class="mc-chg">
           <div class="live-badge"><span class="live-dot"></span>LIVE</div>
-          <div class="mc-chg-val" id="hero-usdtzs-chg" style="margin-top:6px">—</div>
+          <div class="mc-chg-val up" id="hero-usdtzs-chg" style="margin-top:6px">▲ +0.38%</div>
         </div>
       </div>
       <div class="spark-wrap"><canvas class="spark" id="heroSpark"></canvas></div>
       <div class="mc-assets" id="heroAssets">
-        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">₿</div><div><div class="ma-name">Bitcoin</div><div class="ma-sub">BTC/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-btc">—</div><div class="ma-chg" id="h-btc-c">—</div></div></div>
-        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🥇</div><div><div class="ma-name">Gold</div><div class="ma-sub">XAU/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-gold">—</div><div class="ma-chg" id="h-gold-c">—</div></div></div>
-        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🛢</div><div><div class="ma-name">Brent Crude</div><div class="ma-sub">USD/bbl</div></div></div><div class="ma-right"><div class="ma-price" id="h-oil">—</div><div class="ma-chg" id="h-oil-c">—</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">₿</div><div><div class="ma-name">Bitcoin</div><div class="ma-sub">BTC/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-btc">$67,420</div><div class="ma-chg" id="h-btc-c">—</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🥇</div><div><div class="ma-name">Gold</div><div class="ma-sub">XAU/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-gold">$4,510</div><div class="ma-chg" id="h-gold-c">—</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🛢</div><div><div class="ma-name">Brent Crude</div><div class="ma-sub">USD/bbl</div></div></div><div class="ma-right"><div class="ma-price" id="h-oil">$82.15</div><div class="ma-chg" id="h-oil-c">—</div></div></div>
       </div>
     </div>
   </div>
@@ -721,217 +721,87 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 
 <!-- ════════════════ MARKETS PAGE ════════════════ -->
 <div class="page" id="page-markets">
-<style>
-.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:24px}
-@media(max-width:768px){.kpi-strip{grid-template-columns:repeat(2,1fr)}}
-.kpi-tile{background:var(--surface);padding:16px 18px;transition:background .2s}
-.kpi-tile:hover{background:var(--surface2)}
-.kpi-sym{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
-.kpi-val{font-family:var(--mono);font-size:18px;font-weight:500;color:var(--text);margin-bottom:3px}
-.sig-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;overflow:hidden}
-.sig-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
-.sig-card.bull::before{background:var(--green)}.sig-card.bear::before{background:var(--red)}.sig-card.neutral::before{background:var(--gold)}
-.sig-badge{padding:4px 10px;border-radius:100px;font-family:var(--mono);font-size:10px;font-weight:700}
-.sig-badge.BUY{background:rgba(45,186,86,.15);color:var(--green);border:1px solid rgba(45,186,86,.3)}
-.sig-badge.SELL{background:rgba(224,85,85,.15);color:var(--red);border:1px solid rgba(224,85,85,.3)}
-.sig-badge.NEUTRAL{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3)}
-.nfl-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;gap:14px;margin-bottom:10px;transition:background .2s}
-.nfl-item:hover{border-color:var(--border2);background:var(--surface2)}
-.nfl-bar{width:4px;border-radius:2px;flex-shrink:0;align-self:stretch;min-height:40px}
-.nfl-bar.h{background:var(--red)}.nfl-bar.m{background:var(--gold)}.nfl-bar.l{background:var(--green)}
-.econ-row{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid var(--border);font-size:13px}
-.econ-row:hover{background:var(--surface2)}
-.inst-tab2{padding:8px 16px;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;border:1px solid transparent;font-family:var(--sans);transition:all .2s;color:var(--text3);background:transparent}
-.inst-tab2.on{background:var(--surface3);color:var(--gold-light);border-color:var(--border2)}
-.inst-tab2:hover:not(.on){color:var(--text2);background:var(--surface2)}
-.iview2{display:none}.iview2.on{display:block}
-.ivm-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
-.ivm-row:last-child{border-bottom:none}
-.strength-card2{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
-.str-bar2{height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;margin:6px 0}
-.str-fill{height:100%;border-radius:3px}
-.conf-bar{height:4px;background:var(--surface3);border-radius:2px;width:80px;overflow:hidden;margin-top:4px}
-.conf-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--green-dim),var(--green))}
-</style>
-
-<!-- STICKY TOP BAR -->
-<div style="background:var(--surface);border-bottom:1px solid var(--border2);padding:12px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:72px;z-index:90;backdrop-filter:blur(10px)">
-  <div style="display:flex;gap:4px;flex-wrap:wrap">
-    <button class="inst-tab2 on" onclick="mTab(this,'mv-overview')">📊 Overview</button>
-    <button class="inst-tab2" onclick="mTab(this,'mv-signals')">🎯 Signals</button>
-    <button class="inst-tab2" onclick="mTab(this,'mv-news')">📰 Intelligence</button>
-    <button class="inst-tab2" onclick="mTab(this,'mv-calendar')">📅 Calendar</button>
-    <button class="inst-tab2" onclick="mTab(this,'mv-tools')">🛠 Tools</button>
-  </div>
-  <div style="display:flex;gap:12px;align-items:center">
-    <div class="live-badge"><span class="live-dot"></span>Markets Live</div>
-    <div id="mktClock" style="font-family:var(--mono);font-size:11px;color:var(--text3)"></div>
-    <button class="btn-ghost" onclick="fetchAllMarketData()" style="font-size:11px;padding:5px 12px">↻ Refresh</button>
-  </div>
-</div>
-
-<!-- TICKER -->
-<div class="news-ticker-wrap" style="border-radius:0;border-left:none;border-right:none">
-  <div class="ticker" id="newsTicker"></div>
-</div>
-
-<!-- ════ OVERVIEW ════ -->
-<div class="iview2 on" id="mv-overview" style="padding:28px 64px 60px">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
-    <div class="eyebrow-label">Live Rates</div>
-    <div class="live-badge"><span class="live-dot"></span>Auto-refresh 30s</div>
-  </div>
-
-  <!-- KPI Strip — pre-populated with fallback data -->
-  <div class="kpi-strip">
-    <div class="kpi-tile"><div class="kpi-sym">XAU/USD · Gold</div><div class="kpi-val" id="kf-gold">$4,510.00</div><div class="kpi-chg up" id="kf-goldchg">▲ +0.44%</div></div>
-    <div class="kpi-tile"><div class="kpi-sym">USD/TZS</div><div class="kpi-val" id="kf-tzs">2,628.00</div><div class="kpi-chg up">▲ +0.38%</div></div>
-    <div class="kpi-tile"><div class="kpi-sym">BTC/USD</div><div class="kpi-val" id="kf-btc">$67,420</div><div class="kpi-chg up" id="kf-btcchg">▲ +1.84%</div></div>
-    <div class="kpi-tile"><div class="kpi-sym">EUR/USD</div><div class="kpi-val" id="kf-eur">1.0854</div><div class="kpi-chg up">▲ +0.24%</div></div>
-    <div class="kpi-tile"><div class="kpi-sym">GBP/USD</div><div class="kpi-val" id="kf-gbp">1.2683</div><div class="kpi-chg up">▲ +0.15%</div></div>
-    <div class="kpi-tile"><div class="kpi-sym">USD/JPY</div><div class="kpi-val" id="kf-jpy">154.82</div><div class="kpi-chg dn">▼ -0.14%</div></div>
-    <div class="kpi-tile"><div class="kpi-sym">USD/KES</div><div class="kpi-val" id="kf-kes">128.45</div><div class="kpi-chg dn">▼ -0.32%</div></div>
-    <div class="kpi-tile"><div class="kpi-sym">ETH/USD</div><div class="kpi-val" id="kf-eth">$3,218</div><div class="kpi-chg up" id="kf-etchg">▲ +0.55%</div></div>
-  </div>
-
-  <!-- AI Banner -->
-  <div style="background:linear-gradient(135deg,rgba(13,24,16,.9),rgba(17,31,20,.9));border:1px solid var(--border2);border-radius:12px;padding:22px;margin-bottom:24px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
-      <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--green-dim),var(--gold-dim));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;font-weight:700;color:var(--gold-light)">TF</div>
-      <div><div style="font-family:var(--serif);font-size:17px;font-weight:600">TFIC Market Intelligence</div><div id="mktAiDate" style="font-size:10px;color:var(--text3);font-family:var(--mono)">Daily Outlook</div></div>
-      <div class="live-badge" style="margin-left:auto"><span class="live-dot"></span>AI Analysis</div>
-    </div>
-    <div style="font-size:13.5px;color:var(--text2);line-height:1.9;border-left:2px solid var(--border2);padding-left:14px" id="mktAiBody">
-      <strong>Gold (XAU/USD)</strong> is trading at <span id="aiGoldPrice">$4,510</span>, supported by safe-haven demand and central bank accumulation at record pace. Federal Reserve rate cut expectations remain the primary bullish catalyst, with institutional positioning suggesting continued accumulation on dips. TFIC swing target: $4,600–$4,700.<br><br>
-      <strong>USD/TZS</strong> is holding at <span id="aiTzsPrice">2,628</span>, reflecting the Bank of Tanzania's stable monetary policy. Regional EAC trade flows and import demand continue to support USD. No major BOT policy changes expected near-term.<br><br>
-      <strong>TFIC Institutional Outlook:</strong> Moderating global inflation, central bank policy pivots, and geopolitical uncertainty remain structurally supportive of gold and selective EM positioning. Gold $5,000+ target maintained over 12–18 months.
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
-      <span style="font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text3)">XAU Bullish</span>
-      <span style="font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text3)">Fed Pivot Watch</span>
-      <span style="font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text3)">BOT Rate Stable</span>
-      <span style="font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text3)">Central Bank Buying</span>
-      <span style="font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text3)">Gold $5K Target</span>
+<section class="markets-section section">
+  <div class="section-header">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="eyebrow-label">Live Markets</div>
+        <h2 class="section-title">Global Market Overview</h2>
+        <p class="section-subtitle">Real-time rates across forex, commodities, and crypto markets — updated automatically every 30 seconds.</p>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="live-badge"><span class="live-dot"></span>Refreshing every 30s</div>
+        <button class="btn-ghost" onclick="fetchAllMarketData()" style="font-size:12px;padding:6px 14px">↻ Refresh Now</button>
+      </div>
     </div>
   </div>
-
-  <!-- Institutional Views -->
-  <div class="eyebrow-label" style="margin-bottom:14px">Institutional Views</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:24px">
-    <div class="iview-card" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px">
-      <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px"><div style="width:34px;height:34px;border-radius:8px;background:rgba(45,186,86,.15);display:flex;align-items:center;justify-content:center;font-size:15px">⚡</div><div><div style="font-family:var(--serif);font-size:16px;font-weight:600">Intraday View</div><div style="font-size:10px;color:var(--text3);font-family:var(--mono)">Session · 24H</div></div></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">Market Bias</span><span class="up" style="font-family:var(--mono);font-size:11px" id="iv-bias">RISK-ON</span></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">Gold Intraday</span><span class="up" style="font-family:var(--mono);font-size:11px">Bullish</span></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">USD Strength</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold)">Consolidating</span></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">Session Volatility</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold)">Moderate</span></div>
-      <p style="font-size:11px;color:var(--text3);margin-top:10px;line-height:1.7">Gold maintaining bullish bias. Key resistance $4,550. Watch DXY for USD direction. London-NY overlap creating key volatility window.</p>
-    </div>
-    <div class="iview-card" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px">
-      <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px"><div style="width:34px;height:34px;border-radius:8px;background:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;font-size:15px">📈</div><div><div style="font-family:var(--serif);font-size:16px;font-weight:600">Swing View</div><div style="font-size:10px;color:var(--text3);font-family:var(--mono)">3–14 Day Outlook</div></div></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">XAU/USD Bias</span><span class="up" style="font-family:var(--mono);font-size:11px">Bullish</span></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">EUR/USD</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold)">Range-Bound</span></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">USD/TZS</span><span class="dn" style="font-family:var(--mono);font-size:11px">USD Pressure</span></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">Gold Target</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold)">$4,600–4,700</span></div>
-      <p style="font-size:11px;color:var(--text3);margin-top:10px;line-height:1.7">Gold swing outlook constructive. Institutional accumulation on dips. Fed narrative supportive of higher prices medium-term.</p>
-    </div>
-    <div class="iview-card" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px">
-      <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px"><div style="width:34px;height:34px;border-radius:8px;background:rgba(100,150,255,.1);display:flex;align-items:center;justify-content:center;font-size:15px">🏛️</div><div><div style="font-family:var(--serif);font-size:16px;font-weight:600">Institutional</div><div style="font-size:10px;color:var(--text3);font-family:var(--mono)">Long-Term · Macro</div></div></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">Macro Regime</span><span class="up" style="font-family:var(--mono);font-size:11px">Easing Cycle</span></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">Fed Policy</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold)">Pivot Expected</span></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">Gold LT Outlook</span><span class="up" style="font-family:var(--mono);font-size:11px">Structurally Bull</span></div>
-      <div class="ivm-row"><span style="font-size:11px;color:var(--text3)">12-Month Target</span><span class="up" style="font-family:var(--mono);font-size:11px">$5,000+</span></div>
-      <p style="font-size:11px;color:var(--text3);margin-top:10px;line-height:1.7">Central bank gold buying at record pace. Long-term flows favor hard assets. TFIC maintains structural bull case.</p>
-    </div>
+  <div class="news-ticker-wrap">
+    <div class="news-ticker-inner" id="newsTicker">Loading market news...</div>
   </div>
-
-  <!-- Currency Strength -->
-  <div class="eyebrow-label" style="margin-bottom:14px">Currency Strength Meter</div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px" id="strGrid">
-    <div class="strength-card2"><div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold-light)">USD</div><div class="str-bar2"><div class="str-fill" style="width:55%;background:var(--gold)"></div></div><div style="font-size:10px;color:var(--text3)">→ Neutral · 55%</div></div>
-    <div class="strength-card2"><div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold-light)">EUR</div><div class="str-bar2"><div class="str-fill" style="width:48%;background:var(--red)"></div></div><div style="font-size:10px;color:var(--text3)">↓ Weak · 48%</div></div>
-    <div class="strength-card2"><div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold-light)">GBP</div><div class="str-bar2"><div class="str-fill" style="width:58%;background:var(--green)"></div></div><div style="font-size:10px;color:var(--text3)">↑ Strong · 58%</div></div>
-    <div class="strength-card2"><div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold-light)">JPY</div><div class="str-bar2"><div class="str-fill" style="width:35%;background:var(--red)"></div></div><div style="font-size:10px;color:var(--text3)">↓ Weak · 35%</div></div>
-    <div class="strength-card2"><div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold-light)">TZS</div><div class="str-bar2"><div class="str-fill" style="width:45%;background:var(--gold)"></div></div><div style="font-size:10px;color:var(--text3)">→ Neutral · 45%</div></div>
-    <div class="strength-card2"><div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold-light)">CHF</div><div class="str-bar2"><div class="str-fill" style="width:65%;background:var(--green)"></div></div><div style="font-size:10px;color:var(--text3)">↑ Strong · 65%</div></div>
-    <div class="strength-card2"><div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold-light)">KES</div><div class="str-bar2"><div class="str-fill" style="width:40%;background:var(--red)"></div></div><div style="font-size:10px;color:var(--text3)">↓ Weak · 40%</div></div>
-    <div class="strength-card2"><div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold-light)">AUD</div><div class="str-bar2"><div class="str-fill" style="width:42%;background:var(--red)"></div></div><div style="font-size:10px;color:var(--text3)">↓ Weak · 42%</div></div>
+  <div id="marketsGrid" class="markets-grid">
+    <div class="market-tile"><div class="mt-name">XAU/USD</div><div class="mt-price" id="fb-gold">$4,510</div><div class="mt-change up">▲ +0.44%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:60%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
+    <div class="market-tile"><div class="mt-name">USD/TZS</div><div class="mt-price" id="fb-tzs">2,628</div><div class="mt-change up">▲ +0.38%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:55%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
+    <div class="market-tile"><div class="mt-name">BTC/USD</div><div class="mt-price" id="fb-btc">$67,420</div><div class="mt-change up">▲ +1.84%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:68%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
+    <div class="market-tile"><div class="mt-name">EUR/USD</div><div class="mt-price" id="fb-eur">1.0854</div><div class="mt-change up">▲ +0.24%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:62%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
+    <div class="market-tile"><div class="mt-name">GBP/USD</div><div class="mt-price" id="fb-gbp">1.2683</div><div class="mt-change up">▲ +0.15%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:58%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
+    <div class="market-tile"><div class="mt-name">USD/JPY</div><div class="mt-price" id="fb-jpy">154.82</div><div class="mt-change dn">▼ -0.14%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:38%;background:var(--red);height:100%;border-radius:1px"></div></div></div>
+    <div class="market-tile"><div class="mt-name">USD/KES</div><div class="mt-price" id="fb-kes">128.45</div><div class="mt-change dn">▼ -0.32%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:44%;background:var(--red);height:100%;border-radius:1px"></div></div></div>
+    <div class="market-tile"><div class="mt-name">XAU/USD (Gold)</div><div class="mt-price" id="fb-gold2">$4,510</div><div class="mt-change up">▲ +0.44%</div><div class="mt-bar"><div class="mt-bar-fill" style="width:60%;background:var(--green);height:100%;border-radius:1px"></div></div></div>
   </div>
-
-  <!-- Forex Table -->
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--surface2)">
-      <div style="font-family:var(--serif);font-size:17px;font-weight:600">Forex &amp; Commodities Matrix</div>
-      <div class="live-badge"><span class="live-dot"></span>Live Data</div>
-    </div>
-    <div style="overflow-x:auto">
-    <table style="width:100%;border-collapse:collapse">
-      <thead><tr style="background:var(--surface2)">
-        <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)">Pair</th>
-        <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)">Price</th>
-        <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)">Change%</th>
-        <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)">Signal</th>
-        <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)">Sentiment</th>
-      </tr></thead>
-      <tbody id="mktForexBody">
-        <tr><td style="padding:12px 14px;font-family:var(--mono);border-bottom:1px solid var(--border)"><strong style="color:var(--gold-light)">🥇 XAU/USD</strong></td><td style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)" id="ft-gold">$4,510.00</td><td class="up" style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)" id="ft-goldchg">▲ +0.44%</td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><strong style="color:var(--green);font-size:11px">BUY</strong></td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><div style="display:flex;height:5px;border-radius:2px;overflow:hidden;width:70px"><div style="width:70%;background:var(--green)"></div><div style="width:30%;background:var(--red)"></div></div></td></tr>
-        <tr><td style="padding:12px 14px;font-family:var(--mono);border-bottom:1px solid var(--border)"><strong style="color:var(--gold-light)">🇹🇿 USD/TZS</strong></td><td style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)" id="ft-tzs">2,628.00</td><td class="up" style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)">▲ +0.38%</td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><strong style="color:var(--gold);font-size:11px">NEUTRAL</strong></td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><div style="display:flex;height:5px;border-radius:2px;overflow:hidden;width:70px"><div style="width:55%;background:var(--green)"></div><div style="width:45%;background:var(--red)"></div></div></td></tr>
-        <tr><td style="padding:12px 14px;font-family:var(--mono);border-bottom:1px solid var(--border)"><strong style="color:var(--gold-light)">🇪🇺 EUR/USD</strong></td><td style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)" id="ft-eur">1.0854</td><td class="up" style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)">▲ +0.24%</td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><strong style="color:var(--gold);font-size:11px">NEUTRAL</strong></td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><div style="display:flex;height:5px;border-radius:2px;overflow:hidden;width:70px"><div style="width:62%;background:var(--green)"></div><div style="width:38%;background:var(--red)"></div></div></td></tr>
-        <tr><td style="padding:12px 14px;font-family:var(--mono);border-bottom:1px solid var(--border)"><strong style="color:var(--gold-light)">🇬🇧 GBP/USD</strong></td><td style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)" id="ft-gbp">1.2683</td><td class="up" style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)">▲ +0.15%</td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><strong style="color:var(--green);font-size:11px">BUY</strong></td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><div style="display:flex;height:5px;border-radius:2px;overflow:hidden;width:70px"><div style="width:58%;background:var(--green)"></div><div style="width:42%;background:var(--red)"></div></div></td></tr>
-        <tr><td style="padding:12px 14px;font-family:var(--mono);border-bottom:1px solid var(--border)"><strong style="color:var(--gold-light)">🇯🇵 USD/JPY</strong></td><td style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)" id="ft-jpy">154.82</td><td class="dn" style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)">▼ -0.14%</td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><strong style="color:var(--red);font-size:11px">SELL</strong></td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><div style="display:flex;height:5px;border-radius:2px;overflow:hidden;width:70px"><div style="width:38%;background:var(--green)"></div><div style="width:62%;background:var(--red)"></div></div></td></tr>
-        <tr><td style="padding:12px 14px;font-family:var(--mono);border-bottom:1px solid var(--border)"><strong style="color:var(--gold-light)">₿ BTC/USD</strong></td><td style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)" id="ft-btc">$67,420</td><td class="up" style="padding:12px 14px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)" id="ft-btcchg">▲ +1.84%</td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><strong style="color:var(--green);font-size:11px">BUY</strong></td><td style="padding:12px 14px;border-bottom:1px solid var(--border)"><div style="display:flex;height:5px;border-radius:2px;overflow:hidden;width:70px"><div style="width:65%;background:var(--green)"></div><div style="width:35%;background:var(--red)"></div></div></td></tr>
-        <tr><td style="padding:12px 14px;font-family:var(--mono)"><strong style="color:var(--gold-light)">🇰🇪 USD/KES</strong></td><td style="padding:12px 14px;font-family:var(--mono);font-size:12px" id="ft-kes">128.45</td><td class="dn" style="padding:12px 14px;font-family:var(--mono);font-size:12px">▼ -0.32%</td><td style="padding:12px 14px"><strong style="color:var(--red);font-size:11px">SELL</strong></td><td style="padding:12px 14px"><div style="display:flex;height:5px;border-radius:2px;overflow:hidden;width:70px"><div style="width:44%;background:var(--green)"></div><div style="width:56%;background:var(--red)"></div></div></td></tr>
-      </tbody>
-    </table>
-    </div>
+  <table class="forex-table">
+    <thead><tr>
+      <th>Pair</th><th>Price</th><th>Change</th><th>%</th><th>Signal</th>
+    </tr></thead>
+    <tbody id="forexBody">
+    <tr><td><span class="pair-name">XAU/USD</span></td><td id="fbt-gold">$4,510.00</td><td class="up">+0.44</td><td class="up">▲ +0.44%</td><td><span style="color:var(--green);font-size:11px;font-weight:600">BUY</span></td></tr>
+    <tr><td><span class="pair-name">USD/TZS</span></td><td id="fbt-tzs">2,628.00</td><td class="up">+9.8</td><td class="up">▲ +0.38%</td><td><span style="color:var(--gold);font-size:11px;font-weight:600">NEUTRAL</span></td></tr>
+    <tr><td><span class="pair-name">EUR/USD</span></td><td id="fbt-eur">1.0854</td><td class="up">+0.003</td><td class="up">▲ +0.24%</td><td><span style="color:var(--gold);font-size:11px;font-weight:600">NEUTRAL</span></td></tr>
+    <tr><td><span class="pair-name">GBP/USD</span></td><td id="fbt-gbp">1.2683</td><td class="up">+0.002</td><td class="up">▲ +0.15%</td><td><span style="color:var(--green);font-size:11px;font-weight:600">BUY</span></td></tr>
+    <tr><td><span class="pair-name">USD/JPY</span></td><td id="fbt-jpy">154.82</td><td class="dn">-0.22</td><td class="dn">▼ -0.14%</td><td><span style="color:var(--red);font-size:11px;font-weight:600">SELL</span></td></tr>
+    <tr><td><span class="pair-name">BTC/USD</span></td><td id="fbt-btc">$67,420</td><td class="up">+0</td><td class="up">▲ +1.84%</td><td><span style="color:var(--green);font-size:11px;font-weight:600">BUY</span></td></tr>
+  </tbody>
+  </table>
+</section>
+<section class="tools-section section">
+  <div class="section-header">
+    <div class="eyebrow-label">Financial Tools</div>
+    <h2 class="section-title">Smart Tools for Better Decisions</h2>
   </div>
-</div>
-
-<!-- ════ SIGNALS ════ -->
-<div class="iview2" id="mv-signals" style="padding:28px 64px 60px">
-  <div style="margin-bottom:20px"><div class="eyebrow-label">Signal Engine</div><h2 style="font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:4px">Institutional Trade Signals</h2><p style="font-size:12px;color:var(--text3)">⚠️ Educational analysis only — not financial advice.</p></div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px"><button class="cat-tab active" onclick="mSigFilter('all',this)">All</button><button class="cat-tab" onclick="mSigFilter('BUY',this)">BUY</button><button class="cat-tab" onclick="mSigFilter('SELL',this)">SELL</button><button class="cat-tab" onclick="mSigFilter('NEUTRAL',this)">Neutral</button></div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px" id="mSigGrid"></div>
-</div>
-
-<!-- ════ NEWS ════ -->
-<div class="iview2" id="mv-news" style="padding:28px 64px 60px">
-  <div style="margin-bottom:20px"><div class="eyebrow-label">Market Intelligence</div><h2 style="font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:4px">Institutional News Feed</h2><p style="font-size:12px;color:var(--text3)">High-impact financial news filtered for institutional relevance.</p></div>
-  <div id="mNewsCards"></div>
-</div>
-
-<!-- ════ CALENDAR ════ -->
-<div class="iview2" id="mv-calendar" style="padding:28px 64px 60px">
-  <div style="margin-bottom:20px"><div class="eyebrow-label">Economic Calendar</div><h2 style="font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:4px">Upcoming Market Events</h2></div>
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden">
-    <div style="display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);background:var(--surface2)">
-      <div style="font-family:var(--mono);font-size:11px;color:var(--gold)">📅 May 26–30, 2026 · EAT</div>
-      <div style="font-family:var(--mono);font-size:9px;display:flex;gap:10px"><span style="color:var(--red)">● High</span><span style="color:var(--gold)">● Medium</span><span style="color:var(--green)">● Low</span></div>
-    </div>
-    <div id="mCalBody"></div>
-  </div>
-</div>
-
-<!-- ════ TOOLS ════ -->
-<div class="iview2" id="mv-tools" style="padding:28px 64px 60px">
-  <div style="margin-bottom:20px"><div class="eyebrow-label">Financial Tools</div><h2 style="font-family:var(--serif);font-size:26px;font-weight:600">Smart Investment Tools</h2></div>
   <div class="tools-grid">
     <div class="tool-card">
       <h3 class="tool-title">Currency Converter</h3>
-      <p class="tool-sub">Live rates — convert between major currencies and EAC shillings.</p>
-      <div class="converter-row"><div class="conv-input-wrap"><input type="number" class="conv-input" id="convAmount" value="1000"><select class="conv-select" id="convFrom"><option>USD</option><option>EUR</option><option>GBP</option><option>KES</option></select></div><span class="conv-arrow">⇄</span><div class="conv-input-wrap"><input type="number" class="conv-input" id="convResult" readonly style="color:var(--gold-light)"><select class="conv-select" id="convTo"><option>TZS</option><option>USD</option><option>EUR</option><option>KES</option></select></div></div>
-      <div class="conv-result"><div class="conv-result-val" id="convBig">—</div><div class="conv-result-sub" id="convRate">Loading rates...</div></div>
+      <p class="tool-sub">Convert between major currencies and East African shillings.</p>
+      <div class="converter-row">
+        <div class="conv-input-wrap">
+          <input type="number" class="conv-input" id="convAmount" value="1000">
+          <select class="conv-select" id="convFrom"><option>USD</option><option>EUR</option><option>GBP</option><option>KES</option></select>
+        </div>
+        <span class="conv-arrow">⇄</span>
+        <div class="conv-input-wrap">
+          <input type="number" class="conv-input" id="convResult" readonly style="color:var(--gold-light)">
+          <select class="conv-select" id="convTo"><option>TZS</option><option>USD</option><option>EUR</option><option>KES</option></select>
+        </div>
+      </div>
+      <div class="conv-result">
+        <div class="conv-result-val" id="convBig">—</div>
+        <div class="conv-result-sub" id="convRate">Loading current rates...</div>
+      </div>
     </div>
     <div class="tool-card">
-      <h3 class="tool-title">Compound Growth Calculator</h3>
-      <p class="tool-sub">Project your wealth with compound interest analysis.</p>
-      <div class="calc-field"><div class="calc-label">Initial (TZS) <span id="lPrincipal">1,000,000</span></div><input type="range" class="calc-range" id="rPrincipal" min="100000" max="10000000" step="100000" value="1000000"></div>
-      <div class="calc-field"><div class="calc-label">Annual Return <span id="lRate">12%</span></div><input type="range" class="calc-range" id="rRate" min="5" max="25" step="1" value="12"></div>
+      <h3 class="tool-title">Investment Calculator</h3>
+      <p class="tool-sub">Project your wealth growth with compound interest.</p>
+      <div class="calc-field"><div class="calc-label">Initial Amount (TZS) <span id="lPrincipal">1,000,000</span></div><input type="range" class="calc-range" id="rPrincipal" min="100000" max="10000000" step="100000" value="1000000"></div>
+      <div class="calc-field"><div class="calc-label">Annual Return (%) <span id="lRate">12%</span></div><input type="range" class="calc-range" id="rRate" min="5" max="25" step="1" value="12"></div>
       <div class="calc-field"><div class="calc-label">Years <span id="lYears">10</span></div><input type="range" class="calc-range" id="rYears" min="1" max="30" step="1" value="10"></div>
-      <div class="calc-result-grid"><div class="calc-stat"><div class="v" id="cFuture">—</div><div class="l">Future Value</div></div><div class="calc-stat"><div class="v" id="cGain" style="color:var(--gold-light)">—</div><div class="l">Total Gain</div></div><div class="calc-stat"><div class="v" id="cROI" style="color:var(--green-light)">—</div><div class="l">ROI</div></div></div>
+      <div class="calc-result-grid">
+        <div class="calc-stat"><div class="v" id="cFuture">—</div><div class="l">Future Value</div></div>
+        <div class="calc-stat"><div class="v" id="cGain" style="color:var(--gold-light)">—</div><div class="l">Total Gain</div></div>
+        <div class="calc-stat"><div class="v" id="cROI" style="color:var(--green-light)">—</div><div class="l">ROI</div></div>
+      </div>
     </div>
   </div>
+</section>
 </div>
-
 
 <!-- ════════════════ ANALYSIS PAGE ════════════════ -->
 <div class="page" id="page-blog">
@@ -2001,33 +1871,17 @@ const platformPages = ['markets','education','forex'];
 const communityPages = ['mentorship','events'];
 
 function showPage(name) {
-  // Hide all pages
-  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-  var pg = document.getElementById('page-' + name);
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = document.getElementById('page-'+name);
   if (pg) pg.classList.add('active');
-  // Update nav active states
-  document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
-  var navEl = document.getElementById('nav-' + name);
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-'+name);
   if (navEl) navEl.classList.add('active');
-  if (platformPages.indexOf(name) !== -1) { var pNav = document.getElementById('nav-platform'); if (pNav) pNav.classList.add('active'); }
-  if (communityPages.indexOf(name) !== -1) { var cNav = document.getElementById('nav-community'); if (cNav) cNav.classList.add('active'); }
+  if (platformPages.includes(name)) { const pNav = document.getElementById('nav-platform'); if(pNav) pNav.classList.add('active'); }
+  if (communityPages.includes(name)) { const cNav = document.getElementById('nav-community'); if(cNav) cNav.classList.add('active'); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  var mNav = document.getElementById('mobileNav');
-  if (mNav) mNav.classList.remove('open');
-  // Page-specific actions
-  if (name === 'markets') {
-    // Show data immediately (fallback if API not loaded)
-    updateMarketsGrid();
-    updateForexTable();
-    instRenderAll();
-    renderSigGrid();
-    renderNewsCards();
-    renderEconCal();
-    initCalc();
-    updateConverter();
-    // Then fetch fresh data in background
-    fetchAllMarketData();
-  }
+  document.getElementById('mobileNav').classList.remove('open');
+  if (name === 'markets') { fetchAllMarketData(); initCalc(); }
   if (name === 'blog') setTimeout(drawFeatChart, 100);
   if (name === 'forex') updateForexLiveMini();
 }
@@ -2082,16 +1936,7 @@ async function fetchForexData() {
 
 async function fetchAllMarketData() {
   await Promise.all([fetchCryptoData(), fetchForexData(), fetchGoldPrice()]);
-  updateHeroCard();
-  updateQuickStrip();
-  updateTickerBar();
-  updateConverter();
-  updateForexLiveMini();
-  updateNewsTicker();
-  // Update institutional if on markets page
-  if (document.getElementById('page-markets') && document.getElementById('page-markets').classList.contains('active')) {
-    instRenderAll();
-  }
+  updateMarketsGrid(); updateForexTable(); updateHeroCard(); updateQuickStrip(); updateTickerBar(); updateConverter(); updateForexLiveMini();
 }
 
 function fmt(n, dec=2) { if (!n && n!==0) return '—'; return Number(n).toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec}); }
@@ -2120,27 +1965,28 @@ function updateMarketsGrid() {
 }
 
 function updateForexTable() {
-  var r = liveRates || {};
-  var c = cryptoPrices || {};
-  var rows = [
-    { pair:'XAU/USD', price: goldPrice||(4510), pct: goldChg||0.44, display: goldPrice?'$'+fmt(goldPrice,2):'$4,510.00' },
-    { pair:'USD/TZS', price: r.TZS||(2628), pct: 0.38, display: r.TZS?fmt(r.TZS,2):'2,628.00' },
-    { pair:'EUR/USD', price: r.EUR?(1/r.EUR):1.0854, pct: 0.24, display: r.EUR?(1/r.EUR).toFixed(4):'1.0854' },
-    { pair:'GBP/USD', price: r.GBP?(1/r.GBP):1.2683, pct: 0.15, display: r.GBP?(1/r.GBP).toFixed(4):'1.2683' },
-    { pair:'USD/KES', price: r.KES||(128.45), pct: -0.32, display: r.KES?fmt(r.KES,2):'128.45' },
-    { pair:'USD/JPY', price: r.JPY||(154.82), pct: -0.14, display: r.JPY?fmt(r.JPY,2):'154.82' },
-    { pair:'BTC/USD', price: (c.BTC&&c.BTC.price)||67420, pct: (c.BTC&&c.BTC.chg)||1.84, display: c.BTC&&c.BTC.price?'$'+fmt(c.BTC.price,0):'$67,420' },
-    { pair:'ETH/USD', price: (c.ETH&&c.ETH.price)||3218, pct: (c.ETH&&c.ETH.chg)||0.55, display: c.ETH&&c.ETH.price?'$'+fmt(c.ETH.price,0):'$3,218' },
+  const r = liveRates; const c = cryptoPrices;
+  const rows = [
+    { pair:'USD/TZS', price: r.TZS, chg: 9.8, pct: 0.38 },
+    { pair:'EUR/USD', price: r.EUR ? 1/r.EUR : null, chg: 0.0026, pct: 0.24 },
+    { pair:'GBP/USD', price: r.GBP ? 1/r.GBP : null, chg: 0.0019, pct: 0.15 },
+    { pair:'USD/KES', price: r.KES, chg: -0.42, pct: -0.32 },
+    { pair:'USD/JPY', price: r.JPY, chg: -0.22, pct: -0.14 },
+    { pair:'USD/ZAR', price: r.ZAR, chg: 0.18, pct: 0.97 },
+    { pair:'BTC/USD', price: c.BTC?.price, chg: null, pct: c.BTC?.chg||0 },
+    { pair:'ETH/USD', price: c.ETH?.price, chg: null, pct: c.ETH?.chg||0 },
   ];
-  var el = document.getElementById('forexBody');
-  if (!el) return;
-  el.innerHTML = rows.map(function(row) {
-    var up = row.pct >= 0;
-    return '<tr><td><span class="pair-name">'+row.pair+'</span></td>' +
-      '<td>'+row.display+'</td>' +
-      '<td class="'+(up?'up':'dn')+'">'+(up?'+':'')+row.pct.toFixed(2)+'</td>' +
-      '<td class="'+(up?'up':'dn')+'">'+(up?'▲ +':'▼ ')+Math.abs(row.pct).toFixed(2)+'%</td>' +
-      '<td><span style="color:'+(up?'var(--green)':'var(--red)')+';font-size:11px;font-weight:600">'+(up?'BUY':'SELL')+'</span></td></tr>';
+  document.getElementById('forexBody').innerHTML = rows.map(row => {
+    const up = row.pct >= 0;
+    const priceStr = row.price ? (row.price > 1000 ? '$'+fmt(row.price,0) : fmt(row.price,4)) : '—';
+    const chgNum = row.chg !== null ? (up?'+':'')+row.chg : '';
+    return `<tr>
+      <td><span class="pair-name">${row.pair}</span></td>
+      <td>${priceStr}</td>
+      <td class="${up?'up':'dn'}">${chgNum}</td>
+      <td class="${up?'up':'dn'}">${up?'▲ +':'▼ '}${Math.abs(row.pct).toFixed(2)}%</td>
+      <td><span style="color:${up?'var(--green)':'var(--red)'};font-size:11px;font-weight:600">${up?'BUY':'SELL'}</span></td>
+    </tr>`;
   }).join('');
 }
 
@@ -2218,26 +2064,16 @@ function updateTickerBar() {
 }
 
 function updateNewsTicker() {
-  const gold = goldPrice || 4510;
-  const tzs = (liveRates && liveRates.TZS) ? liveRates.TZS.toFixed(2) : '2,628.00';
-  const btc = (cryptoPrices && cryptoPrices.BTC && cryptoPrices.BTC.price) ? ('$'+cryptoPrices.BTC.price.toLocaleString('en-US',{maximumFractionDigits:0})) : '$67,420';
-  const gUp = (goldChg||0.44) >= 0;
   const headlines = [
-    `🥇 GOLD — XAU/USD ${gUp?'▲':'▼'} $${gold.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})} · ${gUp?'+':''}${(goldChg||0.44).toFixed(2)}%`,
-    `📈 USD/TZS — ${tzs} · ▲ +0.38% · Bank of Tanzania rate stable at 5.5%`,
-    `₿ BTC/USD — ${btc} · ${((cryptoPrices&&cryptoPrices.BTC&&cryptoPrices.BTC.chg)||1.84)>=0?'▲ +':'▼ '}${Math.abs((cryptoPrices&&cryptoPrices.BTC&&cryptoPrices.BTC.chg)||1.84).toFixed(2)}%`,
-    `🏦 CENTRAL BANKS — Goldman Sachs raises gold target to $5,000 citing central bank demand surge`,
-    `🌍 AFRICA — East African Community GDP projected at 5.8% in 2026 · Investment opportunities expanding`,
-    `📊 TFIC ANALYSIS — Institutional Outlook: Gold structurally bullish · Fed pivot narrative building`,
-    `⚡ EUR/USD — Consolidating at key levels · ECB-Fed policy divergence remains primary driver`,
-    `🎓 TFIC EDUCATION — New forex course live: USD/TZS Technical Analysis for Tanzanian investors`,
-    `📉 USD/JPY — BOJ normalization risk · JPY strengthening potential if rate hike confirmed`,
-    `🔔 UPCOMING — US Core PCE this Friday · High-impact event for gold and forex markets`,
+    '📰 MARKET — Bank of Tanzania holds key rate steady at 5.5% amid stable inflation outlook',
+    '📈 FOREX — USD/TZS approaches key resistance at 2,650 as dollar strengthens globally',
+    '₿ CRYPTO — Bitcoin consolidates above $65,000 as institutional demand continues',
+    '🥇 GOLD — XAU/USD holds above $4,500 on global uncertainty and central bank buying',
+    '🌍 AFRICA — East African Community GDP projected to grow 5.8% in 2026',
+    '📊 ANALYSIS — TFIC Weekly Outlook: Key levels to watch in forex and commodities this week',
+    '🎓 EDUCATION — New TFIC course: Portfolio Construction for African Investors — now available',
   ];
-  const el = document.getElementById('newsTicker');
-  if (!el) return;
-  const html = headlines.map(h => `<span class="t-item"><span class="t-sym">${h.substring(0,3)}</span><span class="t-up">${h.substring(3)}</span><span class="t-sep">|</span></span>`).join('');
-  el.innerHTML = html + html; // doubled for seamless loop
+  document.getElementById('newsTicker').innerHTML = headlines.map(h => `<span class="news-item">${h}</span>`).join('');
 }
 
 // ═══════════════════════════════════════════════
@@ -2437,31 +2273,16 @@ function closeNotif() { document.getElementById('notification').classList.remove
 // ═══════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════
-window.addEventListener('load', async function() {
+window.addEventListener('load', async () => {
   initAuth();
-  // Show fallback data IMMEDIATELY — no waiting for APIs
-  updateMarketsGrid();
-  updateForexTable();
   await loadSiteSettings();
-  try { await fetchAllMarketData(); } catch(e) {
-    console.warn('Market fetch failed, showing fallback data');
-    updateMarketsGrid(); updateForexTable(); // ensure fallback renders
-    setTimeout(fetchAllMarketData, 4000);
-  }
+  await fetchAllMarketData();
   updateNewsTicker();
-  setTimeout(function() { drawSpark('heroSpark','#c9a84c'); drawFeatChart(); }, 300);
+  setTimeout(() => { drawSpark('heroSpark','#c9a84c'); drawFeatChart(); }, 200);
   initCalc();
-  // Clock
-  setInterval(function() {
-    var cl = document.getElementById('instClock');
-    if (cl) cl.textContent = new Date().toLocaleTimeString('en-US',{timeZone:'Africa/Nairobi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}) + ' EAT';
-  }, 1000);
-  // Refresh every 30s
-  setInterval(async function() {
-    try { await fetchAllMarketData(); } catch(e) {}
-  }, 30000);
-  if (currentUser && currentUser.wantsUpdates) {
-    setTimeout(function() { showNotif('📊 Market Update', 'New forex rates loaded.'); }, 3000);
+  setInterval(fetchAllMarketData, 30000);
+  if (currentUser?.wantsUpdates) {
+    setTimeout(() => showNotif('📊 Market Update', 'New forex rates loaded. USD/TZS: '+(liveRates.TZS?fmt(liveRates.TZS,2):'—')), 3000);
   }
 });
 
@@ -2583,443 +2404,6 @@ function showCallOptions() {
     </div>`;
   document.body.appendChild(popup);
 }
-</script>
-
-
-<script>
-// ═══════════════════════════════════════════════════
-// INSTITUTIONAL MARKET INTELLIGENCE — CLEAN ENGINE
-// ═══════════════════════════════════════════════════
-
-// Tab switcher
-function instTab(btn, viewId) {
-  document.querySelectorAll('.inst-tab').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  document.querySelectorAll('.inst-view').forEach(function(v) { v.classList.remove('active'); });
-  var v = document.getElementById(viewId);
-  if (v) v.classList.add('active');
-  if (viewId === 'inst-signals') renderSigGrid();
-  if (viewId === 'inst-intelligence') renderNewsCards();
-  if (viewId === 'inst-calendar') renderEconCal();
-  if (viewId === 'inst-tools') { initCalc(); updateConverter(); }
-}
-
-// Signal filter
-function instFilterSig(type, btn) {
-  document.querySelectorAll('#inst-signals .cat-tab').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  document.querySelectorAll('.sig-card').forEach(function(c) {
-    c.style.display = (type === 'all' || c.dataset.sig === type) ? '' : 'none';
-  });
-}
-
-// ── Render KPI strip ─────────────────────────────
-function instRenderKPI() {
-  var r = liveRates || {};
-  var c = cryptoPrices || {};
-  var kpis = [
-    { id:'kpi0', val: goldPrice ? '$'+goldPrice.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '$4,510.00', chg: goldChg||0.44 },
-    { id:'kpi1', val: r.TZS ? r.TZS.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '2,628.00', chg: 0.38 },
-    { id:'kpi2', val: c.BTC&&c.BTC.price ? '$'+c.BTC.price.toLocaleString('en-US',{maximumFractionDigits:0}) : '$67,420', chg: (c.BTC&&c.BTC.chg)||1.84 },
-    { id:'kpi3', val: r.EUR ? (1/r.EUR).toFixed(4) : '1.0854', chg: 0.24 },
-    { id:'kpi4', val: r.GBP ? (1/r.GBP).toFixed(4) : '1.2683', chg: 0.15 },
-    { id:'kpi5', val: r.JPY ? r.JPY.toFixed(2) : '154.82', chg: -0.14 },
-  ];
-  kpis.forEach(function(k) {
-    var el = document.getElementById(k.id);
-    if (el) el.textContent = k.val;
-    var parent = el && el.parentElement;
-    if (parent) {
-      var chgEl = parent.querySelector('.kpi-chg');
-      if (chgEl) {
-        var up = k.chg >= 0;
-        chgEl.textContent = (up?'▲ +':'▼ ') + Math.abs(k.chg).toFixed(2) + '%';
-        chgEl.className = 'kpi-chg ' + (up?'up':'dn');
-      }
-    }
-  });
-}
-
-// ── Render forex table ───────────────────────────
-function instRenderForex() {
-  var r = liveRates || {};
-  var c = cryptoPrices || {};
-  var rows = [
-    { flag:'🥇', pair:'XAU/USD', price: goldPrice?'$'+goldPrice.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'$4,510.00', chg:goldChg||0.44, bull:70 },
-    { flag:'🇹🇿', pair:'USD/TZS', price: r.TZS?r.TZS.toLocaleString('en-US',{minimumFractionDigits:2}):'2,628.00', chg:0.38, bull:55 },
-    { flag:'🇪🇺', pair:'EUR/USD', price: r.EUR?(1/r.EUR).toFixed(4):'1.0854', chg:0.24, bull:62 },
-    { flag:'🇬🇧', pair:'GBP/USD', price: r.GBP?(1/r.GBP).toFixed(4):'1.2683', chg:0.15, bull:58 },
-    { flag:'🇯🇵', pair:'USD/JPY', price: r.JPY?r.JPY.toFixed(2):'154.82', chg:-0.14, bull:38 },
-    { flag:'🇰🇪', pair:'USD/KES', price: r.KES?r.KES.toFixed(2):'128.45', chg:-0.32, bull:44 },
-    { flag:'₿', pair:'BTC/USD', price: c.BTC&&c.BTC.price?'$'+c.BTC.price.toLocaleString('en-US',{maximumFractionDigits:0}):'$67,420', chg:(c.BTC&&c.BTC.chg)||1.84, bull:(c.BTC&&c.BTC.chg>0)?65:45 },
-    { flag:'⟠', pair:'ETH/USD', price: c.ETH&&c.ETH.price?'$'+c.ETH.price.toLocaleString('en-US',{maximumFractionDigits:0}):'$3,218', chg:(c.ETH&&c.ETH.chg)||0.55, bull:52 },
-  ];
-  var tbody = document.getElementById('forexBody2');
-  if (!tbody) return;
-  tbody.innerHTML = rows.map(function(row) {
-    var up = row.chg >= 0;
-    var sig = row.bull >= 60 ? 'BUY' : row.bull <= 40 ? 'SELL' : 'NEUTRAL';
-    var sc = sig==='BUY'?'var(--green)':sig==='SELL'?'var(--red)':'var(--gold)';
-    var h = (parseFloat(row.price.replace(/[$,]/g,''))*(1.005)).toFixed(row.price.includes('.')?4:0);
-    var l = (parseFloat(row.price.replace(/[$,]/g,''))*(0.995)).toFixed(row.price.includes('.')?4:0);
-    if (row.pair.includes('USD')) { h = (parseFloat(row.price.replace(/[$,]/g,''))*(1.003)).toFixed(2); l = (parseFloat(row.price.replace(/[$,]/g,''))*(0.997)).toFixed(2); }
-    return '<tr><td><strong style="color:var(--gold-light)">'+row.flag+' '+row.pair+'</strong></td>' +
-      '<td style="font-weight:500">'+row.price+'</td>' +
-      '<td class="'+(up?'up':'dn')+'">'+(up?'▲ +':'▼ ')+Math.abs(row.chg).toFixed(2)+'%</td>' +
-      '<td style="color:var(--green)">'+h+'</td>' +
-      '<td style="color:var(--red)">'+l+'</td>' +
-      '<td><strong style="color:'+sc+';font-size:11px">'+sig+'</strong></td>' +
-      '<td><div style="display:flex;height:5px;border-radius:2px;overflow:hidden;width:70px"><div style="width:'+row.bull+'%;background:var(--green)"></div><div style="width:'+(100-row.bull)+'%;background:var(--red)"></div></div></td></tr>';
-  }).join('');
-}
-
-// ── Render intraday view ─────────────────────────
-function instRenderViews() {
-  var goldUp = (goldChg||0.44) >= 0;
-  var biasEl = document.getElementById('iv-bias');
-  var goldEl = document.getElementById('iv-gold');
-  if (biasEl) { biasEl.textContent = goldUp?'RISK-ON':'RISK-OFF'; biasEl.className = goldUp?'up':'dn'; }
-  if (goldEl) { goldEl.textContent = goldUp?'Bullish':'Bearish'; goldEl.className = goldUp?'up':'dn'; }
-}
-
-// ── AI date update ────────────────────────────────
-function instRenderAI() {
-  var el = document.getElementById('aiDate');
-  if (el) el.textContent = new Date().toLocaleDateString('en-US',{timeZone:'Africa/Nairobi',weekday:'long',year:'numeric',month:'long',day:'numeric'}) + ' · EAT';
-  // Update AI body with live prices
-  var body = document.getElementById('aiBody');
-  if (body) {
-    var gold = goldPrice || 4510;
-    var tzs = (liveRates&&liveRates.TZS) ? liveRates.TZS.toFixed(2) : '2,628';
-    var btc = (cryptoPrices&&cryptoPrices.BTC&&cryptoPrices.BTC.price) ? cryptoPrices.BTC.price.toLocaleString('en-US',{maximumFractionDigits:0}) : '67,420';
-    body.innerHTML = '<strong>Gold (XAU/USD)</strong> is trading at $'+gold.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+', '+(goldChg>=0?'up '+Math.abs(goldChg||0.44).toFixed(2)+'%':'down '+Math.abs(goldChg||0).toFixed(2)+'%')+' today. Safe-haven demand and central bank accumulation continue to provide structural support. Federal Reserve rate cut expectations remain the primary bullish catalyst, with institutional positioning suggesting continued accumulation on dips. TFIC swing target: $4,600–$4,700.<br><br><strong>USD/TZS</strong> is trading at '+tzs+', reflecting the Bank of Tanzania\'s stable monetary policy stance. Regional EAC trade flows and import demand continue to support USD strength against TZS. No major policy changes expected in the near term.<br><br><strong>Bitcoin</strong> is at $'+btc+' — '+(cryptoPrices&&cryptoPrices.BTC&&cryptoPrices.BTC.chg>=0?'positive':'cautious')+' momentum. Institutional ETF inflows and post-halving supply dynamics provide fundamental support.<br><br><strong>TFIC Institutional Outlook:</strong> Moderating global inflation, central bank policy pivots, and geopolitical uncertainty remain structurally supportive of gold and selective EM currency positioning. Gold $5,000+ target maintained.';
-  }
-}
-
-// ── Strength meter update ─────────────────────────
-function instRenderStrength() {
-  var r = liveRates || {};
-  var currencies = [
-    {code:'USD', score:55}, {code:'EUR', score:r.EUR?Math.round(50+(0.921-r.EUR)*300):48},
-    {code:'GBP', score:r.GBP?Math.round(52+(0.786-r.GBP)*300):58}, {code:'JPY', score:r.JPY?Math.round(60-(r.JPY-150)*0.4):35},
-    {code:'TZS', score:45}, {code:'CHF', score:65}, {code:'AUD', score:42}, {code:'KES', score:r.KES?Math.round(50-(r.KES-128)*0.3):40}
-  ];
-  var grid = document.getElementById('strengthGrid');
-  if (!grid) return;
-  grid.innerHTML = currencies.map(function(c) {
-    var s = Math.min(95, Math.max(10, c.score));
-    var color = s>55?'var(--green)':s<45?'var(--red)':'var(--gold)';
-    var label = s>55?'↑ Strong':s<45?'↓ Weak':'→ Neutral';
-    return '<div class="strength-card"><div style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold-light)">'+c.code+'</div><div class="str-bar-wrap"><div class="str-bar" style="width:'+s+'%;background:'+color+'"></div></div><div style="font-size:10px;color:var(--text3)">'+label+' · '+s+'%</div></div>';
-  }).join('');
-}
-
-// ── Main render all ───────────────────────────────
-function instRenderAll() {
-  instRenderKPI();
-  instRenderForex();
-  instRenderViews();
-  instRenderAI();
-  instRenderStrength();
-}
-
-// ── Signal grid ───────────────────────────────────
-function renderSigGrid() {
-  var r = liveRates || {}; var c = cryptoPrices || {};
-  var gold = goldPrice||4510; var goldUp = (goldChg||0.44)>=0;
-  var btcChg = (c.BTC&&c.BTC.chg)||1.84; var btcUp = btcChg>=0;
-  var sigs = [
-    { pair:'XAU/USD', price:'$'+gold.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}),
-      signal:goldUp?'BUY':'SELL', conf:goldUp?74:61, tf:'Swing · Intraday', risk:'Medium',
-      reasons:goldUp?['Safe-haven demand increasing globally','USD weakness creating gold tailwinds','Institutional accumulation above $4,400 key level','Central bank buying trend continues at record pace','Bullish momentum — price holding above 20-day MA']:['Short-term profit-taking after recent rally','USD strength creating near-term headwinds','Overbought RSI — watch for pullback','Key support at $4,400 — critical level to hold'] },
-    { pair:'USD/TZS', price:(r.TZS||2628).toFixed(2), signal:'NEUTRAL', conf:65, tf:'Swing · 3-7 Days', risk:'Low',
-      reasons:['Bank of Tanzania maintaining stable monetary policy','USD demand from import-heavy Tanzanian economy','Regional EAC trade flows supporting TZS stability','Watch BOT rate decisions for medium-term direction'] },
-    { pair:'EUR/USD', price:r.EUR?(1/r.EUR).toFixed(4):'1.0854', signal:'NEUTRAL', conf:62, tf:'Swing · 5-10 Days', risk:'Medium',
-      reasons:['ECB-Fed rate divergence remains primary driver','Eurozone data mixed — growth concerns persist','Consolidating — waiting for Fed clarity','Key resistance at 1.0950 — break above = bullish'] },
-    { pair:'GBP/USD', price:r.GBP?(1/r.GBP).toFixed(4):'1.2683', signal:'BUY', conf:63, tf:'Intraday · Swing', risk:'Medium',
-      reasons:['BOE higher-for-longer stance — GBP supportive','UK inflation sticky — bullish GBP signal','Cable holding key 1.2600 support level','Watch US NFP for next catalyst'] },
-    { pair:'USD/JPY', price:(r.JPY||154.82).toFixed(2), signal:'SELL', conf:70, tf:'Swing · Long-Term', risk:'High',
-      reasons:['BOJ normalization risk — JPY strengthening catalyst','USD/JPY at historically elevated levels','Japanese intervention risk above 155','Fed rate cut expectations = USD selling pressure'] },
-    { pair:'BTC/USD', price:'$'+(c.BTC&&c.BTC.price?c.BTC.price.toLocaleString('en-US',{maximumFractionDigits:0}):'67,420'),
-      signal:btcUp?'BUY':'NEUTRAL', conf:btcUp?67:52, tf:'Intraday · Swing', risk:'High',
-      reasons:btcUp?['Institutional ETF inflows continue driving demand','Post-halving supply reduction historically bullish','Technical momentum positive above $60K','Risk-on sentiment supporting digital assets']:['Profit-taking following recent rally','Watch $60K support — key institutional level','High volatility — strict position sizing required'] }
-  ];
-  var grid = document.getElementById('sigGrid');
-  if (!grid) return;
-  grid.innerHTML = sigs.map(function(s) {
-    var cls = s.signal==='BUY'?'bull':s.signal==='SELL'?'bear':'neutral';
-    return '<div class="sig-card signal-card '+cls+'" data-sig="'+s.signal+'">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">' +
-        '<div><div class="sig-pair">'+s.pair+'</div><div style="font-family:var(--mono);font-size:12px;color:var(--text2);margin-top:2px">'+s.price+'</div></div>' +
-        '<span class="sig-badge '+s.signal+'">'+s.signal+'</span></div>' +
-      '<ul class="sig-reasons" style="margin-bottom:12px">'+s.reasons.map(function(r){return '<li>'+r+'</li>';}).join('')+'</ul>' +
-      '<div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:10px">' +
-        '<div><div style="font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase">'+s.tf+'</div>' +
-          '<div style="display:flex;align-items:center;gap:8px;margin-top:4px">' +
-            '<div class="sig-conf-bar"><div class="sig-conf-fill" style="width:'+s.conf+'%"></div></div>' +
-            '<span style="font-family:var(--mono);font-size:10px;color:var(--green)">'+s.conf+'%</span></div></div>' +
-        '<span style="font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(201,168,76,.1);color:var(--gold)">'+s.risk+' Risk</span>' +
-      '</div></div>';
-  }).join('');
-}
-
-// ── News cards ────────────────────────────────────
-function renderNewsCards() {
-  var news = [
-    {impact:'h', cat:'CENTRAL BANKS', headline:'Federal Reserve signals patience on rate cuts as inflation data remains above 2% target', source:'Reuters', time:'2h ago'},
-    {impact:'h', cat:'GOLD MARKETS', headline:'Central banks globally add record 1,000+ tonnes of gold — demand accelerating in 2026', source:'World Gold Council', time:'4h ago'},
-    {impact:'h', cat:'FOREX — EAC', headline:'Bank of Tanzania maintains key rate at 5.5% amid stable inflation and currency conditions', source:'BOT', time:'6h ago'},
-    {impact:'m', cat:'MACRO ECONOMY', headline:'US CPI expected Friday — markets pricing in 0.3% monthly gain; gold may benefit from soft reading', source:'Bloomberg', time:'8h ago'},
-    {impact:'m', cat:'CRYPTO MARKETS', headline:'Bitcoin consolidates above $65,000 as institutional ETF inflows continue — $70K target in sight', source:'CoinDesk', time:'10h ago'},
-    {impact:'m', cat:'AFRICA MARKETS', headline:'East African economies projected 6.1% GDP growth in 2026 — investment opportunities expanding', source:'AfDB', time:'12h ago'},
-    {impact:'h', cat:'BOJ POLICY', headline:'Bank of Japan considers additional rate hike — USD/JPY could see sharp correction if confirmed', source:'Nikkei', time:'1d ago'},
-    {impact:'l', cat:'COMMODITIES', headline:'Oil prices stabilize at $82/bbl as OPEC+ production cuts offset demand concerns', source:'Reuters', time:'1d ago'},
-    {impact:'m', cat:'ECB POLICY', headline:'ECB holds rates steady — Lagarde signals data-dependent approach for remainder of 2026', source:'ECB', time:'1d ago'},
-    {impact:'h', cat:'GOLD ANALYSIS', headline:'Goldman Sachs raises 12-month gold target to $5,000 citing structural demand and Fed pivot', source:'GS Research', time:'2d ago'},
-  ];
-  var el = document.getElementById('newsCards');
-  if (!el) return;
-  el.innerHTML = news.map(function(n) {
-    var labels = {h:'HIGH',m:'MED',l:'LOW'};
-    return '<div class="nfl-item"><div class="nfl-bar '+n.impact+'"></div>' +
-      '<div style="flex:1"><div style="font-family:var(--mono);font-size:9px;color:var(--gold);letter-spacing:.1em;margin-bottom:4px">'+n.cat+'</div>' +
-      '<div class="nfl-headline">'+n.headline+'</div>' +
-      '<div class="nfl-meta">'+n.source+' · '+n.time+'</div></div>' +
-      '<span class="impact-pill '+n.impact+'">'+labels[n.impact]+'</span></div>';
-  }).join('');
-}
-
-// ── Economic calendar ─────────────────────────────
-function renderEconCal() {
-  var events = [
-    {time:'TUE 15:00',flag:'🇺🇸',name:'US Consumer Confidence Index',prev:'97.0',est:'98.2',imp:'h'},
-    {time:'TUE 17:00',flag:'🇩🇪',name:'Germany CPI (YoY)',prev:'2.2%',est:'2.1%',imp:'h'},
-    {time:'WED 10:00',flag:'🇺🇸',name:'US Durable Goods Orders',prev:'-1.2%',est:'+0.8%',imp:'m'},
-    {time:'WED 15:30',flag:'🇨🇦',name:'Bank of Canada Rate Decision',prev:'3.75%',est:'3.50%',imp:'h'},
-    {time:'THU 12:00',flag:'🇬🇧',name:'BOE Governor Bailey Speech',prev:'—',est:'—',imp:'m'},
-    {time:'THU 15:30',flag:'🇺🇸',name:'US GDP Q1 Revised',prev:'1.6%',est:'1.3%',imp:'h'},
-    {time:'THU 15:30',flag:'🇺🇸',name:'US Jobless Claims',prev:'222K',est:'219K',imp:'m'},
-    {time:'FRI 15:30',flag:'🇺🇸',name:'US Core PCE Price Index ⭐',prev:'2.8%',est:'2.6%',imp:'h'},
-    {time:'FRI 15:30',flag:'🇺🇸',name:'US Personal Income & Spending',prev:'+0.5%',est:'+0.3%',imp:'m'},
-    {time:'FRI 17:00',flag:'🌍',name:'Fed Chair Powell Speech — Jackson Hole',prev:'—',est:'—',imp:'h'},
-  ];
-  var el = document.getElementById('econCal');
-  if (!el) return;
-  el.innerHTML = events.map(function(e) {
-    var dots = '<div class="impact-dots">';
-    var n = e.imp==='h'?3:e.imp==='m'?2:1;
-    var cls = e.imp==='h'?'rh':e.imp==='m'?'gm':'gl';
-    for(var i=0;i<3;i++) dots += '<div class="idot'+(i<n?' '+cls:'')+'"></div>';
-    dots += '</div>';
-    return '<div class="econ-row">' +
-      '<div class="econ-time-col">'+e.time+'</div>' +
-      '<div style="font-size:16px;flex-shrink:0">'+e.flag+'</div>' +
-      dots +
-      '<div class="econ-name-col">'+e.name+'</div>' +
-      '<div class="econ-val-col" style="color:var(--text3)">'+e.prev+'</div>' +
-      '<div class="econ-val-col" style="color:var(--gold)">'+e.est+'</div>' +
-      '</div>';
-  }).join('');
-}
-</script>
-
-
-<script>
-// ═══ MARKETS PAGE JS ════════════════════════════════════════
-
-// Clock
-setInterval(function() {
-  var cl = document.getElementById('mktClock');
-  if (cl) cl.textContent = new Date().toLocaleTimeString('en-US',{timeZone:'Africa/Nairobi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}) + ' EAT';
-}, 1000);
-
-// Tab switcher
-function mTab(btn, viewId) {
-  document.querySelectorAll('.inst-tab2').forEach(function(b) { b.classList.remove('on'); });
-  btn.classList.add('on');
-  document.querySelectorAll('.iview2').forEach(function(v) { v.classList.remove('on'); });
-  var v = document.getElementById(viewId);
-  if (v) v.classList.add('on');
-  if (viewId === 'mv-signals') mRenderSigs();
-  if (viewId === 'mv-news') mRenderNews();
-  if (viewId === 'mv-calendar') mRenderCal();
-  if (viewId === 'mv-tools') { initCalc(); updateConverter(); }
-}
-
-// Update KPI values from live data
-function mUpdateKPI() {
-  var r = liveRates || {}; var c = cryptoPrices || {};
-  var g = goldPrice || 4510; var gc = goldChg || 0.44;
-  var bc = (c.BTC && c.BTC.chg) || 1.84;
-  var bp = (c.BTC && c.BTC.price) || 67420;
-  var ep = (c.ETH && c.ETH.price) || 3218;
-
-  function setEl(id, val) { var el = document.getElementById(id); if(el) el.textContent = val; }
-  function setChg(id, chg) {
-    var el = document.getElementById(id); if(!el) return;
-    var up = chg >= 0;
-    el.textContent = (up?'▲ +':'▼ ')+Math.abs(chg).toFixed(2)+'%';
-    el.className = 'kpi-chg '+(up?'up':'dn');
-  }
-
-  setEl('kf-gold', '$'+g.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
-  setChg('kf-goldchg', gc);
-  setEl('kf-tzs', r.TZS ? r.TZS.toLocaleString('en-US',{minimumFractionDigits:2}) : '2,628.00');
-  setEl('kf-btc', '$'+bp.toLocaleString('en-US',{maximumFractionDigits:0}));
-  setChg('kf-btcchg', bc);
-  setEl('kf-eur', r.EUR ? (1/r.EUR).toFixed(4) : '1.0854');
-  setEl('kf-gbp', r.GBP ? (1/r.GBP).toFixed(4) : '1.2683');
-  setEl('kf-jpy', r.JPY ? r.JPY.toFixed(2) : '154.82');
-  setEl('kf-kes', r.KES ? r.KES.toFixed(2) : '128.45');
-  setEl('kf-eth', '$'+ep.toLocaleString('en-US',{maximumFractionDigits:0}));
-
-  // Update forex table
-  setEl('ft-gold', '$'+g.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
-  var fgEl = document.getElementById('ft-goldchg');
-  if (fgEl) { fgEl.textContent = (gc>=0?'▲ +':'▼ ')+Math.abs(gc).toFixed(2)+'%'; fgEl.className = gc>=0?'up':'dn'; }
-  setEl('ft-tzs', r.TZS ? r.TZS.toLocaleString('en-US',{minimumFractionDigits:2}) : '2,628.00');
-  setEl('ft-eur', r.EUR ? (1/r.EUR).toFixed(4) : '1.0854');
-  setEl('ft-gbp', r.GBP ? (1/r.GBP).toFixed(4) : '1.2683');
-  setEl('ft-jpy', r.JPY ? r.JPY.toFixed(2) : '154.82');
-  setEl('ft-btc', '$'+bp.toLocaleString('en-US',{maximumFractionDigits:0}));
-  var fbEl = document.getElementById('ft-btcchg');
-  if (fbEl) { fbEl.textContent = (bc>=0?'▲ +':'▼ ')+Math.abs(bc).toFixed(2)+'%'; fbEl.className = bc>=0?'up':'dn'; }
-  setEl('ft-kes', r.KES ? r.KES.toFixed(2) : '128.45');
-
-  // Update AI body prices
-  setEl('aiGoldPrice', '$'+g.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
-  setEl('aiTzsPrice', r.TZS ? r.TZS.toFixed(2) : '2,628');
-
-  // AI date
-  var aiDate = document.getElementById('mktAiDate');
-  if (aiDate) aiDate.textContent = new Date().toLocaleDateString('en-US',{timeZone:'Africa/Nairobi',weekday:'long',month:'long',day:'numeric',year:'numeric'}) + ' · EAT';
-}
-
-// Signal grid
-function mRenderSigs() {
-  var r = liveRates||{}; var c = cryptoPrices||{};
-  var g = goldPrice||4510; var gc = goldChg||0.44; var gUp = gc>=0;
-  var btcChg = (c.BTC&&c.BTC.chg)||1.84; var btcUp = btcChg>=0;
-  var sigs = [
-    {pair:'XAU/USD', price:'$'+g.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}), signal:gUp?'BUY':'SELL', conf:gUp?74:61, tf:'Swing · Intraday', risk:'Medium', cls:gUp?'bull':'bear',
-     reasons:gUp?['Safe-haven demand accelerating globally','USD weakness creating gold tailwinds','Central bank buying at record pace in 2026','Institutional accumulation above $4,400 key support','Bullish momentum: price holding above 20-day MA']:['Short-term profit-taking post-rally','USD strength capping upside','RSI overbought — pullback possible','Key support $4,400 — critical level']},
-    {pair:'USD/TZS', price:(r.TZS||2628).toFixed(2), signal:'NEUTRAL', conf:65, tf:'Swing · 3-7 Days', risk:'Low', cls:'neutral',
-     reasons:['Bank of Tanzania maintaining stable monetary policy','USD demand from import-heavy Tanzanian economy','EAC trade flows supporting TZS stability','BOT rate decisions key for medium-term direction']},
-    {pair:'EUR/USD', price:r.EUR?(1/r.EUR).toFixed(4):'1.0854', signal:'NEUTRAL', conf:62, tf:'Swing · 5-10 Days', risk:'Medium', cls:'neutral',
-     reasons:['ECB-Fed rate divergence remains primary driver','Eurozone growth data mixed — concerns persist','Key resistance 1.0950 — break above is bullish','Institutional positioning: slight EUR long']},
-    {pair:'GBP/USD', price:r.GBP?(1/r.GBP).toFixed(4):'1.2683', signal:'BUY', conf:63, tf:'Intraday · Swing', risk:'Medium', cls:'bull',
-     reasons:['BOE higher-for-longer stance GBP supportive','UK inflation sticky — bullish fundamental signal','Cable holding 1.2600 key support level','Watch US NFP Friday for next directional catalyst']},
-    {pair:'USD/JPY', price:(r.JPY||154.82).toFixed(2), signal:'SELL', conf:70, tf:'Swing · Long-Term', risk:'High', cls:'bear',
-     reasons:['BOJ normalization risk — JPY strengthening catalyst','USD/JPY at historically elevated levels','Japanese intervention risk above 155 key level','Fed rate cut expectations = USD selling pressure']},
-    {pair:'BTC/USD', price:'$'+(c.BTC&&c.BTC.price?c.BTC.price.toLocaleString('en-US',{maximumFractionDigits:0}):'67,420'), signal:btcUp?'BUY':'NEUTRAL', conf:btcUp?67:52, tf:'Intraday · Swing', risk:'High', cls:btcUp?'bull':'neutral',
-     reasons:btcUp?['Institutional ETF inflows continue driving demand','Post-halving supply reduction historically bullish','Technical momentum positive above $60K','Risk-on sentiment supporting crypto broadly']:['Profit-taking following recent rally','Watch $60K support — key institutional level','High volatility — position sizing critical']}
-  ];
-  var el = document.getElementById('mSigGrid');
-  if (!el) return;
-  el.innerHTML = sigs.map(function(s) {
-    return '<div class="sig-card '+s.cls+'" data-sig="'+s.signal+'" style="position:relative;overflow:hidden">' +
-      '<div style="position:absolute;top:0;left:0;width:3px;height:100%;background:'+(s.cls==='bull'?'var(--green)':s.cls==='bear'?'var(--red)':'var(--gold)')+'"></div>' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px"><div><div style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold-light)">'+s.pair+'</div><div style="font-family:var(--mono);font-size:12px;color:var(--text2);margin-top:2px">'+s.price+'</div></div><span class="sig-badge '+s.signal+'">'+s.signal+'</span></div>' +
-      '<ul style="list-style:none;margin-bottom:12px">'+s.reasons.map(function(r){return '<li style="font-size:12px;color:var(--text2);padding:3px 0;display:flex;align-items:flex-start;gap:6px;line-height:1.5"><span style="color:var(--gold);font-size:11px;flex-shrink:0">→</span>'+r+'</li>';}).join('')+'</ul>' +
-      '<div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:10px">' +
-        '<div><div style="font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase">'+s.tf+'</div>' +
-        '<div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div class="conf-bar"><div class="conf-fill" style="width:'+s.conf+'%"></div></div><span style="font-family:var(--mono);font-size:10px;color:var(--green)">'+s.conf+'%</span></div></div>' +
-        '<span style="font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(201,168,76,.1);color:var(--gold)">'+s.risk+' Risk</span></div></div>';
-  }).join('');
-}
-
-// News
-function mRenderNews() {
-  var news = [
-    {i:'h',cat:'CENTRAL BANKS',h:'Federal Reserve signals patience on rate cuts as inflation data remains above 2% target',s:'Reuters',t:'2h ago'},
-    {i:'h',cat:'GOLD MARKETS',h:'Central banks globally add record 1,000+ tonnes of gold — demand accelerating in 2026',s:'World Gold Council',t:'4h ago'},
-    {i:'h',cat:'EAC MARKETS',h:'Bank of Tanzania maintains key rate at 5.5% amid stable inflation and currency conditions',s:'BOT',t:'6h ago'},
-    {i:'m',cat:'MACRO',h:'US CPI expected Friday — markets pricing 0.3% monthly gain; gold may benefit from soft reading',s:'Bloomberg',t:'8h ago'},
-    {i:'m',cat:'CRYPTO',h:'Bitcoin consolidates above $65,000 as institutional ETF inflows continue — $70K target in sight',s:'CoinDesk',t:'10h ago'},
-    {i:'m',cat:'AFRICA',h:'East African economies projected 6.1% GDP growth in 2026 — investment opportunities expanding',s:'AfDB',t:'12h ago'},
-    {i:'h',cat:'BOJ POLICY',h:'Bank of Japan considers additional rate hike — USD/JPY could see sharp correction if confirmed',s:'Nikkei',t:'1d ago'},
-    {i:'l',cat:'COMMODITIES',h:'Oil prices stabilize at $82/bbl as OPEC+ production cuts offset demand concerns',s:'Reuters',t:'1d ago'},
-    {i:'m',cat:'ECB POLICY',h:'ECB holds rates steady — Lagarde signals data-dependent approach for remainder of 2026',s:'ECB',t:'1d ago'},
-    {i:'h',cat:'GOLD ANALYSIS',h:'Goldman Sachs raises 12-month gold target to $5,000 citing structural demand and Fed pivot',s:'GS Research',t:'2d ago'},
-  ];
-  var el = document.getElementById('mNewsCards');
-  if (!el) return;
-  var labels = {h:'HIGH',m:'MED',l:'LOW'};
-  var bc = {h:'var(--red)',m:'var(--gold)',l:'var(--green)'};
-  var pc = {h:'rgba(224,85,85,.15)',m:'rgba(201,168,76,.15)',l:'rgba(45,186,86,.15)'};
-  var tc = {h:'var(--red)',m:'var(--gold)',l:'var(--green)'};
-  el.innerHTML = news.map(function(n) {
-    return '<div class="nfl-item"><div class="nfl-bar '+n.i+'"></div>' +
-      '<div style="flex:1"><div style="font-family:var(--mono);font-size:9px;color:var(--gold);letter-spacing:.1em;margin-bottom:4px">'+n.cat+'</div>' +
-      '<div style="font-size:13.5px;font-weight:500;color:var(--text);line-height:1.5;margin-bottom:4px">'+n.h+'</div>' +
-      '<div style="font-family:var(--mono);font-size:10px;color:var(--text3)">'+n.s+' · '+n.t+'</div></div>' +
-      '<span style="font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:100px;background:'+pc[n.i]+';color:'+tc[n.i]+';flex-shrink:0;align-self:flex-start">'+labels[n.i]+'</span></div>';
-  }).join('');
-}
-
-// Calendar
-function mRenderCal() {
-  var events = [
-    {t:'TUE 15:00',f:'🇺🇸',n:'US Consumer Confidence',p:'97.0',e:'98.2',i:3},
-    {t:'TUE 17:00',f:'🇩🇪',n:'Germany CPI (YoY)',p:'2.2%',e:'2.1%',i:3},
-    {t:'WED 10:00',f:'🇺🇸',n:'US Durable Goods Orders',p:'-1.2%',e:'+0.8%',i:2},
-    {t:'WED 15:30',f:'🇨🇦',n:'Bank of Canada Rate Decision',p:'3.75%',e:'3.50%',i:3},
-    {t:'THU 12:00',f:'🇬🇧',n:'BOE Governor Bailey Speech',p:'—',e:'—',i:2},
-    {t:'THU 15:30',f:'🇺🇸',n:'US GDP Q1 Revised',p:'1.6%',e:'1.3%',i:3},
-    {t:'THU 15:30',f:'🇺🇸',n:'US Jobless Claims',p:'222K',e:'219K',i:2},
-    {t:'FRI 15:30',f:'🇺🇸',n:'US Core PCE ⭐',p:'2.8%',e:'2.6%',i:3},
-    {t:'FRI 17:00',f:'🌍',n:'Fed Chair Powell Speech',p:'—',e:'—',i:3},
-  ];
-  var colors = ['var(--surface3)','var(--surface3)','var(--gold)','var(--red)'];
-  var el = document.getElementById('mCalBody');
-  if (!el) return;
-  el.innerHTML = events.map(function(e) {
-    var dots = '';
-    for(var i=0;i<3;i++) dots+='<div style="width:7px;height:7px;border-radius:50%;background:'+(i<e.i?colors[e.i]:'var(--surface3)')+'"></div>';
-    return '<div class="econ-row"><div style="font-family:var(--mono);font-size:10px;color:var(--text3);width:65px;flex-shrink:0">'+e.t+'</div>' +
-      '<div style="font-size:16px;flex-shrink:0">'+e.f+'</div>' +
-      '<div style="display:flex;gap:3px;flex-shrink:0">'+dots+'</div>' +
-      '<div style="flex:1;font-size:13px;color:var(--text)">'+e.n+'</div>' +
-      '<div style="font-family:var(--mono);font-size:11px;color:var(--text3);min-width:60px;text-align:right">'+e.p+'</div>' +
-      '<div style="font-family:var(--mono);font-size:11px;color:var(--gold);min-width:60px;text-align:right">'+e.e+'</div></div>';
-  }).join('');
-}
-
-// Signal filter
-function mSigFilter(type, btn) {
-  document.querySelectorAll('#mv-signals .cat-tab').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
-  document.querySelectorAll('.sig-card').forEach(function(c){
-    c.style.display = (type==='all'||c.dataset.sig===type)?'':'none';
-  });
-}
-
-// Hook into showPage for markets
-var _sp = showPage;
-function showPage(name) {
-  _sp(name);
-  if (name === 'markets') {
-    mUpdateKPI();
-    mRenderCal();
-    mRenderNews();
-  }
-}
-
-// Also update on market data refresh
-var _fm = fetchAllMarketData;
-async function fetchAllMarketData() {
-  await _fm();
-  if (document.getElementById('page-markets') && document.getElementById('page-markets').classList.contains('active')) {
-    mUpdateKPI();
-  }
-}
-
-// Auto-init if markets page shown
-setTimeout(function() {
-  if (document.getElementById('page-markets') && document.getElementById('page-markets').classList.contains('active')) {
-    mUpdateKPI(); mRenderCal(); mRenderNews();
-  }
-}, 800);
 </script>
 
 <!-- ════ COMMUNITY JOIN MODAL ════ -->
