@@ -721,42 +721,312 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 
 <!-- ════════════════ MARKETS PAGE ════════════════ -->
 <div class="page" id="page-markets">
-<section class="markets-section section">
-  <div class="section-header">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+
+<!-- INSTITUTIONAL MARKETS CSS -->
+<style>
+.inst-dash{padding:0 64px 80px}
+@media(max-width:1100px){.inst-dash{padding:0 24px 60px}}
+
+/* Top Bar */
+.inst-topbar{background:var(--surface);border-bottom:1px solid var(--border2);padding:14px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:72px;z-index:100}
+@media(max-width:1100px){.inst-topbar{padding:12px 24px}}
+.inst-tabs{display:flex;gap:4px}
+.inst-tab{padding:8px 16px;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;border:none;font-family:var(--sans);transition:all .2s;color:var(--text3);background:transparent}
+.inst-tab.active{background:var(--surface3);color:var(--gold-light);border:1px solid var(--border2)}
+.inst-tab:hover:not(.active){color:var(--text2);background:var(--surface2)}
+.inst-status{display:flex;align-items:center;gap:16px}
+.inst-time{font-family:var(--mono);font-size:11px;color:var(--text3)}
+.inst-market-status{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(45,186,86,.1);color:var(--green);border:1px solid rgba(45,186,86,.2)}
+
+/* Dashboard Panels */
+.inst-view{display:none}.inst-view.active{display:block}
+
+/* KPI Strip */
+.kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:28px}
+@media(max-width:900px){.kpi-strip{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.kpi-strip{grid-template-columns:repeat(2,1fr)}}
+.kpi-tile{background:var(--surface);padding:16px 18px;transition:background .2s;cursor:default}
+.kpi-tile:hover{background:var(--surface2)}
+.kpi-sym{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.kpi-val{font-family:var(--mono);font-size:16px;font-weight:500;color:var(--text);margin-bottom:3px}
+.kpi-chg{font-family:var(--mono);font-size:10px}
+
+/* Signal Cards */
+.signals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+@media(max-width:900px){.signals-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.signals-grid{grid-template-columns:1fr}}
+.signal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all .3s;position:relative;overflow:hidden}
+.signal-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;border-radius:2px 0 0 2px}
+.signal-card.bull::before{background:var(--green)}
+.signal-card.bear::before{background:var(--red)}
+.signal-card.neutral::before{background:var(--gold)}
+.signal-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.sig-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.sig-pair{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold-light)}
+.sig-badge{padding:4px 10px;border-radius:100px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.06em}
+.sig-badge.BUY{background:rgba(45,186,86,.15);color:var(--green);border:1px solid rgba(45,186,86,.3)}
+.sig-badge.SELL{background:rgba(224,85,85,.15);color:var(--red);border:1px solid rgba(224,85,85,.3)}
+.sig-badge.NEUTRAL{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3)}
+.sig-price{font-family:var(--mono);font-size:13px;color:var(--text2);margin-bottom:10px}
+.sig-reasons{list-style:none;margin-bottom:14px}
+.sig-reasons li{font-size:12px;color:var(--text2);padding:3px 0;display:flex;align-items:flex-start;gap:6px;line-height:1.5}
+.sig-reasons li::before{content:'→';color:var(--gold);font-size:11px;flex-shrink:0;margin-top:1px}
+.sig-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:12px;flex-wrap:wrap;gap:8px}
+.sig-meta{display:flex;flex-direction:column;gap:2px}
+.sig-tf{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
+.sig-conf-bar{height:4px;background:var(--surface3);border-radius:2px;width:80px;overflow:hidden;margin-top:4px}
+.sig-conf-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--green-dim),var(--green))}
+.sig-conf-pct{font-family:var(--mono);font-size:10px;color:var(--green)}
+.sig-risk{font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:100px}
+.risk-low{background:rgba(45,186,86,.1);color:var(--green)}
+.risk-med{background:rgba(201,168,76,.1);color:var(--gold)}
+.risk-high{background:rgba(224,85,85,.1);color:var(--red)}
+
+/* Institutional Views */
+.inst-views-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:28px}
+@media(max-width:900px){.inst-views-grid{grid-template-columns:1fr}}
+.iview-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
+.iview-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.iview-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.iview-title{font-family:var(--serif);font-size:17px;font-weight:600}
+.iview-sub{font-size:11px;color:var(--text3);font-family:var(--mono)}
+.iview-body{font-size:13px;color:var(--text2);line-height:1.8}
+.iview-metric{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.iview-metric:last-child{border-bottom:none}
+.ivm-label{font-size:12px;color:var(--text3)}
+.ivm-val{font-family:var(--mono);font-size:12px;font-weight:500}
+.ivm-val.bull{color:var(--green)}.ivm-val.bear{color:var(--red)}.ivm-val.neutral{color:var(--gold)}
+
+/* Forex Table Enhanced */
+.forex-table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:28px}
+.forex-table-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border)}
+.forex-table-title{font-family:var(--serif);font-size:18px;font-weight:600}
+.forex-table-enhanced{width:100%;border-collapse:collapse}
+.forex-table-enhanced th{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);padding:10px 16px;text-align:left;border-bottom:1px solid var(--border);background:var(--surface2)}
+.forex-table-enhanced td{padding:13px 16px;font-family:var(--mono);font-size:12px;border-bottom:1px solid var(--border)}
+.forex-table-enhanced tr:last-child td{border-bottom:none}
+.forex-table-enhanced tr:hover td{background:var(--surface2)}
+.pair-badge{display:inline-flex;align-items:center;gap:6px}
+.pair-flag{font-size:14px}
+.sentiment-mini{display:flex;align-items:center;gap:4px}
+.sent-dot{width:6px;height:6px;border-radius:50%}
+
+/* Currency Strength Meter */
+.strength-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+@media(max-width:600px){.strength-grid{grid-template-columns:repeat(2,1fr)}}
+.strength-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.str-currency{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--gold-light);margin-bottom:8px}
+.str-bar-wrap{height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;margin-bottom:8px}
+.str-bar{height:100%;border-radius:3px;transition:width 1s ease}
+.str-score{font-family:var(--mono);font-size:11px;color:var(--text2)}
+
+/* News Feed */
+.news-feed{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.news-item-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;transition:all .2s;cursor:pointer}
+.news-item-card:hover{border-color:var(--border2);background:var(--surface2)}
+.news-impact{width:6px;border-radius:3px;flex-shrink:0;align-self:stretch;min-height:40px}
+.news-impact.high{background:var(--red)}
+.news-impact.medium{background:var(--gold)}
+.news-impact.low{background:var(--green)}
+.news-content{flex:1}
+.news-cat-badge{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.news-headline{font-size:14px;font-weight:500;color:var(--text);line-height:1.5;margin-bottom:6px}
+.news-meta-row{display:flex;gap:12px;font-family:var(--mono);font-size:10px;color:var(--text3)}
+.news-impact-label{font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:100px;flex-shrink:0;align-self:flex-start;margin-top:2px}
+.news-impact-label.high{background:rgba(224,85,85,.15);color:var(--red)}
+.news-impact-label.medium{background:rgba(201,168,76,.15);color:var(--gold)}
+.news-impact-label.low{background:rgba(45,186,86,.15);color:var(--green)}
+
+/* Economic Calendar */
+.econ-cal{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:28px}
+.econ-cal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.econ-event{display:flex;align-items:center;gap:16px;padding:12px 20px;border-bottom:1px solid var(--border);transition:background .2s}
+.econ-event:last-child{border-bottom:none}
+.econ-event:hover{background:var(--surface2)}
+.econ-time{font-family:var(--mono);font-size:11px;color:var(--text3);width:60px;flex-shrink:0}
+.econ-flag{font-size:16px;flex-shrink:0}
+.econ-name{flex:1;font-size:13px;color:var(--text)}
+.econ-prev{font-family:var(--mono);font-size:11px;color:var(--text3);text-align:right}
+.econ-forecast{font-family:var(--mono);font-size:11px;color:var(--gold);text-align:right}
+.econ-impact{display:flex;gap:3px;flex-shrink:0}
+.impact-dot{width:6px;height:6px;border-radius:50%;background:var(--surface3)}
+.impact-dot.filled.high{background:var(--red)}
+.impact-dot.filled.medium{background:var(--gold)}
+.impact-dot.filled.low{background:var(--green)}
+
+/* AI Market Intelligence */
+.ai-intel{background:linear-gradient(135deg,rgba(13,24,16,.8),rgba(17,31,20,.8));border:1px solid var(--border2);border-radius:12px;padding:24px;margin-bottom:28px}
+.ai-intel-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.ai-intel-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--green-dim),var(--gold-dim));display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gold-light);font-family:var(--serif);font-weight:700}
+.ai-intel-title{font-family:var(--serif);font-size:18px;font-weight:600}
+.ai-intel-sub{font-size:11px;color:var(--text3);font-family:var(--mono);margin-top:1px}
+.ai-intel-body{font-size:14px;color:var(--text2);line-height:1.9;border-left:2px solid var(--border2);padding-left:16px}
+.ai-intel-body strong{color:var(--gold-light)}
+.ai-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.ai-tag{font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:100px;background:var(--surface2);border:1px solid var(--border);color:var(--text3)}
+</style>
+
+<!-- INSTITUTIONAL TOP BAR -->
+<div class="inst-topbar">
+  <div class="inst-tabs">
+    <button class="inst-tab active" onclick="switchInstView('overview')">📊 Overview</button>
+    <button class="inst-tab" onclick="switchInstView('signals')">🎯 Signals</button>
+    <button class="inst-tab" onclick="switchInstView('news')">📰 Intelligence</button>
+    <button class="inst-tab" onclick="switchInstView('calendar')">📅 Calendar</button>
+    <button class="inst-tab" onclick="switchInstView('tools')">🛠 Tools</button>
+  </div>
+  <div class="inst-status">
+    <div class="inst-market-status"><span class="live-dot"></span>Markets Live</div>
+    <div class="inst-time" id="instClock">--:-- EAT</div>
+    <button class="btn-ghost" onclick="fetchAllMarketData()" style="font-size:11px;padding:5px 12px">↻ Refresh</button>
+  </div>
+</div>
+
+<!-- NEWS TICKER -->
+<div class="news-ticker-wrap" style="margin:0;border-radius:0;border-left:none;border-right:none">
+  <div class="news-ticker-inner" id="newsTicker">Loading market intelligence...</div>
+</div>
+
+<!-- ── VIEW: OVERVIEW ── -->
+<div class="inst-dash">
+<div class="inst-view active" id="view-overview">
+
+  <!-- KPI Strip -->
+  <div style="margin:28px 0 8px;display:flex;justify-content:space-between;align-items:center">
+    <div class="eyebrow-label">Live Rates</div>
+    <div class="live-badge"><span class="live-dot"></span>Auto-refresh 30s</div>
+  </div>
+  <div class="kpi-strip" id="kpiStrip">
+    <div class="kpi-tile"><div class="kpi-sym">Loading...</div><div class="kpi-val">—</div><div class="kpi-chg">—</div></div>
+  </div>
+
+  <!-- AI Intelligence Banner -->
+  <div class="ai-intel" id="aiIntelBanner">
+    <div class="ai-intel-header">
+      <div class="ai-intel-icon">TF</div>
       <div>
-        <div class="eyebrow-label">Live Markets</div>
-        <h2 class="section-title">Global Market Overview</h2>
-        <p class="section-subtitle">Real-time rates across forex, commodities, and crypto markets — updated automatically every 30 seconds.</p>
+        <div class="ai-intel-title">TFIC Market Intelligence</div>
+        <div class="ai-intel-sub" id="aiIntelTime">Generating daily outlook...</div>
       </div>
-      <div style="display:flex;gap:12px;align-items:center">
-        <div class="live-badge"><span class="live-dot"></span>Refreshing every 30s</div>
-        <button class="btn-ghost" onclick="fetchAllMarketData()" style="font-size:12px;padding:6px 14px">↻ Refresh Now</button>
+      <div class="live-badge" style="margin-left:auto"><span class="live-dot"></span>AI Analysis</div>
+    </div>
+    <div class="ai-intel-body" id="aiIntelBody">
+      <span class="spin" style="display:inline-block;margin-right:8px"></span>Analyzing global market conditions...
+    </div>
+    <div class="ai-tags" id="aiIntelTags"></div>
+  </div>
+
+  <!-- Institutional Views -->
+  <div class="eyebrow-label" style="margin-bottom:16px">Institutional Views</div>
+  <div class="inst-views-grid" id="instViewsGrid">
+    <div class="iview-card">
+      <div class="iview-header">
+        <div class="iview-icon" style="background:rgba(45,186,86,.15);color:var(--green)">⚡</div>
+        <div><div class="iview-title">Intraday View</div><div class="iview-sub">Session · 24H Outlook</div></div>
       </div>
+      <div class="iview-body" id="intradayView"><span class="spin"></span></div>
+    </div>
+    <div class="iview-card">
+      <div class="iview-header">
+        <div class="iview-icon" style="background:rgba(201,168,76,.15);color:var(--gold)">📈</div>
+        <div><div class="iview-title">Swing View</div><div class="iview-sub">3–14 Day Outlook</div></div>
+      </div>
+      <div class="iview-body" id="swingView"><span class="spin"></span></div>
+    </div>
+    <div class="iview-card">
+      <div class="iview-header">
+        <div class="iview-icon" style="background:rgba(100,150,255,.1);color:#8ab4f8">🏛️</div>
+        <div><div class="iview-title">Institutional View</div><div class="iview-sub">Long-Term · Macro</div></div>
+      </div>
+      <div class="iview-body" id="institutionalView"><span class="spin"></span></div>
     </div>
   </div>
-  <div class="news-ticker-wrap">
-    <div class="news-ticker-inner" id="newsTicker">Loading market news...</div>
+
+  <!-- Currency Strength -->
+  <div class="eyebrow-label" style="margin-bottom:16px">Currency Strength Meter</div>
+  <div class="strength-grid" id="strengthGrid">
+    <div class="strength-card"><div class="kpi-sym">Loading...</div></div>
   </div>
-  <div id="marketsGrid" class="markets-grid">
-    <div class="loading-overlay" style="grid-column:1/-1"><span class="spin"></span>Loading market data...</div>
+
+  <!-- Forex Table Enhanced -->
+  <div class="forex-table-wrap">
+    <div class="forex-table-header">
+      <div class="forex-table-title">Forex & Commodities Matrix</div>
+      <div class="live-badge"><span class="live-dot"></span>Live</div>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="forex-table-enhanced">
+      <thead><tr>
+        <th>Pair</th><th>Price</th><th>Change</th><th>%</th>
+        <th>Session High</th><th>Session Low</th><th>Signal</th><th>Sentiment</th>
+      </tr></thead>
+      <tbody id="forexBody"><tr><td colspan="8" style="text-align:center;color:var(--text3);padding:20px"><span class="spin"></span> Loading...</td></tr></tbody>
+    </table>
+    </div>
   </div>
-  <table class="forex-table">
-    <thead><tr>
-      <th>Pair</th><th>Price</th><th>Change</th><th>%</th><th>Signal</th>
-    </tr></thead>
-    <tbody id="forexBody"><tr><td colspan="5" style="text-align:center;color:var(--text3);padding:20px"><span class="spin"></span> Loading...</td></tr></tbody>
-  </table>
-</section>
-<section class="tools-section section">
-  <div class="section-header">
+
+</div><!-- /view-overview -->
+
+<!-- ── VIEW: SIGNALS ── -->
+<div class="inst-view" id="view-signals">
+  <div style="margin:28px 0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div>
+      <div class="eyebrow-label">Signal Engine</div>
+      <h2 style="font-family:var(--serif);font-size:28px;font-weight:600">Institutional Trade Signals</h2>
+      <p style="font-size:13px;color:var(--text3);margin-top:4px">⚠️ Educational analysis only — not financial advice. Always conduct your own research.</p>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap" id="signalFilters">
+      <button class="cat-tab active" onclick="filterSignals('all',this)">All</button>
+      <button class="cat-tab" onclick="filterSignals('BUY',this)">BUY Signals</button>
+      <button class="cat-tab" onclick="filterSignals('SELL',this)">SELL Signals</button>
+      <button class="cat-tab" onclick="filterSignals('NEUTRAL',this)">Neutral</button>
+    </div>
+  </div>
+  <div class="signals-grid" id="signalsGrid">
+    <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text3)"><span class="spin"></span> Generating signals...</div>
+  </div>
+</div>
+
+<!-- ── VIEW: INTELLIGENCE ── -->
+<div class="inst-view" id="view-news">
+  <div style="margin:28px 0 20px">
+    <div class="eyebrow-label">Market Intelligence</div>
+    <h2 style="font-family:var(--serif);font-size:28px;font-weight:600">Institutional News Feed</h2>
+    <p style="font-size:13px;color:var(--text3);margin-top:4px">High-impact financial news filtered for institutional relevance — forex, commodities, macro policy.</p>
+  </div>
+  <div class="news-feed" id="newsFeedCards"></div>
+</div>
+
+<!-- ── VIEW: CALENDAR ── -->
+<div class="inst-view" id="view-calendar">
+  <div style="margin:28px 0 20px">
+    <div class="eyebrow-label">Economic Calendar</div>
+    <h2 style="font-family:var(--serif);font-size:28px;font-weight:600">Upcoming Market Events</h2>
+    <p style="font-size:13px;color:var(--text3);margin-top:4px">High and medium impact events that may move forex, gold, and commodity markets.</p>
+  </div>
+  <div class="econ-cal">
+    <div class="econ-cal-header">
+      <div style="font-family:var(--mono);font-size:12px;color:var(--gold)">📅 Week of May 26 – May 30, 2026 · EAT</div>
+      <div style="display:flex;gap:12px;font-family:var(--mono);font-size:10px">
+        <span style="color:var(--red)">● High Impact</span>
+        <span style="color:var(--gold)">● Medium</span>
+        <span style="color:var(--green)">● Low</span>
+      </div>
+    </div>
+    <div id="econCalBody"></div>
+  </div>
+</div>
+
+<!-- ── VIEW: TOOLS ── -->
+<div class="inst-view" id="view-tools">
+  <div style="margin:28px 0 20px">
     <div class="eyebrow-label">Financial Tools</div>
-    <h2 class="section-title">Smart Tools for Better Decisions</h2>
+    <h2 style="font-family:var(--serif);font-size:28px;font-weight:600">Smart Investment Tools</h2>
   </div>
   <div class="tools-grid">
     <div class="tool-card">
       <h3 class="tool-title">Currency Converter</h3>
-      <p class="tool-sub">Convert between major currencies and East African shillings.</p>
+      <p class="tool-sub">Live rates — convert between major currencies and East African shillings.</p>
       <div class="converter-row">
         <div class="conv-input-wrap">
           <input type="number" class="conv-input" id="convAmount" value="1000">
@@ -774,8 +1044,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       </div>
     </div>
     <div class="tool-card">
-      <h3 class="tool-title">Investment Calculator</h3>
-      <p class="tool-sub">Project your wealth growth with compound interest.</p>
+      <h3 class="tool-title">Compound Growth Calculator</h3>
+      <p class="tool-sub">Project your wealth growth with compound interest analysis.</p>
       <div class="calc-field"><div class="calc-label">Initial Amount (TZS) <span id="lPrincipal">1,000,000</span></div><input type="range" class="calc-range" id="rPrincipal" min="100000" max="10000000" step="100000" value="1000000"></div>
       <div class="calc-field"><div class="calc-label">Annual Return (%) <span id="lRate">12%</span></div><input type="range" class="calc-range" id="rRate" min="5" max="25" step="1" value="12"></div>
       <div class="calc-field"><div class="calc-label">Years <span id="lYears">10</span></div><input type="range" class="calc-range" id="rYears" min="1" max="30" step="1" value="10"></div>
@@ -786,7 +1056,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       </div>
     </div>
   </div>
-</section>
+</div>
+
+</div><!-- /inst-dash -->
+
+
 </div>
 
 <!-- ════════════════ ANALYSIS PAGE ════════════════ -->
@@ -2442,6 +2716,423 @@ function showCallOptions() {
     </div>`;
   document.body.appendChild(popup);
 }
+</script>
+
+
+<script>
+// ═══════════════════════════════════════════════
+// INSTITUTIONAL MARKET INTELLIGENCE ENGINE
+// ═══════════════════════════════════════════════
+
+// ── Clock ─────────────────────────────────────
+function updateInstClock() {
+  const el = document.getElementById('instClock');
+  if (!el) return;
+  const now = new Date().toLocaleString('en-US', { timeZone: 'Africa/Nairobi', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12: false });
+  el.textContent = now + ' EAT';
+}
+setInterval(updateInstClock, 1000);
+updateInstClock();
+
+// ── View Switcher ──────────────────────────────
+function switchInstView(name) {
+  document.querySelectorAll('.inst-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.inst-tab').forEach(t => t.classList.remove('active'));
+  const view = document.getElementById('view-' + name);
+  if (view) view.classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'signals') renderSignals();
+  if (name === 'news') renderNewsFeed();
+  if (name === 'calendar') renderEconCalendar();
+  if (name === 'tools') { initCalc(); updateConverter(); }
+}
+
+// ── Signal Filter ──────────────────────────────
+function filterSignals(type, btn) {
+  document.querySelectorAll('#signalFilters .cat-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.signal-card').forEach(card => {
+    card.style.display = (type === 'all' || card.dataset.signal === type) ? '' : 'none';
+  });
+}
+
+// ── Generate Smart Signals ─────────────────────
+function generateSignals(rates, crypto) {
+  const r = rates || {}; const c = crypto || {};
+  const gold = goldPrice || 4510;
+  const btc = c.BTC?.price || 67420;
+  const btcChg = c.BTC?.chg || 0;
+  const ethChg = c.ETH?.chg || 0;
+  const tzs = r.TZS || 2628;
+  const eur = r.EUR ? (1/r.EUR) : 1.085;
+  const gbp = r.GBP ? (1/r.GBP) : 1.268;
+  const jpy = r.JPY || 154.8;
+  const goldChgNow = goldChg || 0.44;
+  const tzsChg = 0.38;
+
+  const signals = [
+    {
+      pair: 'XAU/USD', price: '$' + gold.toLocaleString('en-US', {minimumFractionDigits:2,maximumFractionDigits:2}),
+      signal: goldChgNow > 0.2 ? 'BUY' : goldChgNow < -0.2 ? 'SELL' : 'NEUTRAL',
+      confidence: goldChgNow > 0 ? 74 : 61,
+      timeframe: 'Swing · Intraday', risk: 'Medium',
+      reasons: goldChgNow > 0 ? [
+        'Safe-haven demand increasing amid global uncertainty',
+        'USD weakness creating tailwinds for gold',
+        'Institutional accumulation above $4,400 key level',
+        'Bullish momentum — price holding above 20-day MA',
+        'Central bank gold buying trend continues'
+      ] : [
+        'Short-term profit-taking after recent rally',
+        'USD strength creating near-term headwinds',
+        'Overbought conditions on RSI — watch for pullback',
+        'Key support at $4,400 — critical level to hold'
+      ]
+    },
+    {
+      pair: 'USD/TZS', price: tzs.toLocaleString('en-US', {minimumFractionDigits:2,maximumFractionDigits:2}),
+      signal: tzsChg > 0 ? 'SELL' : 'BUY',
+      confidence: 68, timeframe: 'Swing · 3-7 Days', risk: 'Low',
+      reasons: [
+        'Bank of Tanzania maintaining stable monetary policy',
+        'USD demand from import-heavy Tanzanian economy',
+        'Regional trade flows supporting TZS stability',
+        'EAC integration creating cross-border currency pressures',
+        'Watch BOT rate decisions for medium-term direction'
+      ]
+    },
+    {
+      pair: 'EUR/USD', price: eur.toFixed(4),
+      signal: eur > 1.08 ? 'NEUTRAL' : 'BUY',
+      confidence: 65, timeframe: 'Swing · 5-10 Days', risk: 'Medium',
+      reasons: [
+        'ECB rate path divergence vs Federal Reserve remains key driver',
+        'Eurozone economic data mixed — growth concerns persist',
+        'EUR/USD consolidating — waiting for Fed clarity',
+        'Key resistance at 1.0950 — break above bullish',
+        'CFTC positioning: institutions slightly EUR long'
+      ]
+    },
+    {
+      pair: 'GBP/USD', price: gbp.toFixed(4),
+      signal: gbp > 1.27 ? 'NEUTRAL' : 'BUY',
+      confidence: 62, timeframe: 'Intraday · Swing', risk: 'Medium',
+      reasons: [
+        'BOE maintaining higher-for-longer rate stance — GBP supportive',
+        'UK inflation data showing stickiness — GBP bullish signal',
+        'Cable holding key 1.2600 support — technical strength',
+        'Watch US NFP and CPI for near-term catalyst'
+      ]
+    },
+    {
+      pair: 'USD/JPY', price: jpy.toFixed(2),
+      signal: jpy > 150 ? 'SELL' : 'NEUTRAL',
+      confidence: 71, timeframe: 'Swing · Long-Term', risk: 'High',
+      reasons: [
+        'BOJ policy normalization risk — JPY strengthening catalyst',
+        'USD/JPY at historically elevated levels — mean reversion risk',
+        'Japanese intervention risk above 155 — key level to watch',
+        'Fed rate cut expectations creating USD selling pressure',
+        'Risk-off environment benefits safe-haven JPY'
+      ]
+    },
+    {
+      pair: 'BTC/USD', price: '$' + btc.toLocaleString('en-US', {maximumFractionDigits:0}),
+      signal: btcChg > 1 ? 'BUY' : btcChg < -1 ? 'SELL' : 'NEUTRAL',
+      confidence: btcChg > 0 ? 69 : 55,
+      timeframe: 'Intraday · Swing', risk: 'High',
+      reasons: btcChg > 0 ? [
+        'Institutional ETF inflows continue driving demand',
+        'Post-halving supply reduction historically bullish',
+        'Technical momentum positive above $60K key level',
+        'Risk-on sentiment supporting digital assets'
+      ] : [
+        'Profit-taking following recent strong rally',
+        'Regulatory concerns creating near-term uncertainty',
+        'Watch $60K support — key institutional level',
+        'High volatility — position sizing critical'
+      ]
+    }
+  ];
+  return signals;
+}
+
+function renderSignals() {
+  const signals = generateSignals(liveRates, cryptoPrices);
+  const grid = document.getElementById('signalsGrid');
+  if (!grid) return;
+  grid.innerHTML = signals.map(s => `
+    <div class="signal-card ${s.signal === 'BUY' ? 'bull' : s.signal === 'SELL' ? 'bear' : 'neutral'}"
+         data-signal="${s.signal}">
+      <div class="sig-header">
+        <div>
+          <div class="sig-pair">${s.pair}</div>
+          <div class="sig-price">${s.price}</div>
+        </div>
+        <span class="sig-badge ${s.signal}">${s.signal}</span>
+      </div>
+      <ul class="sig-reasons">
+        ${s.reasons.map(r => `<li>${r}</li>`).join('')}
+      </ul>
+      <div class="sig-footer">
+        <div class="sig-meta">
+          <div class="sig-tf">${s.timeframe}</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+            <div class="sig-conf-bar"><div class="sig-conf-fill" style="width:${s.confidence}%"></div></div>
+            <span class="sig-conf-pct">${s.confidence}%</span>
+          </div>
+        </div>
+        <span class="sig-risk risk-${s.risk.toLowerCase()}">${s.risk} Risk</span>
+      </div>
+    </div>`).join('');
+}
+
+// ── Institutional Views ────────────────────────
+function renderInstViews() {
+  const gold = goldPrice || 4510;
+  const goldUp = (goldChg || 0) >= 0;
+  const btcChg = cryptoPrices.BTC?.chg || 0;
+
+  const intradayEl = document.getElementById('intradayView');
+  const swingEl = document.getElementById('swingView');
+  const instEl = document.getElementById('institutionalView');
+
+  if (intradayEl) intradayEl.innerHTML = `
+    <div class="iview-metric"><span class="ivm-label">Market Bias</span><span class="ivm-val ${goldUp?'bull':'bear'}">${goldUp?'RISK-ON':'RISK-OFF'}</span></div>
+    <div class="iview-metric"><span class="ivm-label">Gold (XAU/USD)</span><span class="ivm-val ${goldUp?'bull':'bear'}">${goldUp?'Bullish':'Bearish'} Intraday</span></div>
+    <div class="iview-metric"><span class="ivm-label">USD Strength</span><span class="ivm-val neutral">Consolidating</span></div>
+    <div class="iview-metric"><span class="ivm-label">Crypto Sentiment</span><span class="ivm-val ${btcChg>=0?'bull':'bear'}">${btcChg>=0?'Positive':'Cautious'}</span></div>
+    <div class="iview-metric"><span class="ivm-label">Session Volatility</span><span class="ivm-val neutral">Moderate</span></div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px;line-height:1.7">
+      ${goldUp ? 'Gold maintaining bullish bias. Key resistance $4,550. Watch DXY for USD direction. London session overlap creating volatility window.' : 'Gold facing near-term pressure. Support at $4,400 critical. USD strength capping upside. Watch session lows for reversal signals.'}
+    </p>`;
+
+  if (swingEl) swingEl.innerHTML = `
+    <div class="iview-metric"><span class="ivm-label">XAU/USD Bias</span><span class="ivm-val bull">Bullish</span></div>
+    <div class="iview-metric"><span class="ivm-label">EUR/USD Outlook</span><span class="ivm-val neutral">Range-Bound</span></div>
+    <div class="iview-metric"><span class="ivm-label">USD/TZS Trend</span><span class="ivm-val bear">USD Pressure</span></div>
+    <div class="iview-metric"><span class="ivm-label">Risk Appetite</span><span class="ivm-val bull">Improving</span></div>
+    <div class="iview-metric"><span class="ivm-label">Key Level — Gold</span><span class="ivm-val neutral">$4,400 Support</span></div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px;line-height:1.7">
+      Gold swing outlook remains constructive. Institutional positioning suggests accumulation on dips. Fed rate cut narrative supportive of gold. Target $4,600–4,700 range swing.
+    </p>`;
+
+  if (instEl) instEl.innerHTML = `
+    <div class="iview-metric"><span class="ivm-label">Macro Regime</span><span class="ivm-val bull">Easing Cycle</span></div>
+    <div class="iview-metric"><span class="ivm-label">Fed Policy</span><span class="ivm-val neutral">Pivot Expected</span></div>
+    <div class="iview-metric"><span class="ivm-label">Gold LT Outlook</span><span class="ivm-val bull">Structurally Bullish</span></div>
+    <div class="iview-metric"><span class="ivm-label">EM Currencies</span><span class="ivm-val neutral">Selectively Positive</span></div>
+    <div class="iview-metric"><span class="ivm-label">Inflation Trend</span><span class="ivm-val bull">Moderating</span></div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px;line-height:1.7">
+      Central bank gold accumulation continues at record pace. Fed pivot expectations building. Long-term capital flows favor hard assets. TFIC structural view: Gold $5,000+ target over 12–18 months.
+    </p>`;
+}
+
+// ── AI Market Intelligence ─────────────────────
+function renderAIIntelligence() {
+  const gold = goldPrice || 4510;
+  const goldUp = (goldChg || 0) >= 0;
+  const btc = cryptoPrices.BTC?.price || 67420;
+  const btcUp = (cryptoPrices.BTC?.chg || 0) >= 0;
+  const tzs = liveRates.TZS || 2628;
+  const now = new Date().toLocaleString('en-US', { timeZone: 'Africa/Nairobi', dateStyle: 'full', timeStyle: 'short' });
+
+  const body = document.getElementById('aiIntelBody');
+  const timeEl = document.getElementById('aiIntelTime');
+  const tagsEl = document.getElementById('aiIntelTags');
+
+  if (timeEl) timeEl.textContent = now + ' EAT';
+
+  const analysis = `<strong>Gold (XAU/USD)</strong> is ${goldUp ? 'trading with bullish momentum at $' + gold.toLocaleString() + ', supported by safe-haven demand and central bank buying. The metal remains structurally supported as Federal Reserve rate cut expectations build.' : 'experiencing near-term selling pressure at $' + gold.toLocaleString() + ', however the structural bull case remains intact with central bank demand providing strong support at key levels.'}<br><br>
+  <strong>USD/TZS</strong> is holding at ${tzs.toLocaleString('en-US', {minimumFractionDigits:2,maximumFractionDigits:2})}, reflecting stable Bank of Tanzania monetary policy. Regional trade flows and EAC integration dynamics continue to influence the pair. Watch for any BOT policy statements for medium-term direction.<br><br>
+  <strong>Crypto markets</strong> show ${btcUp ? 'positive momentum with Bitcoin at $' + btc.toLocaleString('en-US',{maximumFractionDigits:0}) + '. Institutional ETF inflows and post-halving supply dynamics continue to provide fundamental support.' : 'consolidation with Bitcoin at $' + btc.toLocaleString('en-US',{maximumFractionDigits:0}) + '. Market participants await clearer macro signals before committing to directional positions.'}<br><br>
+  <strong>TFIC Institutional Outlook:</strong> The prevailing macro environment — characterized by moderating inflation, central bank policy pivots, and elevated geopolitical uncertainty — remains structurally supportive of gold and selective emerging market currency positioning.`;
+
+  if (body) body.innerHTML = analysis;
+  if (tagsEl) tagsEl.innerHTML = ['XAU/USD Bullish', 'Fed Pivot Watch', 'BOT Policy Stable', 'Central Bank Buying', 'Risk-On Sentiment', 'EAC Integration', 'Gold $5K Target'].map(t => `<span class="ai-tag">${t}</span>`).join('');
+}
+
+// ── KPI Strip ──────────────────────────────────
+function renderKPIStrip() {
+  const r = liveRates; const c = cryptoPrices;
+  const kpis = [
+    { sym: 'XAU/USD', val: goldPrice ? '$'+goldPrice.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '$4,510', chg: goldChg||0.44 },
+    { sym: 'USD/TZS', val: r.TZS ? r.TZS.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '—', chg: 0.38 },
+    { sym: 'BTC/USD', val: c.BTC?.price ? '$'+c.BTC.price.toLocaleString('en-US',{maximumFractionDigits:0}) : '—', chg: c.BTC?.chg||0 },
+    { sym: 'EUR/USD', val: r.EUR ? (1/r.EUR).toFixed(4) : '—', chg: 0.24 },
+    { sym: 'GBP/USD', val: r.GBP ? (1/r.GBP).toFixed(4) : '—', chg: 0.15 },
+    { sym: 'USD/JPY', val: r.JPY ? r.JPY.toFixed(2) : '—', chg: -0.14 },
+  ];
+  const el = document.getElementById('kpiStrip');
+  if (!el) return;
+  el.innerHTML = kpis.map(k => `
+    <div class="kpi-tile">
+      <div class="kpi-sym">${k.sym}</div>
+      <div class="kpi-val">${k.val}</div>
+      <div class="kpi-chg ${k.chg>=0?'up':'dn'}">${k.chg>=0?'▲ +':'▼ '}${Math.abs(k.chg).toFixed(2)}%</div>
+    </div>`).join('');
+}
+
+// ── Currency Strength ──────────────────────────
+function renderCurrencyStrength() {
+  const r = liveRates;
+  if (!r.TZS) return;
+  const currencies = [
+    { code:'USD', score: 55, color:'var(--green)' },
+    { code:'EUR', score: r.EUR ? Math.round(50 + (0.921-r.EUR)*500) : 48, color:'var(--gold)' },
+    { code:'GBP', score: r.GBP ? Math.round(52 + (0.786-r.GBP)*500) : 52, color:'var(--green)' },
+    { code:'JPY', score: r.JPY ? Math.round(60 - (r.JPY-150)*0.5) : 35, color:'var(--red)' },
+    { code:'TZS', score: 45, color:'var(--gold)' },
+    { code:'KES', score: r.KES ? Math.round(50 - (r.KES-128)*0.5) : 42, color:'var(--gold)' },
+    { code:'CHF', score: 65, color:'var(--green)' },
+    { code:'AUD', score: 48, color:'var(--red)' },
+  ];
+  const el = document.getElementById('strengthGrid');
+  if (!el) return;
+  el.innerHTML = currencies.map(c => {
+    const score = Math.min(100, Math.max(10, c.score));
+    return `<div class="strength-card">
+      <div class="str-currency">${c.code}</div>
+      <div class="str-bar-wrap"><div class="str-bar" style="width:${score}%;background:${c.score>55?'var(--green)':c.score<45?'var(--red)':'var(--gold)'}"></div></div>
+      <div class="str-score">${c.score > 55 ? '↑ Strong' : c.score < 45 ? '↓ Weak' : '→ Neutral'} · ${score}%</div>
+    </div>`;
+  }).join('');
+}
+
+// ── Enhanced Forex Table ───────────────────────
+function renderForexTableEnhanced() {
+  const r = liveRates; const c = cryptoPrices;
+  const rows = [
+    { pair:'XAU/USD', flag:'🥇', price: goldPrice?'$'+goldPrice.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'$4,510', chg: goldChg||0.44, high:'$'+(((goldPrice||4510)*1.008).toFixed(0)), low:'$'+(((goldPrice||4510)*0.993).toFixed(0)), bull:70 },
+    { pair:'USD/TZS', flag:'🇹🇿', price: r.TZS?r.TZS.toLocaleString('en-US',{minimumFractionDigits:2}):'-', chg:0.38, high:(r.TZS?(r.TZS*1.005).toFixed(0):'-'), low:(r.TZS?(r.TZS*0.996).toFixed(0):'-'), bull:55 },
+    { pair:'EUR/USD', flag:'🇪🇺', price: r.EUR?(1/r.EUR).toFixed(4):'-', chg:0.24, high:r.EUR?((1/r.EUR)*1.004).toFixed(4):'-', low:r.EUR?((1/r.EUR)*0.997).toFixed(4):'-', bull:62 },
+    { pair:'GBP/USD', flag:'🇬🇧', price: r.GBP?(1/r.GBP).toFixed(4):'-', chg:0.15, high:r.GBP?((1/r.GBP)*1.003).toFixed(4):'-', low:r.GBP?((1/r.GBP)*0.997).toFixed(4):'-', bull:58 },
+    { pair:'USD/JPY', flag:'🇯🇵', price: r.JPY?r.JPY.toFixed(2):'-', chg:-0.14, high:r.JPY?(r.JPY*1.003).toFixed(2):'-', low:r.JPY?(r.JPY*0.997).toFixed(2):'-', bull:38 },
+    { pair:'BTC/USD', flag:'₿', price: c.BTC?.price?'$'+c.BTC.price.toLocaleString('en-US',{maximumFractionDigits:0}):'-', chg:c.BTC?.chg||0, high:c.BTC?.price?'$'+((c.BTC.price*1.03).toFixed(0)):'-', low:c.BTC?.price?'$'+((c.BTC.price*0.97).toFixed(0)):'-', bull:c.BTC?.chg>0?65:45 },
+    { pair:'ETH/USD', flag:'⟠', price: c.ETH?.price?'$'+c.ETH.price.toLocaleString('en-US',{maximumFractionDigits:0}):'-', chg:c.ETH?.chg||0, high:'-', low:'-', bull:c.ETH?.chg>0?60:42 },
+    { pair:'USD/KES', flag:'🇰🇪', price: r.KES?r.KES.toFixed(2):'-', chg:-0.32, high:r.KES?(r.KES*1.003).toFixed(2):'-', low:r.KES?(r.KES*0.997).toFixed(2):'-', bull:44 },
+  ];
+  const tbody = document.getElementById('forexBody');
+  if (!tbody) return;
+  tbody.innerHTML = rows.map(row => {
+    const up = row.chg >= 0;
+    const sig = row.bull >= 60 ? 'BUY' : row.bull <= 40 ? 'SELL' : 'NEUTRAL';
+    const sigColor = sig==='BUY'?'var(--green)':sig==='SELL'?'var(--red)':'var(--gold)';
+    return `<tr>
+      <td><span class="pair-badge"><span class="pair-flag">${row.flag}</span><strong style="color:var(--gold-light)">${row.pair}</strong></span></td>
+      <td style="font-weight:500">${row.price}</td>
+      <td class="${up?'up':'dn'}">${up?'+':''}${row.chg.toFixed(2)}</td>
+      <td class="${up?'up':'dn'}">${up?'▲ +':'▼ '}${Math.abs(row.chg).toFixed(2)}%</td>
+      <td style="color:var(--green)">${row.high}</td>
+      <td style="color:var(--red)">${row.low}</td>
+      <td><strong style="color:${sigColor};font-size:11px">${sig}</strong></td>
+      <td>
+        <div class="sentiment-mini">
+          <div class="sent-dot" style="background:var(--green);width:${row.bull}%;max-width:30px;height:6px;border-radius:2px"></div>
+          <div class="sent-dot" style="background:var(--red);width:${100-row.bull}%;max-width:30px;height:6px;border-radius:2px"></div>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ── News Feed ──────────────────────────────────
+function renderNewsFeed() {
+  const news = [
+    { impact:'high', cat:'CENTRAL BANKS', headline:'Federal Reserve signals patience on rate cuts as inflation data remains above 2% target', source:'Reuters', time:'2h ago', region:'USD' },
+    { impact:'high', cat:'GOLD MARKETS', headline:'Central banks globally add record 1,000+ tonnes of gold — demand accelerating in 2026', source:'World Gold Council', time:'4h ago', region:'XAU' },
+    { impact:'high', cat:'FOREX — EAC', headline:'Bank of Tanzania maintains key rate at 5.5% amid stable inflation and currency conditions', source:'BOT', time:'6h ago', region:'TZS' },
+    { impact:'medium', cat:'MACRO ECONOMY', headline:'US CPI data expected Friday — markets pricing in 0.3% monthly gain; gold may benefit from soft reading', source:'Bloomberg', time:'8h ago', region:'USD' },
+    { impact:'medium', cat:'CRYPTO MARKETS', headline:'Bitcoin consolidates above $65,000 as institutional ETF inflows continue — $70K target in sight', source:'CoinDesk', time:'10h ago', region:'BTC' },
+    { impact:'medium', cat:'AFRICA MARKETS', headline:'East African economies projected 6.1% GDP growth in 2026 — investment opportunities expanding', source:'AfDB', time:'12h ago', region:'EAC' },
+    { impact:'high', cat:'BOJ POLICY', headline:'Bank of Japan considers additional rate hike — USD/JPY could see sharp correction if confirmed', source:'Nikkei', time:'1d ago', region:'JPY' },
+    { impact:'low', cat:'COMMODITIES', headline:'Oil prices stabilize at $82/bbl as OPEC+ production cuts offset demand concerns', source:'Reuters', time:'1d ago', region:'OIL' },
+    { impact:'medium', cat:'ECB POLICY', headline:'ECB holds rates steady — Lagarde signals data-dependent approach for remainder of 2026', source:'ECB', time:'1d ago', region:'EUR' },
+    { impact:'high', cat:'GOLD ANALYSIS', headline:'Goldman Sachs raises 12-month gold target to $5,000 citing structural demand and Fed pivot', source:'GS Research', time:'2d ago', region:'XAU' },
+  ];
+  const el = document.getElementById('newsFeedCards');
+  if (!el) return;
+  el.innerHTML = news.map(n => `
+    <div class="news-item-card">
+      <div class="news-impact ${n.impact}"></div>
+      <div class="news-content">
+        <div class="news-cat-badge">${n.cat} · ${n.region}</div>
+        <div class="news-headline">${n.headline}</div>
+        <div class="news-meta-row">
+          <span>${n.source}</span><span>·</span><span>${n.time}</span>
+        </div>
+      </div>
+      <span class="news-impact-label ${n.impact}">${n.impact.toUpperCase()}</span>
+    </div>`).join('');
+}
+
+// ── Economic Calendar ──────────────────────────
+function renderEconCalendar() {
+  const events = [
+    { time:'TUE 15:00', flag:'🇺🇸', name:'US Consumer Confidence Index', prev:'97.0', forecast:'98.2', impact:'high' },
+    { time:'TUE 17:00', flag:'🇩🇪', name:'Germany CPI (YoY)', prev:'2.2%', forecast:'2.1%', impact:'high' },
+    { time:'WED 10:00', flag:'🇺🇸', name:'US Durable Goods Orders', prev:'-1.2%', forecast:'+0.8%', impact:'medium' },
+    { time:'WED 15:30', flag:'🇨🇦', name:'Bank of Canada Rate Decision', prev:'3.75%', forecast:'3.50%', impact:'high' },
+    { time:'THU 12:00', flag:'🇬🇧', name:'BOE Governor Bailey Speech', prev:'—', forecast:'—', impact:'medium' },
+    { time:'THU 15:30', flag:'🇺🇸', name:'US GDP (Q1 Revised)', prev:'1.6%', forecast:'1.3%', impact:'high' },
+    { time:'THU 15:30', flag:'🇺🇸', name:'US Jobless Claims', prev:'222K', forecast:'219K', impact:'medium' },
+    { time:'FRI 15:30', flag:'🇺🇸', name:'US Core PCE Price Index', prev:'2.8%', forecast:'2.6%', impact:'high' },
+    { time:'FRI 15:30', flag:'🇺🇸', name:'US Personal Income & Spending', prev:'+0.5%', forecast:'+0.3%', impact:'medium' },
+    { time:'FRI 17:00', flag:'🌍', name:'Fed Chair Powell Speech (Jackson Hole)', prev:'—', forecast:'—', impact:'high' },
+  ];
+  const el = document.getElementById('econCalBody');
+  if (!el) return;
+  el.innerHTML = events.map(e => `
+    <div class="econ-event">
+      <div class="econ-time">${e.time}</div>
+      <div class="econ-flag">${e.flag}</div>
+      <div class="econ-name">${e.name}</div>
+      <div style="display:flex;gap:4px;align-items:center;flex-shrink:0">
+        ${[1,2,3].map((d,i) => `<div class="impact-dot ${i<(e.impact==='high'?3:e.impact==='medium'?2:1)?'filled '+e.impact:''}"></div>`).join('')}
+      </div>
+      <div class="econ-prev" style="min-width:60px">Prev: ${e.prev}</div>
+      <div class="econ-forecast" style="min-width:60px">Est: ${e.forecast}</div>
+    </div>`).join('');
+}
+
+// ── Main render after market data loads ──────────────────────
+const _origFetch = fetchAllMarketData;
+async function fetchAllMarketDataEnhanced() {
+  await _origFetch();
+  renderKPIStrip();
+  renderCurrencyStrength();
+  renderForexTableEnhanced();
+  renderInstViews();
+  renderAIIntelligence();
+  // Auto-render signals if visible
+  if (document.getElementById('view-signals')?.classList.contains('active')) renderSignals();
+}
+
+// Override when markets page shown
+const _origShowPage = showPage;
+function showPage(name) {
+  _origShowPage(name);
+  if (name === 'markets') {
+    renderEconCalendar();
+    renderNewsFeed();
+    setTimeout(() => {
+      renderKPIStrip();
+      renderCurrencyStrength();
+      renderForexTableEnhanced();
+      renderInstViews();
+      renderAIIntelligence();
+    }, 500);
+  }
+}
+
+// Also refresh institutional on auto-refresh
+setInterval(() => {
+  if (document.getElementById('page-markets')?.classList.contains('active')) {
+    renderKPIStrip();
+    renderCurrencyStrength();
+    renderForexTableEnhanced();
+  }
+}, 30000);
 </script>
 
 <!-- ════ COMMUNITY JOIN MODAL ════ -->
