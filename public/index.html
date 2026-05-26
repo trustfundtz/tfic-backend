@@ -495,17 +495,18 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 <style id="bloomberg-style">
 /* ── Breaking News Banner ── */
 .breaking-banner{
-  background:linear-gradient(90deg,#b8030a,#d4040d);
+  background:linear-gradient(90deg,#1a1200,#2a1e00,#1a1200);border-bottom:1px solid var(--gold-dim);
   padding:9px 64px;display:flex;align-items:center;gap:16px;
   border-bottom:1px solid rgba(0,0,0,.2);
 }
 .breaking-label{
   font-family:var(--mono);font-size:10px;font-weight:700;
-  letter-spacing:.12em;color:#fff;background:rgba(0,0,0,.25);
-  padding:3px 10px;border-radius:3px;white-space:nowrap;flex-shrink:0;
+  letter-spacing:.15em;color:#0a0f0a;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  padding:4px 12px;border-radius:4px;white-space:nowrap;flex-shrink:0;
 }
-.breaking-text{font-size:13px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .3s}
-.breaking-time{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.6);margin-left:auto;white-space:nowrap;flex-shrink:0}
+.breaking-text{font-size:13px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .3s;font-style:italic}
+.breaking-time{font-family:var(--mono);font-size:10px;color:var(--gold-dim);letter-spacing:.06em;margin-left:auto;white-space:nowrap;flex-shrink:0}
 
 /* ── Reuters-style Index Strip ── */
 .index-strip{
@@ -514,11 +515,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
   overflow-x:auto;scrollbar-width:none;
 }
 .index-strip::-webkit-scrollbar{display:none}
-.idx-item{display:flex;gap:8px;align-items:center;white-space:nowrap;flex-shrink:0}
-.idx-name{font-family:var(--mono);font-size:11px;color:var(--text2);font-weight:600}
-.idx-val{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--text)}
-.idx-chg{font-family:var(--mono);font-size:10px}
-.idx-div{width:1px;height:20px;background:var(--border);flex-shrink:0}
+
+
+
+
+
 
 /* ── Bloomberg Market Cards ── */
 .bloomberg-grid{
@@ -597,33 +598,80 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 
 <!-- BREAKING NEWS BANNER -->
 <div class="breaking-banner" id="breakingBanner">
-  <span class="breaking-label">ANALYSIS</span>
-  <span class="breaking-text" id="breakingText">Goldman Sachs raises Gold target to $5,000 — TFIC maintains bullish institutional outlook on XAU/USD</span>
+  <span class="breaking-label">MARKET BRIEF</span>
+  <span style="color:var(--gold-dim);font-family:var(--mono);font-size:14px;flex-shrink:0">◈</span><span class="breaking-text" id="breakingText">Goldman Sachs raises Gold target to $5,000 — TFIC maintains bullish institutional outlook on XAU/USD</span>
   <span class="breaking-time" id="breakingTime"></span>
 </div>
 
-<!-- REUTERS-STYLE INDEX STRIP -->
-<div class="index-strip">
-  <div class="idx-item"><span class="idx-name">GOLD</span><span class="idx-val" id="is-gold">$4,510</span><span class="idx-chg up" id="is-goldchg">▲+0.44%</span></div>
-  <div class="idx-div"></div>
-  <div class="idx-item"><span class="idx-name">USD/TZS</span><span class="idx-val" id="is-tzs">2,628</span><span class="idx-chg up">▲+0.38%</span></div>
-  <div class="idx-div"></div>
-  <div class="idx-item"><span class="idx-name">BTC</span><span class="idx-val" id="is-btc">$67,420</span><span class="idx-chg up" id="is-btcchg">▲+1.84%</span></div>
-  <div class="idx-div"></div>
-  <div class="idx-item"><span class="idx-name">EUR/USD</span><span class="idx-val" id="is-eur">1.0854</span><span class="idx-chg up">▲+0.24%</span></div>
-  <div class="idx-div"></div>
-  <div class="idx-item"><span class="idx-name">GBP/USD</span><span class="idx-val" id="is-gbp">1.2683</span><span class="idx-chg up">▲+0.15%</span></div>
-  <div class="idx-div"></div>
-  <div class="idx-item"><span class="idx-name">USD/JPY</span><span class="idx-val" id="is-jpy">154.82</span><span class="idx-chg dn">▼-0.14%</span></div>
-  <div class="idx-div"></div>
-  <div class="idx-item"><span class="idx-name">USD/KES</span><span class="idx-val" id="is-kes">128.45</span><span class="idx-chg dn">▼-0.32%</span></div>
-  <div class="idx-div"></div>
-  <div class="idx-item"><span class="idx-name">ETH</span><span class="idx-val" id="is-eth">$3,218</span><span class="idx-chg up" id="is-etchg">▲+0.55%</span></div>
-  <div class="idx-div"></div>
-  <div class="idx-item"><span class="idx-name">OIL(WTI)</span><span class="idx-val">$82.15</span><span class="idx-chg dn">▼-0.28%</span></div>
-  <div class="live-badge" style="margin-left:auto"><span class="live-dot"></span>Live · 30s</div>
-</div>
+<!-- index strip removed -->
 
+<!-- TFIC LIVE RATES STRIP -->
+<div style="
+  background:linear-gradient(180deg,#060d06,#070e07);
+  border-bottom:1px solid rgba(45,186,86,.15);
+  padding:0 64px;
+  display:flex;align-items:stretch;
+  overflow-x:auto;scrollbar-width:none;
+  height:40px;
+">
+  <!-- TFIC Brand Tag -->
+  <div style="display:flex;align-items:center;padding:0 16px 0 0;margin-right:4px;border-right:1px solid rgba(255,255,255,.06);flex-shrink:0">
+    <div style="display:flex;align-items:center;gap:6px">
+      <div style="width:4px;height:4px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite"></div>
+      <span style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.2em;color:var(--green);text-transform:uppercase">Live Rates</span>
+    </div>
+  </div>
+
+  <!-- Pairs -->
+  <div style="display:flex;align-items:center;gap:0;flex:1">
+    <div style="display:flex;align-items:center;padding:0 20px;border-right:1px solid rgba(255,255,255,.06);height:100%;gap:8px;flex-shrink:0">
+      <span style="font-family:var(--mono);font-size:9px;color:var(--gold-dim);letter-spacing:.08em">XAU/USD</span>
+      <span style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--gold-light)" id="is-gold">$4,510</span>
+      <span style="font-family:var(--mono);font-size:10px;color:var(--green)" id="is-goldchg">▲0.44%</span>
+    </div>
+    <div style="display:flex;align-items:center;padding:0 20px;border-right:1px solid rgba(255,255,255,.06);height:100%;gap:8px;flex-shrink:0">
+      <span style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.08em">USD/TZS</span>
+      <span style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text)" id="is-tzs">2,628</span>
+      <span style="font-family:var(--mono);font-size:10px;color:var(--green)">▲0.38%</span>
+    </div>
+    <div style="display:flex;align-items:center;padding:0 20px;border-right:1px solid rgba(255,255,255,.06);height:100%;gap:8px;flex-shrink:0">
+      <span style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.08em">BTC/USD</span>
+      <span style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text)" id="is-btc">$67,420</span>
+      <span style="font-family:var(--mono);font-size:10px" id="is-btcchg" style="color:var(--green)">▲1.84%</span>
+    </div>
+    <div style="display:flex;align-items:center;padding:0 20px;border-right:1px solid rgba(255,255,255,.06);height:100%;gap:8px;flex-shrink:0">
+      <span style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.08em">EUR/USD</span>
+      <span style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text)" id="is-eur">1.0854</span>
+      <span style="font-family:var(--mono);font-size:10px;color:var(--green)">▲0.24%</span>
+    </div>
+    <div style="display:flex;align-items:center;padding:0 20px;border-right:1px solid rgba(255,255,255,.06);height:100%;gap:8px;flex-shrink:0">
+      <span style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.08em">GBP/USD</span>
+      <span style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text)" id="is-gbp">1.2683</span>
+      <span style="font-family:var(--mono);font-size:10px;color:var(--green)">▲0.15%</span>
+    </div>
+    <div style="display:flex;align-items:center;padding:0 20px;border-right:1px solid rgba(255,255,255,.06);height:100%;gap:8px;flex-shrink:0">
+      <span style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.08em">USD/JPY</span>
+      <span style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text)" id="is-jpy">154.82</span>
+      <span style="font-family:var(--mono);font-size:10px;color:var(--red)">▼0.14%</span>
+    </div>
+    <div style="display:flex;align-items:center;padding:0 20px;border-right:1px solid rgba(255,255,255,.06);height:100%;gap:8px;flex-shrink:0">
+      <span style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.08em">USD/KES</span>
+      <span style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text)" id="is-kes">128.45</span>
+      <span style="font-family:var(--mono);font-size:10px;color:var(--red)">▼0.32%</span>
+    </div>
+    <div style="display:flex;align-items:center;padding:0 20px;height:100%;gap:8px;flex-shrink:0">
+      <span style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.08em">ETH/USD</span>
+      <span style="font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text)" id="is-eth">$3,218</span>
+      <span style="font-family:var(--mono);font-size:10px;color:var(--green)" id="is-etchg">▲0.55%</span>
+    </div>
+  </div>
+
+  <!-- Right: Clock -->
+  <div style="display:flex;align-items:center;padding-left:16px;border-left:1px solid rgba(255,255,255,.06);flex-shrink:0;gap:6px">
+    <div style="width:4px;height:4px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite"></div>
+    <span style="font-family:var(--mono);font-size:10px;color:var(--text3)" id="liveStripClock">--:-- EAT</span>
+  </div>
+</div>
 <!-- TICKER -->
 <div class="ticker-wrap"><div class="ticker" id="ticker"></div></div>
 
@@ -2619,6 +2667,12 @@ function updateBreakingTime() {
 }
 setInterval(updateBreakingTime, 1000);
 updateBreakingTime();
+
+// Live strip clock
+setInterval(function() {
+  var cl = document.getElementById('liveStripClock');
+  if (cl) cl.textContent = new Date().toLocaleTimeString('en-US',{timeZone:'Africa/Nairobi',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}) + ' EAT';
+}, 1000);
 
 // Update Bloomberg cards from live data (called after fetchAllMarketData)
 function updateBloombergCards() {
