@@ -29,7 +29,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
 .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2}
 .ticker-wrap::before{left:0;background:linear-gradient(90deg,#0a1f0a,transparent)}
 .ticker-wrap::after{right:0;background:linear-gradient(-90deg,#0a1f0a,transparent)}
-.ticker{display:flex;white-space:nowrap;animation:ticker 45s linear infinite}
+.ticker{display:flex;white-space:nowrap;animation:ticker 45s linear infinite;will-change:transform}.ticker-wrap{position:relative;overflow:hidden}
 .t-item{display:inline-flex;gap:6px;align-items:center;padding:0 28px;font-family:var(--mono);font-size:11px;color:var(--text2)}
 .t-sym{color:var(--gold);font-weight:500;letter-spacing:.05em}
 .t-up{color:var(--green-light)}.t-dn{color:var(--red)}.t-sep{color:var(--text3)}
@@ -578,7 +578,24 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 </div>
 
 <!-- TICKER -->
-<div class="ticker-wrap"><div class="ticker" id="ticker"></div></div>
+<div class="ticker-wrap"><div class="ticker" id="ticker">
+  <span class="t-item"><span class="t-sym">XAU/USD</span><span class="t-up">$4,510</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">USD/TZS</span><span class="t-up">2,628</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">BTC/USD</span><span class="t-up">$67,420</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">EUR/USD</span><span class="t-up">1.0854</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">GBP/USD</span><span class="t-up">1.2683</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">USD/JPY</span><span class="t-dn">154.82</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">USD/KES</span><span class="t-dn">128.45</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">GOLD</span><span class="t-up">$4,510</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">XAU/USD</span><span class="t-up">$4,510</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">USD/TZS</span><span class="t-up">2,628</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">BTC/USD</span><span class="t-up">$67,420</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">EUR/USD</span><span class="t-up">1.0854</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">GBP/USD</span><span class="t-up">1.2683</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">USD/JPY</span><span class="t-dn">154.82</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">USD/KES</span><span class="t-dn">128.45</span><span class="t-sep">|</span></span>
+  <span class="t-item"><span class="t-sym">GOLD</span><span class="t-up">$4,510</span><span class="t-sep">|</span></span>
+</div></div>
 
 <!-- NAV -->
 <nav>
@@ -741,18 +758,18 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
       <div class="mc-header">
         <div>
           <div class="mc-label">USD/TZS Live Rate</div>
-          <div class="mc-val" id="hero-usdtzs">—</div>
+          <div class="mc-val" id="hero-usdtzs">2,628</div>
         </div>
         <div class="mc-chg">
           <div class="live-badge"><span class="live-dot"></span>LIVE</div>
-          <div class="mc-chg-val" id="hero-usdtzs-chg" style="margin-top:6px">—</div>
+          <div class="mc-chg-val up" id="hero-usdtzs-chg" style="margin-top:6px">▲ +0.38%</div>
         </div>
       </div>
       <div class="spark-wrap"><canvas class="spark" id="heroSpark"></canvas></div>
       <div class="mc-assets" id="heroAssets">
-        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">₿</div><div><div class="ma-name">Bitcoin</div><div class="ma-sub">BTC/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-btc">—</div><div class="ma-chg" id="h-btc-c">—</div></div></div>
-        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🥇</div><div><div class="ma-name">Gold</div><div class="ma-sub">XAU/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-gold">—</div><div class="ma-chg" id="h-gold-c">—</div></div></div>
-        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🛢</div><div><div class="ma-name">Brent Crude</div><div class="ma-sub">USD/bbl</div></div></div><div class="ma-right"><div class="ma-price" id="h-oil">—</div><div class="ma-chg" id="h-oil-c">—</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">₿</div><div><div class="ma-name">Bitcoin</div><div class="ma-sub">BTC/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-btc">$67,420</div><div class="ma-chg up" id="h-btc-c">▲ +1.84%</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🥇</div><div><div class="ma-name">Gold</div><div class="ma-sub">XAU/USD</div></div></div><div class="ma-right"><div class="ma-price" id="h-gold">$4,510</div><div class="ma-chg" id="h-gold-c">—</div></div></div>
+        <div class="mc-asset"><div class="ma-left"><div class="ma-icon">🛢</div><div><div class="ma-name">Brent Crude</div><div class="ma-sub">USD/bbl</div></div></div><div class="ma-right"><div class="ma-price" id="h-oil">$82.15</div><div class="ma-chg dn" id="h-oil-c">▼ -0.28%</div></div></div>
       </div>
     </div>
   </div>
@@ -2290,20 +2307,27 @@ function updateQuickStrip() {
 }
 
 function updateTickerBar() {
-  const r = liveRates; const c = cryptoPrices;
-  const items = [
-    ['USD/TZS', r.TZS?fmt(r.TZS,0):'—', true],
-    ['EUR/USD', r.EUR?(1/r.EUR).toFixed(4):'—', true],
-    ['GBP/USD', r.GBP?(1/r.GBP).toFixed(4):'—', true],
-    ['USD/KES', r.KES?fmt(r.KES,2):'—', false],
-    ['BTC/USD', c.BTC?.price?'$'+fmt(c.BTC.price,0):'—', (c.BTC?.chg||0)>=0],
-    ['ETH/USD', c.ETH?.price?'$'+fmt(c.ETH.price,0):'—', (c.ETH?.chg||0)>=0],
-    ['XAU/USD', goldPrice?'$'+fmt(goldPrice,0):'$4,510', goldChg>=0],
-    ['USD/UGX', r.UGX?fmt(r.UGX,0):'—', true],
+  var r = liveRates || {};
+  var c = cryptoPrices || {};
+  var g = goldPrice || 4510; var gc = goldChg || 0.44;
+  var items = [
+    ['XAU/USD', '$'+(g.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})), gc>=0],
+    ['USD/TZS', r.TZS?fmt(r.TZS,2):'2,628', true],
+    ['BTC/USD', (c.BTC&&c.BTC.price)?'$'+fmt(c.BTC.price,0):'$67,420', ((c.BTC&&c.BTC.chg)||0)>=0],
+    ['EUR/USD', r.EUR?(1/r.EUR).toFixed(4):'1.0854', true],
+    ['GBP/USD', r.GBP?(1/r.GBP).toFixed(4):'1.2683', true],
+    ['USD/JPY', r.JPY?fmt(r.JPY,2):'154.82', false],
+    ['USD/KES', r.KES?fmt(r.KES,2):'128.45', false],
+    ['ETH/USD', (c.ETH&&c.ETH.price)?'$'+fmt(c.ETH.price,0):'$3,218', ((c.ETH&&c.ETH.chg)||0)>=0],
+    ['GOLD', '$'+(g.toLocaleString('en-US',{maximumFractionDigits:0})), gc>=0],
+    ['BOT RATE', '5.50%', true], ['FED WATCH', 'Rate Cut', true], ['GOLD TGT', '$5,000+', true],
   ];
-  const html = items.map(([sym,val,up]) => `
-    <div class="t-item">
-      <span class="t-sym">${sym}</span>
+  var html = items.map(function(it){
+    return '<span class="t-item"><span class="t-sym">'+it[0]+'</span><span class="'+(it[2]?'t-up':'t-dn')+'">'+it[1]+'</span><span class="t-sep">|</span></span>';
+  }).join('');
+  var el = document.getElementById('ticker');
+  if(el) { el.innerHTML = html+html; el.style.animation='none'; el.offsetHeight; el.style.animation='ticker 50s linear infinite'; }
+}</span>
       <span class="${up?'t-up':'t-dn'}">${val}</span>
       <span class="t-sep">|</span>
     </div>`).join('');
@@ -2522,8 +2546,10 @@ function closeNotif() { document.getElementById('notification').classList.remove
 // ═══════════════════════════════════════════════
 window.addEventListener('load', async () => {
   initAuth();
+  // Show fallback data immediately
+  updateTickerBar();
   await loadSiteSettings();
-  await fetchAllMarketData();
+  try { await fetchAllMarketData(); } catch(e) { setTimeout(fetchAllMarketData, 3000); }
   updateNewsTicker();
   setTimeout(() => { drawSpark('heroSpark','#c9a84c'); drawFeatChart(); }, 200);
   initCalc();
