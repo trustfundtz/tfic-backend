@@ -1,11 +1,11 @@
-ï»¿const express = require('express');
+const express = require('express');
 const router = express.Router();
 const { pool } = require('../db');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.GMAIL_USER || process.env.EMAIL_FROM,
@@ -45,7 +45,7 @@ router.post('/forgot-password', async (req, res) => {
     await transporter.sendMail({
       from: `"TFIC Security" <${process.env.GMAIL_USER || process.env.EMAIL_FROM}>`,
       to: email,
-      subject: 'TFIC â€” Reset Your Password',
+      subject: 'TFIC — Reset Your Password',
       html: `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
           <div style="background:#0d1810;padding:28px;text-align:center">
@@ -64,7 +64,7 @@ router.post('/forgot-password', async (req, res) => {
             <p style="color:#888;font-size:12px;margin-top:20px">Or copy this link: <br><span style="color:#1a6632;word-break:break-all">${resetLink}</span></p>
           </div>
           <div style="background:#0d1810;padding:14px;text-align:center">
-            <p style="color:#607060;margin:0;font-size:11px">TFIC Security Â· trustfundinvestmentclub38@gmail.com</p>
+            <p style="color:#607060;margin:0;font-size:11px">TFIC Security · trustfundinvestmentclub38@gmail.com</p>
           </div>
         </div>`
     });
