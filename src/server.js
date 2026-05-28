@@ -35,6 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100, message: { error: 'Maombi mengi sana. Subiri dakika 15.' } });
 const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10, message: { error: 'Majaribio mengi ya kuingia. Subiri dakika 15.' } });
 app.use('/api', limiter);
+app.use('/api/forgot', require('./routes/forgot-password'));
 app.use('/api/auth', authLimiter);
 app.use('/api/community', communityRoutes);
 app.use('/api/mentorship', require('./routes/mentorship'));
