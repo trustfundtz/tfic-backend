@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trust Fund Investment Club — Africa's Premier Investment Education Platform</title><!-- build_20260528_101401 -->
+<title>Trust Fund Investment Club — Africa's Premier Investment Education Platform</title>
 <meta name="description" content="Trust Fund Investment Club (TFIC) — Professional financial education, portfolio development, and investment intelligence. Empowering investors worldwide.">
 <meta property="og:title" content="Trust Fund Investment Club (TFIC)">
 <meta property="og:description" content="Professional financial education, portfolio development and investment intelligence. Established 2025, Tanzania.">
@@ -605,18 +605,51 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 64p
 <!-- LOGIN MODAL -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('login')">✕</button>
-    <h2>Welcome Back 👋</h2>
-    <p class="sub">Sign in to your TFIC account.</p>
-    <div id="loginError" class="error-msg"></div>
-    <div class="form-field"><label class="form-label">Email Address</label><input class="form-input" id="l-email" type="email" placeholder="email@example.com"></div>
-    <div class="form-field"><label class="form-label">Password</label><input class="form-input" id="l-pass" type="password" placeholder="Your password"></div>
-    <div class="form-check"><input type="checkbox" id="l-remember" checked><label for="l-remember">Keep me signed in on this device</label></div>
-    <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px;margin-top:8px" onclick="doLogin()">Sign In →</button>
-    <div class="modal-switch">No account yet? <a onclick="closeModal('login');openModal('signup')">Register for free</a></div>
+    <button class="modal-close" onclick="closeModal('login');hideForgotPage()">✕</button>
+
+    <!-- LOGIN FORM -->
+    <div id="loginFormView">
+      <h2>Welcome Back 👋</h2>
+      <p class="sub">Sign in to your TFIC account.</p>
+      <div id="loginError" class="error-msg"></div>
+      <div class="form-field"><label class="form-label">Email Address</label><input class="form-input" id="l-email" type="email" placeholder="email@example.com"></div>
+      <div class="form-field"><label class="form-label">Password</label><input class="form-input" id="l-pass" type="password" placeholder="Your password"></div>
+      <div class="form-check"><input type="checkbox" id="l-remember" checked><label for="l-remember">Keep me signed in on this device</label></div>
+      <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px;margin-top:8px" onclick="doLogin()">Sign In →</button>
+      <div style="text-align:center;margin:12px 0 4px">
+        <a href="#" onclick="event.preventDefault();showForgotPage()" style="font-size:13px;color:var(--gold);text-decoration:none;cursor:pointer">🔐 Forgot your password?</a>
+      </div>
+      <div class="modal-switch">No account yet? <a onclick="closeModal('login');openModal('signup')">Register for free</a></div>
+    </div>
+
+    <!-- FORGOT PASSWORD FORM — inside same modal -->
+    <div id="forgotFormView" style="display:none">
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-size:36px;margin-bottom:10px">🔐</div>
+        <h2 style="margin:0 0 6px">Reset Password</h2>
+        <p class="sub">We'll send a reset link to your email.</p>
+      </div>
+      <div id="forgotMsg" style="display:none;text-align:center;padding:16px;background:rgba(45,186,86,.1);border:1px solid rgba(45,186,86,.3);border-radius:8px;color:var(--green);font-size:14px;margin-bottom:16px"></div>
+      <div id="forgotErrMsg" style="display:none;padding:10px;background:rgba(224,85,85,.1);border:1px solid rgba(224,85,85,.2);border-radius:8px;color:var(--red);font-size:13px;margin-bottom:12px"></div>
+      <div class="form-field"><label class="form-label">Your Email Address</label><input class="form-input" id="fp-email" type="email" placeholder="email@example.com"></div>
+      <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px;margin-top:8px" id="fpBtn" onclick="doForgotPwd()">Send Reset Link →</button>
+      <div style="text-align:center;margin-top:14px">
+        <a href="#" onclick="event.preventDefault();hideForgotPage()" style="font-size:13px;color:var(--text3);text-decoration:none">← Back to Sign In</a>
+      </div>
+    </div>
+
+    <!-- RESET SENT SUCCESS -->
+    <div id="forgotSentView" style="display:none;text-align:center;padding:10px 0">
+      <div style="font-size:48px;margin-bottom:12px">📧</div>
+      <h3 style="color:var(--green);margin-bottom:8px">Check Your Email!</h3>
+      <p style="color:var(--text2);font-size:14px;line-height:1.6">A reset link has been sent.<br>It expires in <strong>1 hour</strong>.</p>
+      <p style="color:var(--text3);font-size:12px;margin-top:8px">Check spam if you don't see it.</p>
+      <button class="btn-green" onclick="hideForgotPage()" style="margin-top:20px;width:100%">Back to Sign In</button>
+    </div>
   </div>
 </div>
 
+<!-- FORGOT PASSWORD PAGE — shown inside loginModal -->
 <!-- NOTIFICATION -->
 <div class="notification" id="notification">
   <button class="notif-close" onclick="closeNotif()">✕</button>
@@ -2393,108 +2426,53 @@ function showCallOptions() {
 </script>
 
 
-<!-- FORGOT PASSWORD MODAL -->
-<div class="modal-overlay" id="forgotModal" style="display:none" onclick="if(event.target===this)closeForgotModal()">
-  <div class="modal" style="max-width:420px">
-    <button class="modal-close" onclick="closeForgotModal()">✕</button>
-    <div style="text-align:center;margin-bottom:24px">
-      <div style="font-size:40px;margin-bottom:12px">🔐</div>
-      <h2 style="margin:0 0 8px">Reset Password</h2>
-      <p style="color:var(--text3);font-size:14px;margin:0">Enter your email — we'll send a reset link.</p>
-    </div>
-    <div id="forgotSuccess" style="display:none;text-align:center;padding:20px">
-      <div style="font-size:48px;margin-bottom:12px">📧</div>
-      <h3 style="color:var(--green);margin-bottom:8px">Email Sent!</h3>
-      <p style="color:var(--text2);font-size:14px;line-height:1.6">Check your inbox for the reset link.<br>It expires in <strong>1 hour</strong>.</p>
-      <p style="color:var(--text3);font-size:12px;margin-top:12px">Didn't receive it? Check your spam folder.</p>
-      <button class="btn-green" onclick="closeForgotModal()" style="margin-top:20px;width:100%">Back to Sign In</button>
-    </div>
-    <div id="forgotFormWrap">
-      <div class="form-group">
-        <label class="form-label">Email Address</label>
-        <input class="form-input" id="forgot-email" type="email" placeholder="your@email.com">
-      </div>
-      <div id="forgotError" style="display:none;color:var(--red);font-size:13px;margin-bottom:12px;padding:10px;background:rgba(224,85,85,.1);border-radius:8px;border:1px solid rgba(224,85,85,.2)"></div>
-      <button class="btn-green" onclick="doForgotPassword()" style="width:100%;margin-top:8px" id="forgotBtn">Send Reset Link →</button>
-      <div class="modal-switch" style="margin-top:16px">
-        Remember your password? <a onclick="closeForgotModal();openModal('login')">Sign in here</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- RESET PASSWORD MODAL -->
-<div class="modal-overlay" id="resetModal" style="display:none" onclick="if(event.target===this)closeResetModal()">
+<div class="modal-overlay" id="resetPwdModal" style="display:none" onclick="if(event.target===this){document.getElementById('resetPwdModal').style.display='none';document.body.style.overflow=''}">
   <div class="modal" style="max-width:420px">
-    <button class="modal-close" onclick="closeResetModal()">✕</button>
-    <div style="text-align:center;margin-bottom:24px">
-      <div style="font-size:40px;margin-bottom:12px">🔑</div>
-      <h2 style="margin:0 0 8px">New Password</h2>
-      <p style="color:var(--text3);font-size:14px;margin:0">Create a strong new password.</p>
+    <button class="modal-close" onclick="document.getElementById('resetPwdModal').style.display='none';document.body.style.overflow=''">✕</button>
+    <div id="resetPwdForm">
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-size:36px;margin-bottom:10px">🔑</div>
+        <h2 style="margin:0 0 6px">New Password</h2>
+        <p class="sub">Create a strong new password.</p>
+      </div>
+      <div id="resetPwdErr" style="display:none;padding:10px;background:rgba(224,85,85,.1);border:1px solid rgba(224,85,85,.2);border-radius:8px;color:var(--red);font-size:13px;margin-bottom:12px"></div>
+      <div class="form-field"><label class="form-label">New Password</label><input class="form-input" id="rp-pass" type="password" placeholder="Minimum 8 characters"></div>
+      <div class="form-field"><label class="form-label">Confirm Password</label><input class="form-input" id="rp-pass2" type="password" placeholder="Repeat new password"></div>
+      <button class="btn-green" style="width:100%;padding:14px;font-size:15px;border-radius:8px;margin-top:8px" id="resetPwdBtn" onclick="doResetPwd()">Update Password →</button>
     </div>
-    <div id="resetSuccess" style="display:none;text-align:center;padding:20px">
+    <div id="resetPwdDone" style="display:none;text-align:center;padding:10px 0">
       <div style="font-size:48px;margin-bottom:12px">✅</div>
       <h3 style="color:var(--green);margin-bottom:8px">Password Updated!</h3>
-      <p style="color:var(--text2);font-size:14px">Your password has been reset successfully.</p>
-      <button class="btn-green" onclick="closeResetModal();openModal('login')" style="margin-top:20px;width:100%">Sign In Now →</button>
-    </div>
-    <div id="resetFormWrap">
-      <div class="form-group">
-        <label class="form-label">New Password</label>
-        <input class="form-input" id="reset-pass" type="password" placeholder="Minimum 8 characters">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Confirm Password</label>
-        <input class="form-input" id="reset-pass2" type="password" placeholder="Repeat new password">
-      </div>
-      <div id="resetError" style="display:none;color:var(--red);font-size:13px;margin-bottom:12px;padding:10px;background:rgba(224,85,85,.1);border-radius:8px;border:1px solid rgba(224,85,85,.2)"></div>
-      <button class="btn-green" onclick="doResetPassword()" style="width:100%;margin-top:8px" id="resetBtn">Update Password →</button>
+      <p style="color:var(--text2);font-size:14px">You can now sign in with your new password.</p>
+      <button class="btn-green" onclick="document.getElementById('resetPwdModal').style.display='none';document.body.style.overflow='';openModal('login')" style="margin-top:20px;width:100%">Sign In Now →</button>
     </div>
   </div>
 </div>
 
-
 <script>
-// ══════════════════════════════════════════════════
-// FORGOT/RESET PASSWORD — No overrides whatsoever
-// Uses unique function names: openForgotModal etc.
-// ══════════════════════════════════════════════════
+// ═══════════════════════════════════════
+// FORGOT / RESET PASSWORD — standalone
+// ═══════════════════════════════════════
 
-function openForgotModal() {
-  closeModal('login'); // close login first
-  document.getElementById('forgotFormWrap').style.display = '';
-  document.getElementById('forgotSuccess').style.display = 'none';
-  document.getElementById('forgotError').style.display = 'none';
-  document.getElementById('forgot-email').value = '';
-  document.getElementById('forgotModal').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+function showForgotPage() {
+  document.getElementById('loginFormView').style.display = 'none';
+  document.getElementById('forgotFormView').style.display = 'block';
+  document.getElementById('forgotSentView').style.display = 'none';
+  document.getElementById('forgotErrMsg').style.display = 'none';
+  document.getElementById('fp-email').value = '';
 }
 
-function closeForgotModal() {
-  document.getElementById('forgotModal').style.display = 'none';
-  document.body.style.overflow = '';
+function hideForgotPage() {
+  document.getElementById('loginFormView').style.display = 'block';
+  document.getElementById('forgotFormView').style.display = 'none';
+  document.getElementById('forgotSentView').style.display = 'none';
 }
 
-function openResetModal() {
-  document.getElementById('resetFormWrap').style.display = '';
-  document.getElementById('resetSuccess').style.display = 'none';
-  document.getElementById('resetError').style.display = 'none';
-  document.getElementById('reset-pass').value = '';
-  document.getElementById('reset-pass2').value = '';
-  document.getElementById('resetModal').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-
-function closeResetModal() {
-  document.getElementById('resetModal').style.display = 'none';
-  document.body.style.overflow = '';
-  window.history.replaceState({}, document.title, window.location.pathname);
-}
-
-async function doForgotPassword() {
-  const email = document.getElementById('forgot-email').value.trim();
-  const errEl = document.getElementById('forgotError');
-  const btn = document.getElementById('forgotBtn');
+async function doForgotPwd() {
+  var email = document.getElementById('fp-email').value.trim();
+  var errEl = document.getElementById('forgotErrMsg');
+  var btn = document.getElementById('fpBtn');
   errEl.style.display = 'none';
   if (!email || !email.includes('@')) {
     errEl.textContent = 'Please enter a valid email address.';
@@ -2503,45 +2481,46 @@ async function doForgotPassword() {
   }
   btn.disabled = true; btn.textContent = 'Sending...';
   try {
-    const res = await fetch(API + '/forgot/forgot-password', {
+    var res = await fetch(API + '/forgot/forgot-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ email: email })
     });
-    const data = await res.json();
+    var data = await res.json();
     if (data.success) {
-      document.getElementById('forgotFormWrap').style.display = 'none';
-      document.getElementById('forgotSuccess').style.display = 'block';
+      document.getElementById('forgotFormView').style.display = 'none';
+      document.getElementById('forgotSentView').style.display = 'block';
     } else {
       errEl.textContent = data.error || 'Something went wrong. Please try again.';
       errEl.style.display = 'block';
     }
   } catch(e) {
-    errEl.textContent = 'Network error. Please try again.';
+    errEl.textContent = 'Network error. Please check your connection.';
     errEl.style.display = 'block';
   }
   btn.disabled = false; btn.textContent = 'Send Reset Link →';
 }
 
-async function doResetPassword() {
-  const pass = document.getElementById('reset-pass').value;
-  const pass2 = document.getElementById('reset-pass2').value;
-  const errEl = document.getElementById('resetError');
-  const btn = document.getElementById('resetBtn');
+async function doResetPwd() {
+  var pass = document.getElementById('rp-pass').value;
+  var pass2 = document.getElementById('rp-pass2').value;
+  var errEl = document.getElementById('resetPwdErr');
+  var btn = document.getElementById('resetPwdBtn');
   errEl.style.display = 'none';
   if (pass.length < 8) { errEl.textContent = 'Password must be at least 8 characters.'; errEl.style.display = 'block'; return; }
   if (pass !== pass2) { errEl.textContent = 'Passwords do not match.'; errEl.style.display = 'block'; return; }
   btn.disabled = true; btn.textContent = 'Updating...';
   try {
-    const res = await fetch(API + '/forgot/reset-password', {
+    var res = await fetch(API + '/forgot/reset-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token: window._resetToken, password: pass })
     });
-    const data = await res.json();
+    var data = await res.json();
     if (data.success) {
-      document.getElementById('resetFormWrap').style.display = 'none';
-      document.getElementById('resetSuccess').style.display = 'block';
+      document.getElementById('resetPwdForm').style.display = 'none';
+      document.getElementById('resetPwdDone').style.display = 'block';
+      window.history.replaceState({}, document.title, window.location.pathname);
     } else {
       errEl.textContent = data.error || 'Could not reset. Link may have expired.';
       errEl.style.display = 'block';
@@ -2555,11 +2534,11 @@ async function doResetPassword() {
 
 // Auto-open reset modal if URL has ?reset=token
 window.addEventListener('load', function() {
-  var params = new URLSearchParams(window.location.search);
-  var token = params.get('reset');
+  var token = new URLSearchParams(window.location.search).get('reset');
   if (token) {
     window._resetToken = token;
-    setTimeout(openResetModal, 800);
+    var m = document.getElementById('resetPwdModal');
+    if (m) { m.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
   }
 });
 </script>
