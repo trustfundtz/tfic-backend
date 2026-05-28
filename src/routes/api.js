@@ -59,7 +59,7 @@ router.post('/auth/login', async (req, res) => {
 
     const user = rows[0];
     const valid = await bcrypt.compare(password, user.password_hash);
-    if (!valid) return res.status(401).json({ error: 'Password si sahihi' });
+    if (!valid) return res.status(401).json({ error: 'Incorrect password. Please try again.' });
 
     await db.query('UPDATE users SET last_login=NOW(), login_count=login_count+1 WHERE id=$1', [user.id]);
 
